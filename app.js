@@ -430,8 +430,8 @@ function shareJob(jobId, jobTitle, jobUrl) {
 
 🔗 ${fullUrl}
 
-📱 SarkariAI - AI job recommendations
-#SarkariAI #GovernmentJobs`;
+📱 GovFitAI - AI job recommendations
+#GovFitAI #GovernmentJobs`;
 
     if (navigator.share) {
         navigator.share({

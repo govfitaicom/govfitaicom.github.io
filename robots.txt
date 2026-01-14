@@ -4,7 +4,7 @@ Disallow: /admin.html
 Disallow: /admin
 Disallow: /private/
 
-Sitemap: https://sarkariai.co.in/sitemap.xml
+Sitemap: https://govfitai.com/sitemap.xml
 
 Crawl-delay: 1
 

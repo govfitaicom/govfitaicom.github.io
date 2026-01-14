@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">Job Details - SarkariAI</title>
+    <title id="pageTitle">Job Details - GovFitAI</title>
     <meta name="description" id="pageDescription" content="View detailed information about government job opportunities">
     <meta name="keywords" content="government jobs, sarkari naukri, job details, eligibility, application">
     
     <!-- Open Graph -->
     <meta property="og:type" content="article">
-    <meta property="og:title" id="ogTitle" content="Job Details - SarkariAI">
+    <meta property="og:title" id="ogTitle" content="Job Details - GovFitAI">
     <meta property="og:description" id="ogDescription" content="Government job details and eligibility">
     
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -395,11 +395,11 @@
     <header>
         <div class="nav-container">
             <div class="logo" onclick="window.location.href='index.html'">
-                <img src="logo.png" alt="SarkariAI - Smart Government Job Matching" class="logo-img">
+                <img src="logo.png" alt="GovFitAI - Smart Government Job Matching" class="logo-img">
                 <!-- Optional: Text bhi rakhna hai to uncomment karein -->
-                <!-- <span class="logo-text">SarkariAI</span> -->
+                <!-- <span class="logo-text">GovFitAI</span> -->
             </div>
-            <!-- <a href="index.html" class="logo">🇮🇳 SarkariAI</a> -->
+            <!-- <a href="index.html" class="logo">🇮🇳 GovFitAI</a> -->
             <a href="index.html" class="back-btn">← Back to Jobs</a>
         </div>
     </header>
@@ -598,7 +598,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2025 SarkariAI. All rights reserved.</p>
+        <p>&copy; 2025 GovFitAI. All rights reserved.</p>
         <p style="margin-top: 10px;">
             <a href="index.html">Home</a> | 
             <a href="about.html">About</a> | 
@@ -659,7 +659,7 @@ function init() {
     }
 
     function displayJobDetails(job) {
-        document.getElementById('pageTitle').textContent = `${job.title} - ${job.organization} | SarkariAI`;
+        document.getElementById('pageTitle').textContent = `${job.title} - ${job.organization} | GovFitAI`;
         document.getElementById('pageDescription').content = `Apply for ${job.title} at ${job.organization}. Education: ${job.education_required}. Deadline: ${formatDate(job.application_deadline)}`;
         document.getElementById('ogTitle').content = `${job.title} - ${job.organization}`;
         document.getElementById('ogDescription').content = `Apply for ${job.title}. Deadline: ${formatDate(job.application_deadline)}`;
