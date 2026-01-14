@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - SarkariAI</title>
+    <meta name="description" content="About SarkariAI - AI-powered government job matching platform helping job seekers find their perfect government career">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            line-height: 1.6;
+        }header { 
+            background: white; 
+            color: #333; 
+            padding: 15px 0; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        h2 {
+            color: #667eea;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .feature-card {
+            text-align: center;
+            padding: 20px;
+        }
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        .feature-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .stat-label {
+            font-size: 16px;
+        }
+        .team-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 40px 0;
+        }
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+        }
+        footer a {
+            color: #a0aec0;
+            text-decoration: none;
+        }
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        .btn {
+            background: white;
+            color: #667eea;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+        }
+        .logo { 
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+        }
+        .logo-img { 
+            height: 55px;
+            width: auto;
+            object-fit: contain;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover .logo-img {
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            font-size: 26px;
+            font-weight: bold;
+            color: #333;
+        }
+        .back-btn {
+            background:linear-gradient(135deg, #667eea 0%, #764ba2 100%); ;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        .back-btn:hover {
+            background: rgba(161, 154, 154, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+             <div class="logo" onclick="window.location.href='index.html'">
+                <img src="logo.png" alt="SarkariAI - Smart Government Job Matching" class="logo-img">
+        </div>
+         <a href="index.html" class="back-btn">← Back to Jobs</a>
+    </header>
+
+    <div class="hero">
+        <h1>About SarkariAI</h1>
+        <p>Empowering Job Seekers with AI-Powered Government Job Matching</p>
+    </div>
+
+    <div class="container">
+        <h2>Our Mission</h2>
+        <p>SarkariAI is on a mission to revolutionize how people find government jobs in India. We believe that finding the right job should be simple, personalized, and accessible to everyone. Using cutting-edge AI technology, we match job seekers with government opportunities that perfectly fit their qualifications, education, and career goals.</p>
+
+        <h2>The Problem We Solve</h2>
+        <p>Every year, millions of Indians search for government jobs across hundreds of organizations - SSC, Railway, UPSC, PSUs, State PSCs, and more. The process is overwhelming:</p>
+        <ul style="margin-left: 30px; margin-bottom: 20px;">
+            <li style="margin-bottom: 10px;">✗ Job postings scattered across multiple websites</li>
+            <li style="margin-bottom: 10px;">✗ Complex eligibility criteria (age, education, percentage, category)</li>
+            <li style="margin-bottom: 10px;">✗ Missing deadlines due to lack of notifications</li>
+            <li style="margin-bottom: 10px;">✗ Applying to jobs you're not eligible for</li>
+            <li style="margin-bottom: 10px;">✗ Wasting time searching instead of preparing</li>
+        </ul>
+
+        <h2>Our Solution</h2>
+        <p>SarkariAI uses artificial intelligence to solve these problems:</p>
+        <ul style="margin-left: 30px; margin-bottom: 20px;">
+            <li style="margin-bottom: 10px;">✓ <strong>Smart Matching:</strong> AI analyzes your profile and shows ONLY jobs you qualify for</li>
+            <li style="margin-bottom: 10px;">✓ <strong>Centralized Platform:</strong> All government jobs in one place</li>
+            <li style="margin-bottom: 10px;">✓ <strong>Real-time Updates:</strong> Never miss a deadline with instant notifications</li>
+            <li style="margin-bottom: 10px;">✓ <strong>Time Saving:</strong> Focus on preparation, not searching</li>
+            <li style="margin-bottom: 10px;">✓ <strong>100% Free:</strong> No hidden charges, ever</li>
+        </ul>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>AI-Powered Matching</h3>
+                <p>Our algorithm considers age, education, percentage, category, and location to recommend perfect jobs</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Instant Notifications</h3>
+                <p>Get alerts the moment a matching job is posted</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>Mobile First</h3>
+                <p>Access jobs anytime, anywhere with our mobile app</p>
+            </div>
+        </div>
+
+        <h2>How It Works</h2>
+        <p style="font-size: 18px; margin-top: 20px;"><strong>Step 1:</strong> Create your profile with education, age, qualifications</p>
+        <p style="font-size: 18px;"><strong>Step 2:</strong> Our AI matches you with eligible jobs</p>
+        <p style="font-size: 18px;"><strong>Step 3:</strong> Get personalized recommendations daily</p>
+        <p style="font-size: 18px;"><strong>Step 4:</strong> Apply directly through official government portals</p>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">10,000+</div>
+                <div class="stat-label">Active Users</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Job Postings</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">95%</div>
+                <div class="stat-label">Match Accuracy</div>
+            </div>
+        </div>
+
+        <h2>What Makes Us Different</h2>
+        <p><strong>1. Accuracy:</strong> We verify job details from official sources to ensure accuracy</p>
+        <p><strong>2. Transparency:</strong> Clear eligibility criteria for every job</p>
+        <p><strong>3. Privacy:</strong> Your data is secure and never sold to third parties</p>
+        <p><strong>4. Support:</strong> Dedicated customer support to help you succeed</p>
+        <p><strong>5. Technology:</strong> Built with modern AI and cloud infrastructure</p>
+
+        <div class="team-section">
+            <h2 style="text-align: center;">Our Values</h2>
+            <p><strong>🎯 User-First:</strong> Every feature is designed with job seekers in mind</p>
+            <p><strong>🔒 Privacy:</strong> Your personal information is protected and confidential</p>
+            <p><strong>✨ Innovation:</strong> Continuous improvement using the latest AI technology</p>
+            <p><strong>🤝 Integrity:</strong> Honest, transparent, and trustworthy service</p>
+            <p><strong>🇮🇳 Made in India:</strong> Built by Indians, for Indians</p>
+        </div>
+
+        <h2>Coverage</h2>
+        <p>We cover jobs from:</p>
+        <ul style="margin-left: 30px; margin-bottom: 20px;">
+            <li>Staff Selection Commission (SSC)</li>
+            <li>Railway Recruitment Board (RRB)</li>
+            <li>Union Public Service Commission (UPSC)</li>
+            <li>Public Sector Undertakings (PSUs)</li>
+            <li>State Public Service Commissions</li>
+            <li>Defense Services (Army, Navy, Air Force)</li>
+            <li>Banking (IBPS, SBI, RBI)</li>
+            <li>State Government Departments</li>
+        </ul>
+
+        <h2>Technology Stack</h2>
+        <p>SarkariAI is built with cutting-edge technology:</p>
+        <ul style="margin-left: 30px; margin-bottom: 20px;">
+            <li>🤖 AI/Machine Learning for job matching</li>
+            <li>☁️ Cloud infrastructure for scalability</li>
+            <li>📱 Flutter for cross-platform mobile apps</li>
+            <li>🔐 Enterprise-grade security</li>
+            <li>⚡ Real-time notifications</li>
+        </ul>
+
+        <div class="cta-section">
+            <h2>Ready to Find Your Dream Government Job?</h2>
+            <p style="margin-bottom: 20px;">Join thousands of job seekers who trust SarkariAI</p>
+            <a href="/" class="btn">Get Started Free →</a>
+        </div>
+
+        <h2>Contact Us</h2>
+        <p>Have questions or feedback? We'd love to hear from you!</p>
+        <p><strong>Email:</strong> sarkari.ai.app@gmail.com</p>
+        <p><strong>Website:</strong> https://sarkariai.co.in</p>
+        <p style="margin-top: 20px;">Follow us on social media for job updates and tips:</p>
+        <p>📘 Facebook | 🐦 Twitter | 📸 Instagram | 💼 LinkedIn</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 SarkariAI. All rights reserved.</p>
+        <p style="margin-top: 10px;">
+            <a href="/">Home</a> | 
+            <a href="about.html">About</a> | 
+            <a href="terms.html">Terms</a> | 
+            <a href="privacy-policy.html">Privacy</a>
+        </p>
+    </footer>
+</body>
+</html>

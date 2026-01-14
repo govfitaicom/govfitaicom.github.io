@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Job Details - SarkariAI</title>
+    <meta name="description" id="pageDescription" content="View detailed information about government job opportunities">
+    <meta name="keywords" content="government jobs, sarkari naukri, job details, eligibility, application">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" id="ogTitle" content="Job Details - SarkariAI">
+    <meta property="og:description" id="ogDescription" content="Government job details and eligibility">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        header { 
+            background: white; 
+            color: #333; 
+            padding: 15px 0; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        .back-btn {
+            background:linear-gradient(135deg, #667eea 0%, #764ba2 100%); ;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        .back-btn:hover {
+            background: rgba(161, 154, 154, 0.3);
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        .breadcrumb span {
+            color: #999;
+            margin: 0 8px;
+        }
+        
+        /* Job Header Card */
+        .job-header {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .job-title {
+            color: #667eea;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .job-org {
+            color: #666;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .job-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .badge {
+            background: #e7f3ff;
+            color: #004085;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .badge.urgent {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .badge.deadline {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        /* Main Grid Layout */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 20px;
+        }
+        
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .info-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .info-card h2 {
+            color: #333;
+            font-size: 22px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .info-card h3 {
+            color: #667eea;
+            font-size: 18px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        .info-label {
+            color: #666;
+            font-weight: 500;
+        }
+        .info-value {
+            color: #333;
+            font-weight: 600;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .apply-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 100px;
+        }
+        .deadline-timer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .deadline-timer .label {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+        .deadline-timer .date {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .deadline-timer .days-left {
+            font-size: 16px;
+            margin-top: 8px;
+            opacity: 0.9;
+        }
+        .btn-apply {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .btn-apply:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .quick-facts {
+            margin-top: 20px;
+        }
+        .fact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .fact-item:last-child {
+            border-bottom: none;
+        }
+        .fact-icon {
+            font-size: 20px;
+        }
+        
+        /* Content sections */
+        .content-section {
+            margin-bottom: 25px;
+        }
+        .content-section p {
+            color: #666;
+            margin-bottom: 12px;
+            line-height: 1.8;
+        }
+        .content-section ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        .content-section li {
+            color: #666;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        /* Table for fees/dates */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        .info-table th,
+        .info-table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        .info-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+        .info-table td {
+            color: #666;
+        }
+        
+        /* Related Jobs */
+        .related-jobs {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .job-small-card {
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .job-small-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .job-small-card h4 {
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        .job-small-card p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 100px 20px;
+            color: #666;
+        }
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Footer */
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+        }
+        footer a {
+            color: #a0aec0;
+            text-decoration: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            .apply-card {
+                position: static;
+            }
+            .job-title {
+                font-size: 24px;
+            }
+        }
+              .logo { 
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: translateY(-2px);
+}
+
+.logo-img { 
+    height: 55px;
+    width: auto;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+
+.logo:hover .logo-img {
+    transform: scale(1.05);
+}
+
+.logo-text {
+    font-size: 26px;
+    font-weight: bold;
+    color: #333;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <div class="logo" onclick="window.location.href='index.html'">
+                <img src="logo.png" alt="SarkariAI - Smart Government Job Matching" class="logo-img">
+                <!-- Optional: Text bhi rakhna hai to uncomment karein -->
+                <!-- <span class="logo-text">SarkariAI</span> -->
+            </div>
+            <!-- <a href="index.html" class="logo">🇮🇳 SarkariAI</a> -->
+            <a href="index.html" class="back-btn">← Back to Jobs</a>
+        </div>
+    </header>
+
+    <div id="loadingState" class="loading">
+        <div class="loading-spinner"></div>
+        <p>Loading job details...</p>
+    </div>
+
+    <div id="mainContent" class="container" style="display: none;">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span>›</span>
+            <a href="index.html#jobs">Jobs</a>
+            <span>›</span>
+            <span id="breadcrumbTitle">Job Details</span>
+        </div>
+
+        <!-- Job Header -->
+        <div class="job-header">
+            <h1 class="job-title" id="jobTitle"></h1>
+            <div class="job-org" id="jobOrg"></div>
+            <div class="job-badges" id="jobBadges"></div>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="content-grid">
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- About Job -->
+                <div class="info-card">
+                    <h2>📋 Job Description</h2>
+                    <div class="content-section">
+                        <p id="jobDescription"></p>
+                    </div>
+                </div>
+
+                <!-- Eligibility Criteria -->
+                <div class="info-card">
+                    <h2>✅ Eligibility Criteria</h2>
+                    
+                    <h3>Age Limit</h3>
+                    <div class="info-row">
+                        <span class="info-label">Age Range:</span>
+                        <span class="info-value" id="ageRange"></span>
+                    </div>
+
+                    <h3>Educational Qualification</h3>
+                    <div class="info-row">
+                        <span class="info-label">Required Education:</span>
+                        <span class="info-value" id="educationRequired"></span>
+                    </div>
+                    <div id="educationFields"></div>
+                    <div class="info-row">
+                        <span class="info-label">Minimum Percentage:</span>
+                        <span class="info-value" id="minPercentage"></span>
+                    </div>
+
+                    <h3>Category</h3>
+                    <div class="info-row">
+                        <span class="info-label">Eligible Categories:</span>
+                        <span class="info-value" id="categories"></span>
+                    </div>
+
+                    <h3>Location</h3>
+                    <div class="info-row">
+                        <span class="info-label">State/Region:</span>
+                        <span class="info-value" id="jobState"></span>
+                    </div>
+
+                    <div id="additionalReqs" class="content-section"></div>
+                </div>
+
+                <!-- Important Dates -->
+                <div class="info-card">
+                    <h2>📅 Important Dates</h2>
+                    <table class="info-table">
+                        <tr>
+                            <th>Event</th>
+                            <th>Date</th>
+                        </tr>
+                        <tr>
+                            <td>Job Posted</td>
+                            <td id="postedDate"></td>
+                        </tr>
+                        <tr>
+                            <td>Application Start Date</td>
+                            <td id="startDate"></td>
+                        </tr>
+                        <tr>
+                            <td>Application Deadline</td>
+                            <td id="deadlineDate"></td>
+                        </tr>
+                        <tr>
+                            <td>Admit Card Release</td>
+                            <td id="admitCardDate"></td>
+                        </tr>
+                        <tr>
+                            <td>Result Date</td>
+                            <td id="resultDateDisplay"></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- How to Apply -->
+                <div class="info-card">
+                    <h2>📝 How to Apply</h2>
+                    <div class="content-section">
+                        <p>Follow these steps to apply for this job:</p>
+                        <ol>
+                            <li>Click on the "Apply Now" button in the sidebar</li>
+                            <li>You will be redirected to the official government portal</li>
+                            <li>Register/Login on the official website</li>
+                            <li>Fill the application form carefully</li>
+                            <li>Upload required documents (photo, signature, certificates)</li>
+                            <li>Pay application fee (if applicable)</li>
+                            <li>Submit the form and take a printout for future reference</li>
+                        </ol>
+                        <p><strong>Note:</strong> Make sure you meet all eligibility criteria before applying. Keep all your documents ready in the specified format.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Section -->
+                <div class="info-card">
+                    <h2>❓ Frequently Asked Questions</h2>
+                    <div class="content-section">
+                        <h3>Q: Is there any application fee?</h3>
+                        <p>A: Application fees vary by category. Check the official notification for exact details. SC/ST/PWD candidates are usually exempted from fees.</p>
+
+                        <h3>Q: Can I edit my application after submission?</h3>
+                        <p>A: Most government portals allow corrections during a specified correction window. Check the official website for details.</p>
+
+                        <h3>Q: What documents do I need?</h3>
+                        <p>A: Typically you need: Recent photograph, Signature, Educational certificates, Caste certificate (if applicable), and ID proof.</p>
+
+                        <h3>Q: When will the exam be conducted?</h3>
+                        <p>A: Exam dates are announced separately after the application deadline. Keep checking the official website.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="apply-card">
+                    <div class="deadline-timer">
+                        <div class="label">Application Deadline</div>
+                        <div class="date" id="deadlineDisplay"></div>
+                        <div class="days-left" id="daysLeft"></div>
+                    </div>
+                    
+                    <a href="#" id="applyBtn" class="btn-apply" target="_blank">
+                        Apply Now on Official Website →
+                    </a>
+                    
+                    <div class="quick-facts">
+                        <h3 style="margin-bottom: 15px;">Quick Facts</h3>
+                        <div class="fact-item">
+                            <span class="fact-icon">🎓</span>
+                            <div>
+                                <div style="font-size: 12px; color: #999;">Education</div>
+                                <div style="font-weight: 600;" id="qfEducation"></div>
+                            </div>
+                        </div>
+                        <div class="fact-item">
+                            <span class="fact-icon">👤</span>
+                            <div>
+                                <div style="font-size: 12px; color: #999;">Age Limit</div>
+                                <div style="font-weight: 600;" id="qfAge"></div>
+                            </div>
+                        </div>
+                        <div class="fact-item">
+                            <span class="fact-icon">📍</span>
+                            <div>
+                                <div style="font-size: 12px; color: #999;">Location</div>
+                                <div style="font-weight: 600;" id="qfLocation"></div>
+                            </div>
+                        </div>
+                        <div class="fact-item">
+                            <span class="fact-icon">📊</span>
+                            <div>
+                                <div style="font-size: 12px; color: #999;">Min Percentage</div>
+                                <div style="font-weight: 600;" id="qfPercentage"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Related Jobs -->
+        <div class="related-jobs">
+            <h2>Similar Jobs You May Like</h2>
+            <div id="relatedJobsContainer"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 SarkariAI. All rights reserved.</p>
+        <p style="margin-top: 10px;">
+            <a href="index.html">Home</a> | 
+            <a href="about.html">About</a> | 
+            <a href="terms.html">Terms</a> | 
+            <a href="privacy-policy.html">Privacy</a>
+        </p>
+    </footer>
+
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+    setTimeout(init, 100);
+});
+
+function init() {
+    const SUPABASE_URL = 'https://yhgqtbbxsbptssybgbrl.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InloZ3F0YmJ4c2JwdHNzeWJnYnJsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU1OTQ4NDYsImV4cCI6MjA4MTE3MDg0Nn0.cktVnZkay3MjYIG_v0WJSkotyq79Nnkr3JJn_munDi8';
+    
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const shortId = urlParams.get('id');
+
+    if (!shortId) {
+        window.location.href = 'index.html';
+        return;
+    }
+
+    loadJobDetails();
+
+    async function loadJobDetails() {
+        try {
+            const { data: allJobs, error } = await supabaseClient
+                .from('jobs')
+                .select('*');
+
+            if (error) {
+                console.error('Supabase Error:', error);
+                alert('Database error');
+                return;
+            }
+
+            const job = allJobs.find(j => j.id.startsWith(shortId));
+
+            if (!job) {
+                alert('Job not found!');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            displayJobDetails(job);
+            loadRelatedJobs(job);
+
+        } catch (error) {
+            console.error('Catch Error:', error);
+            alert('Something went wrong');
+            window.location.href = 'index.html';
+        }
+    }
+
+    function displayJobDetails(job) {
+        document.getElementById('pageTitle').textContent = `${job.title} - ${job.organization} | SarkariAI`;
+        document.getElementById('pageDescription').content = `Apply for ${job.title} at ${job.organization}. Education: ${job.education_required}. Deadline: ${formatDate(job.application_deadline)}`;
+        document.getElementById('ogTitle').content = `${job.title} - ${job.organization}`;
+        document.getElementById('ogDescription').content = `Apply for ${job.title}. Deadline: ${formatDate(job.application_deadline)}`;
+
+        document.getElementById('jobTitle').textContent = job.title;
+        document.getElementById('jobOrg').textContent = `${job.organization} • ${job.post_name}`;
+        document.getElementById('breadcrumbTitle').textContent = job.title;
+
+        const badges = [];
+        const daysLeft = getDaysLeft(job.application_deadline);
+        if (daysLeft <= 7) {
+            badges.push(`<span class="badge deadline">⚠️ ${daysLeft} days left</span>`);
+        } else if (daysLeft <= 15) {
+            badges.push(`<span class="badge urgent">⏰ Apply Soon</span>`);
+        }
+        badges.push(`<span class="badge">🎓 ${job.education_required}</span>`);
+        badges.push(`<span class="badge">📍 ${job.state}</span>`);
+        document.getElementById('jobBadges').innerHTML = badges.join('');
+
+        document.getElementById('jobDescription').textContent = job.description || 
+            `${job.organization} has announced recruitment for the post of ${job.post_name}. Eligible candidates can apply online through the official website before the deadline.`;
+
+        document.getElementById('ageRange').textContent = formatAge(job.min_age, job.max_age);
+        document.getElementById('educationRequired').textContent = job.education_required;
+        
+        if (job.education_fields?.length) {
+            document.getElementById('educationFields').innerHTML = `
+                <div class="info-row">
+                    <span class="info-label">Fields:</span>
+                    <span class="info-value">${job.education_fields.join(', ')}</span>
+                </div>
+            `;
+        }
+        
+        document.getElementById('minPercentage').textContent = `${job.min_percentage}%`;
+        document.getElementById('categories').textContent = job.categories?.length ? job.categories.join(', ') : 'All Categories';
+        document.getElementById('jobState').textContent = job.state;
+
+        if (job.additional_requirements) {
+            document.getElementById('additionalReqs').innerHTML = `
+                <h3>Additional Requirements</h3>
+                <p>${job.additional_requirements}</p>
+            `;
+        }
+
+        document.getElementById('postedDate').textContent = formatDate(job.posted_date);
+        document.getElementById('startDate').textContent = formatDate(job.application_start_date || job.posted_date);
+        document.getElementById('deadlineDate').textContent = formatDate(job.application_deadline);
+        document.getElementById('admitCardDate').textContent = job.admit_card_date || 'Will Be Updated Here Soon';
+        document.getElementById('resultDateDisplay').textContent = job.result_date || 'Will Be Updated Here Soon';
+        document.getElementById('deadlineDisplay').textContent = formatDate(job.application_deadline);
+        document.getElementById('daysLeft').textContent = daysLeft > 0 ? `${daysLeft} days remaining` : 'EXPIRED';
+
+        document.getElementById('applyBtn').href = job.apply_link;
+
+        document.getElementById('qfEducation').textContent = job.education_required;
+        document.getElementById('qfAge').textContent = formatAge(job.min_age, job.max_age);
+        document.getElementById('qfLocation').textContent = job.state;
+        document.getElementById('qfPercentage').textContent = `${job.min_percentage}%`;
+
+        document.getElementById('loadingState').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+    }
+
+    async function loadRelatedJobs(currentJob) {
+        try {
+            const { data: jobs, error } = await supabaseClient
+                .from('jobs')
+                .select('*')
+                .neq('id', currentJob.id)
+                .eq('education_required', currentJob.education_required)
+                .gte('application_deadline', new Date().toISOString())
+                .limit(4);
+
+            if (jobs?.length) {
+                document.getElementById('relatedJobsContainer').innerHTML = jobs.map(job => {
+                    const slug = generateJobSlug(job.title);
+                    const sid = job.id.substring(0, 8);
+                    return `
+                        <div class="job-small-card" onclick="window.location.href='job-details.html?job=${slug}&id=${sid}'">
+                            <h4>${job.title}</h4>
+                            <p>${job.organization} • Deadline: ${formatDate(job.application_deadline)}</p>
+                        </div>
+                    `;
+                }).join('');
+            } else {
+                document.querySelector('.related-jobs').style.display = 'none';
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    function generateJobSlug(title) {
+        return title.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-+|-+$/g, '');
+    }
+
+    function formatDate(dateStr) {
+        if (!dateStr) return 'N/A';
+        const date = new Date(dateStr);
+        return date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+
+    function formatAge(min, max) {
+        if (!min && !max) return 'Not Specified';
+        if (!min) return `Up to ${max} years`;
+        if (!max) return `${min} years and above`;
+        return `${min} - ${max} years`;
+    }
+
+    function getDaysLeft(deadline) {
+        const now = new Date();
+        const end = new Date(deadline);
+        return Math.ceil((end - now) / (1000 * 60 * 60 * 24));
+    }
+}
+</script>
+</body>
+</html>

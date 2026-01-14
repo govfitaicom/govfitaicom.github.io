@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - SarkariAI</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; background: white; border-radius: 12px; padding: 30px; }
+        .header { display: flex; justify-content: space-between; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #eee; }
+        h1 { color: #667eea; }
+        .btn { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; margin: 5px; }
+        .btn-primary { background: #667eea; color: white; }
+        .btn-success { background: #28a745; color: white; }
+        .btn-danger { background: #dc3545; color: white; }
+        .btn-ai { background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 600; margin-top: 8px; }
+        .btn-ai:disabled { opacity: 0.6; cursor: not-allowed; }
+        .tabs { display: flex; gap: 10px; margin-bottom: 30px; border-bottom: 2px solid #eee; overflow-x: auto; }
+        .tab-btn { padding: 15px 25px; background: none; border: none; font-size: 16px; font-weight: 600; color: #666; cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; }
+        .tab-btn.active { color: #667eea; border-bottom-color: #667eea; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: 600; margin-bottom: 5px; }
+        input, select, textarea { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; }
+        .row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .manager-box { background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        .add-row { display: flex; gap: 10px; margin: 15px 0; }
+        .add-row input, .add-row select { flex: 1; }
+        .items-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+        .item-tag { background: white; padding: 10px 15px; border-radius: 6px; border: 1px solid #ddd; display: flex; align-items: center; gap: 8px; font-size: 14px; }
+        .item-tag button { background: #dc3545; color: white; border: none; border-radius: 50%; width: 22px; height: 22px; cursor: pointer; font-size: 14px; }
+        .job-card { border: 2px solid #eee; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .message { padding: 12px; border-radius: 8px; margin-bottom: 20px; display: none; }
+        .message.success { background: #d4edda; color: #155724; display: block; }
+        .message.error { background: #f8d7da; color: #721c24; display: block; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; overflow-y: auto; }
+        .modal.active { display: block; }
+        .modal-content { background: white; max-width: 900px; margin: 50px auto; border-radius: 12px; padding: 30px; position: relative; }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: #999; }
+        .hidden { display: none; }
+        .ai-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 3000; align-items: center; justify-content: center; }
+        .ai-modal.active { display: flex; }
+        .ai-modal-content { background: white; max-width: 700px; width: 90%; border-radius: 16px; padding: 30px; max-height: 80vh; overflow-y: auto; }
+        .ai-result { background: linear-gradient(135deg, #f5f7ff, #e8f0ff); padding: 20px; border-radius: 12px; margin: 20px 0; border: 2px solid #667eea; }
+        @media (max-width: 768px) { .row { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div id="loginScreen" class="container" style="max-width: 400px; margin-top: 100px;">
+        <h1>🔐 Admin</h1>
+        <div id="loginMessage" class="message"></div>
+        <form id="loginForm">
+            <div class="form-group"><label>Email</label><input type="email" id="loginEmail" required></div>
+            <div class="form-group"><label>Password</label><input type="password" id="loginPassword" required></div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+        </form>
+    </div>
+
+    <div id="dashboard" class="container hidden">
+        <div class="header">
+            <div><h1>Admin</h1><span id="adminEmail"></span></div>
+            <div>
+                <button class="btn btn-success" onclick="openAddJobModal()">+ Job</button>
+                <button class="btn btn-danger" onclick="logout()">Logout</button>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('jobs')">Jobs</button>
+            <button class="tab-btn" onclick="switchTab('levels')">Levels</button>
+            <button class="tab-btn" onclick="switchTab('fields')">Fields</button>
+            <button class="tab-btn" onclick="switchTab('cats')">Categories</button>
+            <button class="tab-btn" onclick="switchTab('states')">States</button>
+        </div>
+
+        <div id="message" class="message"></div>
+
+        <div id="jobsTab" class="tab-content active">
+            <label><input type="checkbox" id="showExpired" onchange="loadJobs()"> Show Expired</label>
+            <div id="jobsContainer" style="margin-top: 20px;"></div>
+        </div>
+
+        <div id="levelsTab" class="tab-content">
+            <div class="manager-box">
+                <h3>Education Levels</h3>
+                <div class="add-row">
+                    <input type="text" id="newLevel" placeholder="Level name">
+                    <input type="number" id="newLevelHierarchy" placeholder="Hierarchy (1-10)" min="1" max="10">
+                    <button class="btn btn-success" onclick="addLvl()">Add</button>
+                </div>
+                <div id="lvlsDisplay" class="items-grid"></div>
+            </div>
+        </div>
+
+        <div id="fieldsTab" class="tab-content">
+            <div class="manager-box">
+                <h3>Education Fields</h3>
+                <div class="add-row">
+                    <select id="lvlForField"></select>
+                    <input type="text" id="newFld" placeholder="Field name">
+                    <button class="btn btn-success" onclick="addFld()">Add</button>
+                </div>
+                <div id="fldsDisplay"></div>
+            </div>
+        </div>
+
+        <div id="catsTab" class="tab-content">
+            <div class="manager-box">
+                <h3>Categories</h3>
+                <div class="add-row">
+                    <input type="text" id="newCat" placeholder="Category name">
+                    <button class="btn btn-success" onclick="addCat()">Add</button>
+                </div>
+                <div id="catsDisplay" class="items-grid"></div>
+            </div>
+        </div>
+
+        <div id="statesTab" class="tab-content">
+            <div class="manager-box">
+                <h3>States</h3>
+                <div class="add-row">
+                    <input type="text" id="newState" placeholder="State name">
+                    <button class="btn btn-success" onclick="addSt()">Add</button>
+                </div>
+                <div id="stsDisplay" class="items-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="jobModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeJobModal()">&times;</span>
+            <h2 id="modalTitle">Add Job</h2>
+            <form id="jobForm">
+                <input type="hidden" id="jobId">
+                <div class="form-group"><label>Title *</label><input type="text" id="title" required></div>
+                <div class="form-group"><label>Organization *</label><input type="text" id="organization" required></div>
+                <div class="form-group"><label>Post *</label><input type="text" id="postName" required></div>
+                
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="description" rows="3"></textarea>
+                    <button type="button" class="btn-ai" onclick="aiRewrite('description')">✨ AI Magic</button>
+                </div>
+
+                <div class="row">
+                    <div class="form-group"><label>Min Age</label><input type="number" id="minAge"></div>
+                    <div class="form-group"><label>Max Age</label><input type="number" id="maxAge"></div>
+                </div>
+                <div class="form-group"><label>Education *</label><select id="eduReq" required onchange="updFlds()"></select></div>
+                <div class="form-group">
+                    <label>Fields</label>
+                    <select id="fldInput"></select>
+                    <button type="button" class="btn btn-success" onclick="addJobFld()">Add</button>
+                    <div id="fldsCont" class="items-grid" style="margin-top: 10px;"></div>
+                </div>
+                <div class="form-group"><label>Min % *</label><input type="number" id="minPct" required min="0" max="100" step="0.01"></div>                
+                <div class="form-group">
+                    <label>Additional Requirements</label>
+                    <textarea id="addReq" rows="3"></textarea>
+                    <button type="button" class="btn-ai" onclick="aiRewrite('addReq')">✨ AI Magic</button>
+                </div>
+                <div class="form-group"><label>Categories</label><div id="catsCb"></div></div>
+                <div class="form-group"><label>State *</label><select id="stateSel" required></select></div>
+                <h3 style="color: #667eea; margin: 20px 0;">Dates</h3>
+                <div class="row">
+                    <div class="form-group"><label>Start *</label><input type="date" id="startDt" required></div>
+                    <div class="form-group"><label>Deadline *</label><input type="date" id="deadDt" required></div>
+                </div>
+                <div class="row">
+                    <div class="form-group"><label>Admit Card</label><input type="text" id="admitDt"></div>
+                    <div class="form-group"><label>Result</label><input type="text" id="resDt"></div>
+                </div>
+                <div class="form-group"><label>Link *</label><input type="url" id="link" required></div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="aiModal" class="ai-modal">
+        <div class="ai-modal-content">
+            <h2 style="color: #667eea;">✨ AI Generated</h2>
+            <p style="color: #666; margin-bottom: 20px;">SEO-optimized & Plagiarism-free</p>
+            <div class="ai-result"><p id="aiResult" style="white-space: pre-wrap;"></p></div>
+            <div style="display: flex; gap: 15px;">
+                <button onclick="useAiResult()" class="btn btn-success" style="flex: 1;">✅ Use This</button>
+                <button onclick="closeAiModal()" class="btn btn-danger" style="flex: 1;">❌ Cancel</button>
+            </div>
+        </div>
+    </div>
+    <script src="admin.js"></script>
+</body>
+</html>

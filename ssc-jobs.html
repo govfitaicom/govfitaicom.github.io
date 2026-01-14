@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSC Jobs 2025 - Latest Staff Selection Commission Vacancies | SarkariAI</title>
+    <meta name="description" content="Find latest SSC jobs 2025 including SSC CGL, CHSL, MTS, GD, Stenographer vacancies. Complete information about eligibility, exam pattern, and application process.">
+    <meta name="keywords" content="SSC jobs, SSC CGL, SSC CHSL, Staff Selection Commission, sarkari naukri, government jobs">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        header { 
+            background: white; 
+            color: #333; 
+            padding: 15px 0; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+      
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .hero h1 { font-size: 42px; margin-bottom: 20px; }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .content-box {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            line-height: 1.8;
+            color: #666;
+        }
+        .content-box h2 {
+            color: #667eea;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .content-box h3 {
+            color: #333;
+            font-size: 22px;
+            margin: 25px 0 15px;
+        }
+        .content-box p {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .info-table th,
+        .info-table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .info-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+        ul { margin-left: 30px; margin-bottom: 15px; }
+        li { margin-bottom: 10px; }
+        .cta-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        .btn {
+            background: white;
+            color: #667eea;
+            padding: 15px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+        }
+        footer a { color: #a0aec0; text-decoration: none; }
+         .logo { 
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+        }
+        .logo-img { 
+            height: 55px;
+            width: auto;
+            object-fit: contain;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover .logo-img {
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            font-size: 26px;
+            font-weight: bold;
+            color: #333;
+        }
+        .back-btn {
+            background:linear-gradient(135deg, #667eea 0%, #764ba2 100%); ;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        .back-btn:hover {
+            background: rgba(161, 154, 154, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <div class="logo" onclick="window.location.href='index.html'">
+                <img src="logo.png" alt="SarkariAI - Smart Government Job Matching" class="logo-img">
+        </div>
+         <a href="index.html" class="back-btn">← Back to Jobs</a>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h1>📋 SSC Jobs 2025</h1>
+        <p>Latest Staff Selection Commission Recruitment Notifications</p>
+    </div>
+
+    <div class="container">
+        <div class="content-box">
+            <h2>About Staff Selection Commission (SSC)</h2>
+            <p>
+                The Staff Selection Commission (SSC) is one of the most prestigious recruitment bodies in India, established in 1975. 
+                It is responsible for recruiting candidates for various Group B and Group C posts in ministries, departments, and organizations 
+                of the Government of India. Every year, lakhs of aspirants appear for SSC examinations, making it one of the most competitive 
+                recruitment processes in the country.
+            </p>
+            <p>
+                SSC conducts multiple examinations throughout the year, offering opportunities in diverse fields ranging from clerical positions 
+                to investigative agencies. The commission is known for its transparent selection process, merit-based recruitment, and adherence 
+                to reservation policies. Working under SSC offers job security, good salary packages, allowances, and opportunities for career growth 
+                in central government departments.
+            </p>
+
+            <h2>Popular SSC Examinations</h2>
+
+            <h3>1. SSC Combined Graduate Level (CGL)</h3>
+            <p>
+                SSC CGL is one of the most sought-after examinations in India, recruiting candidates for Group B and Group C posts. 
+                Positions include Assistant Section Officer, Inspector, Auditor, Tax Assistant, Junior Statistical Officer, and many more. 
+                The exam is conducted in four tiers: Tier-I (Computer-Based Test), Tier-II (Computer-Based Test), Tier-III (Descriptive Paper), 
+                and Tier-IV (Skill Test/Computer Proficiency Test).
+            </p>
+            <table class="info-table">
+                <tr>
+                    <th>Aspect</th>
+                    <th>Details</th>
+                </tr>
+                <tr>
+                    <td>Educational Qualification</td>
+                    <td>Bachelor's Degree from recognized university</td>
+                </tr>
+                <tr>
+                    <td>Age Limit</td>
+                    <td>18-32 years (relaxation for reserved categories)</td>
+                </tr>
+                <tr>
+                    <td>Salary Range</td>
+                    <td>₹25,500 - ₹81,100 per month (as per 7th Pay Commission)</td>
+                </tr>
+                <tr>
+                    <td>Selection Process</td>
+                    <td>Tier-I, Tier-II, Tier-III, Tier-IV, Document Verification</td>
+                </tr>
+            </table>
+
+            <h3>2. SSC Combined Higher Secondary Level (CHSL)</h3>
+            <p>
+                SSC CHSL exam is conducted for recruitment to posts like Lower Division Clerk (LDC), Junior Secretariat Assistant (JSA), 
+                Postal Assistant, Sorting Assistant, and Data Entry Operator (DEO). This examination is for candidates who have completed 
+                their 10+2 or equivalent. The exam consists of Tier-I (Computer-Based Test), Tier-II (Descriptive Paper), and Tier-III 
+                (Skill Test/Typing Test).
+            </p>
+            <table class="info-table">
+                <tr>
+                    <th>Aspect</th>
+                    <th>Details</th>
+                </tr>
+                <tr>
+                    <td>Educational Qualification</td>
+                    <td>12th Pass from recognized board</td>
+                </tr>
+                <tr>
+                    <td>Age Limit</td>
+                    <td>18-27 years</td>
+                </tr>
+                <tr>
+                    <td>Salary Range</td>
+                    <td>₹19,900 - ₹63,200 per month</td>
+                </tr>
+                <tr>
+                    <td>Selection Process</td>
+                    <td>Tier-I, Tier-II, Tier-III, Document Verification</td>
+                </tr>
+            </table>
+
+            <h3>3. SSC Multi-Tasking Staff (MTS)</h3>
+            <p>
+                SSC MTS exam recruits candidates for non-technical Group C posts across various ministries and departments. 
+                Multi-Tasking Staff perform various duties including cleaning, maintenance, messenger duties, and other non-clerical work. 
+                This is an excellent entry point for candidates with 10th class qualification.
+            </p>
+
+            <h3>4. SSC General Duty (GD) Constable</h3>
+            <p>
+                SSC GD Constable recruitment is conducted for various forces including BSF, CRPF, CISF, ITBP, SSB, NIA, SSF, and Rifleman (GD) 
+                in Assam Rifles. This is one of the largest recruitments conducted by SSC, offering opportunities to serve in paramilitary forces 
+                across India. The job involves maintaining internal security, border protection, and law enforcement.
+            </p>
+
+            <h3>5. SSC Stenographer</h3>
+            <p>
+                SSC conducts separate examinations for Stenographer Grade C and Grade D positions. Stenographers are required in various ministries 
+                and departments to take dictation and type correspondence. Candidates need to have good typing speed and shorthand knowledge.
+            </p>
+
+            <h2>Eligibility Criteria for SSC Jobs</h2>
+            
+            <h3>Educational Qualifications</h3>
+            <ul>
+                <li><strong>10th Pass:</strong> SSC MTS, SSC GD Constable</li>
+                <li><strong>12th Pass:</strong> SSC CHSL, SSC Stenographer Grade D</li>
+                <li><strong>Graduation:</strong> SSC CGL, SSC Stenographer Grade C, SSC Junior Engineer (with engineering degree)</li>
+                <li><strong>Post Graduation:</strong> Certain posts in SSC CGL like Statistical Investigator require post-graduation</li>
+            </ul>
+
+            <h3>Age Limits</h3>
+            <p>Age limits vary by examination and post:</p>
+            <ul>
+                <li>SSC CGL: 18-32 years</li>
+                <li>SSC CHSL: 18-27 years</li>
+                <li>SSC MTS: 18-25 years</li>
+                <li>SSC GD: 18-23 years</li>
+                <li>SSC Stenographer: 18-30 years</li>
+            </ul>
+            <p>Age relaxation is provided as per government norms: 5 years for SC/ST, 3 years for OBC, 10 years for PWD candidates, and other categories as specified.</p>
+
+            <h2>SSC Exam Pattern and Syllabus</h2>
+            
+            <h3>Common Subjects Across SSC Exams</h3>
+            <ul>
+                <li><strong>General Intelligence and Reasoning:</strong> Analogy, Classification, Series, Coding-Decoding, Blood Relations, Direction Sense, Puzzles</li>
+                <li><strong>General Awareness:</strong> Current Affairs, History, Geography, Polity, Economics, Science, Static GK</li>
+                <li><strong>Quantitative Aptitude:</strong> Number Systems, Percentages, Profit & Loss, Time & Work, Geometry, Algebra, Trigonometry</li>
+                <li><strong>English Language:</strong> Grammar, Vocabulary, Comprehension, Sentence Formation, Error Detection</li>
+            </ul>
+
+            <h3>Preparation Strategy</h3>
+            <p>To succeed in SSC examinations, follow these proven strategies:</p>
+            <ul>
+                <li>Understand the complete syllabus and exam pattern before starting preparation</li>
+                <li>Create a realistic study schedule allocating time to each subject based on your strengths and weaknesses</li>
+                <li>Focus on NCERT books for basic concepts in Mathematics and General Studies</li>
+                <li>Practice previous years' question papers extensively to understand the exam difficulty and pattern</li>
+                <li>Take regular mock tests to improve speed and accuracy under time pressure</li>
+                <li>Stay updated with current affairs by reading newspapers like The Hindu or Indian Express daily</li>
+                <li>Focus on accuracy rather than attempting all questions, as negative marking applies</li>
+                <li>Revise regularly and make short notes for quick revision before exams</li>
+                <li>Join online forums or study groups to clarify doubts and share knowledge</li>
+                <li>Maintain physical and mental health through regular exercise and adequate sleep</li>
+            </ul>
+
+            <h2>Salary and Benefits</h2>
+            <p>
+                SSC employees receive attractive salary packages along with various allowances and benefits. The salary structure as per 
+                7th Pay Commission includes:
+            </p>
+            <ul>
+                <li><strong>Basic Pay:</strong> Varies by post and level (₹18,000 to ₹81,100 per month)</li>
+                <li><strong>Dearness Allowance (DA):</strong> Currently around 50% of basic pay, revised twice annually</li>
+                <li><strong>House Rent Allowance (HRA):</strong> 8-24% depending on city of posting (X, Y, Z class cities)</li>
+                <li><strong>Transport Allowance:</strong> ₹3,600-₹7,200 per month</li>
+                <li><strong>Medical Benefits:</strong> Comprehensive health insurance for employee and family</li>
+                <li><strong>Leave Travel Concession (LTC):</strong> Once in two years for travel anywhere in India</li>
+                <li><strong>Pension Benefits:</strong> Defined pension scheme with family pension provision</li>
+                <li><strong>Provident Fund:</strong> 12% of basic + DA contribution from both employee and employer</li>
+            </ul>
+            <p>
+                Additionally, employees get festival advance, children education allowance, and various other benefits making government 
+                service financially rewarding and secure.
+            </p>
+
+            <h2>Application Process</h2>
+            <p>The application process for SSC exams is conducted entirely online:</p>
+            <ol style="margin-left: 30px;">
+                <li>Visit the official SSC website (ssc.nic.in) and navigate to the respective regional website</li>
+                <li>Look for the notification of the exam you want to apply for</li>
+                <li>Read the detailed notification carefully to understand eligibility criteria</li>
+                <li>Click on "Apply Online" link and register using your email and mobile number</li>
+                <li>Fill the application form with personal details, educational qualifications, and exam preferences</li>
+                <li>Upload scanned photographs and signature as per specifications</li>
+                <li>Pay the application fee online (exemption for SC/ST/PWD/Ex-Servicemen/Women candidates)</li>
+                <li>Submit the application and take a printout for future reference</li>
+                <li>Note down your registration number and password for future logins</li>
+            </ol>
+
+            <h2>Important Tips for SSC Aspirants</h2>
+            <ul>
+                <li>Start preparation at least 6-12 months before the exam</li>
+                <li>Understand that SSC is a marathon, not a sprint - consistency matters more than intensity</li>
+                <li>Don't rely solely on coaching; self-study is equally important</li>
+                <li>Practice mental math to solve quant questions faster</li>
+                <li>Read editorials and opinion pieces for improving English and general awareness simultaneously</li>
+                <li>Learn shortcuts and tricks for quantitative aptitude but understand the fundamentals first</li>
+                <li>Maintain a separate notebook for formulas, vocabulary, and important dates</li>
+                <li>Time management during exam is crucial - practice with timers</li>
+                <li>Don't get demotivated by initial failures - most successful candidates clear on 2nd or 3rd attempt</li>
+                <li>Stay away from rumors and focus on official information from SSC website</li>
+            </ul>
+        </div>
+
+        <div class="cta-box">
+            <h2 style="margin-bottom: 20px;">Find SSC Jobs Matching Your Profile</h2>
+            <p style="font-size: 18px; margin-bottom: 20px;">
+                Get personalized SSC job recommendations based on your education, age, and qualifications
+            </p>
+            <a href="index.html" class="btn">Browse SSC Jobs Now →</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 SarkariAI. All rights reserved.</p>
+        <p style="margin-top: 10px;">
+            <a href="index.html">Home</a> | 
+            <a href="about.html">About</a> | 
+            <a href="resources.html">Resources</a> | 
+            <a href="terms.html">Terms</a> | 
+            <a href="privacy-policy.html">Privacy</a>
+        </p>
+    </footer>
+</body>
+</html>
