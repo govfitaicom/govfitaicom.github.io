@@ -1,0 +1,11 @@
+{
+  "name": "govfitai-sitemap",
+  "version": "1.0.0",
+  "description": "Sitemap generator for GovFitAI",
+  "main": "generate-sitemap.js",
+  "scripts": {
+    "generate": "node generate-sitemap.js"
+  },
+  "keywords": ["sitemap", "seo"],
+  "author": "GovFitAI"
+}
