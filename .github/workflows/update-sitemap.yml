@@ -2,8 +2,7 @@ name: Update Sitemap
 
 on:
   schedule:
-    # Runs every day at 2 AM IST (8:30 PM UTC previous day)
-    - cron: '30 20 * * *'
+    - cron: '0 2 * * 0'  # Har Sunday subah 2 baje
   
   # Also run when you push to main branch
   push:
