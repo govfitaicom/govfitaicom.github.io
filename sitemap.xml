@@ -3,7 +3,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://govfitai.com/</loc>
-    <lastmod>2026-01-25</lastmod>
+    <lastmod>2026-01-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -11,25 +11,25 @@
   <!-- Static Pages -->
   <url>
     <loc>https://govfitai.com/about.html</loc>
-    <lastmod>2026-01-25</lastmod>
+    <lastmod>2026-01-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/resources.html</loc>
-    <lastmod>2026-01-25</lastmod>
+    <lastmod>2026-01-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://govfitai.com/privacy-policy.html</loc>
-    <lastmod>2026-01-25</lastmod>
+    <lastmod>2026-01-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://govfitai.com/terms.html</loc>
-    <lastmod>2026-01-25</lastmod>
+    <lastmod>2026-01-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -37,54 +37,474 @@
   <!-- Job Category Pages -->
   <url>
     <loc>https://govfitai.com/ssc-jobs.html</loc>
-    <lastmod>2026-01-25</lastmod>
+    <lastmod>2026-01-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/railway-jobs.html</loc>
-    <lastmod>2026-01-25</lastmod>
+    <lastmod>2026-01-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/banking-jobs.html</loc>
-    <lastmod>2026-01-25</lastmod>
+    <lastmod>2026-01-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/defense-jobs.html</loc>
-    <lastmod>2026-01-25</lastmod>
+    <lastmod>2026-01-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/PSU-jobs.html</loc>
-    <lastmod>2026-01-25</lastmod>
+    <lastmod>2026-01-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/SSC-CGL-Preparation.html</loc>
-    <lastmod>2026-01-25</lastmod>
+    <lastmod>2026-01-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://govfitai.com/UPSC-jobs.html</loc>
-    <lastmod>2026-01-25</lastmod>
+    <lastmod>2026-01-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/UPSC-Preparation-Strategy.html</loc>
-    <lastmod>2026-01-25</lastmod>
+    <lastmod>2026-01-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <!-- Dynamic Job Pages -->
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=up-police-constable-recruitment-2026&amp;id=78ef9bb9</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=bihar-bpsc-bpsc-motor-vehicle-inspector-mvi-in-transport-dept-recruitment-2025-download-final-result-for-28-post&amp;id=fcce245d</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=join-indian-coast-guard-icg-yantrik-navik-gd-cgept-012026-cgept-022026-batch-recruitment-2025-apply-online-for-630-post&amp;id=ed623187</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=join-indian-coast-guard-icg-yantrik-navik-gd-cgept-012026-cgept-022026-batch-recruitment-2025-apply-online-for-630-post&amp;id=2a862486</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=join-indian-coast-guard-icg-yantrik-navik-gd-cgept-012026-cgept-022026-batch-recruitment-2025-apply-online-for-630-post&amp;id=08b58b43</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=upsssc-lekhpal-recruitment-2025-apply-correction-edit-form-for-7994-post&amp;id=44c9d03f</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=nabard-development-assistant-recruitment-2026-apply-online-for-162-post&amp;id=ff30945c</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=nabard-development-assistant-recruitment-2026-apply-online-for-162-post&amp;id=58591fbd</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=up-police-constable-recruitment-2025-apply-online-for-32679-post&amp;id=7ca9cd74</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=iffco-phulpur-trade-technician-apprentices-2026-apply-online-form&amp;id=5f89de1f</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=iffco-phulpur-trade-technician-apprentices-2026-apply-online-form&amp;id=0832db2a</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=mpesb-mp-iti-training-officer-recruitment-2026-apply-online-for-1120-post&amp;id=9c6f09b7</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=india-exit-bank-management-trainee-mt-recruitment-2026-apply-online-for-40-post&amp;id=f9692684</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=bank-of-maharashtra-apprentices-recruitment-2026-apply-online-for-600-post&amp;id=832648e9</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=reserve-bank-of-india-rbi-office-attendant-recruitment-2026-apply-online-for-572-post&amp;id=b8e3a9b1</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=supreme-court-of-india-sci-law-clerk-cum-research-associates-recruitment-2025-apply-online-for-90-post&amp;id=847a0f70</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=rajasthan-rpsc-protection-officer-recruitment-2025-apply-online-for-12-post&amp;id=96d14c75</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=join-indian-air-force-agniveer-vayu-intake-012027-batch-apply-online-form&amp;id=e3211a1e</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=rajasthan-staff-selection-board-rssb-ldc-junior-assistant-recruitment-2026-apply-online-for-10644-post&amp;id=cfee4187</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=bpssc-havildar-clerk-home-guard-recruitment-2026-apply-online-for-64-post&amp;id=aceee6fa</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=rajasthan-staff-selection-board-rssb-agriculture-supervisor-recruitment-2026-apply-online-for-1100-post&amp;id=1d6019b4</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=uttar-pradesh-teacher-eligibility-test-uptet-2026-exam-date&amp;id=1c005f59</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=railway-rrb-group-d-various-posts-of-level-1-cen-092025-recruitment-2026-apply-online-for-22000-approx-post&amp;id=97aefb94</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=uppsc-medical-officer-dental-surgeon-swastha-shiksha-adhikari-veterinary-officer-other-post-direct-recruitment-2025-apply-online-for-2158-post&amp;id=f660b2a3</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=uppsc-medical-officer-dental-surgeon-swastha-shiksha-adhikari-veterinary-officer-other-post-direct-recruitment-2025-apply-online-for-2158-post&amp;id=788d3334</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=uppsc-medical-officer-dental-surgeon-swastha-shiksha-adhikari-veterinary-officer-other-post-direct-recruitment-2025-apply-online-for-2158-post&amp;id=e9f039fe</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=post-uppsc-medical-officer-dental-surgeon-swastha-shiksha-adhikari-veterinary-officer-other-post-direct-recruitment-2025-apply-online-for-2158-post&amp;id=7fd4e8f4</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=uppsc-medical-officer-dental-surgeon-swastha-shiksha-adhikari-veterinary-officer-other-post-direct-recruitment-2025-apply-online-for-2158-post&amp;id=d0a415e1</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=uppsc-medical-officer-dental-surgeon-swastha-shiksha-adhikari-veterinary-officer-other-post-direct-recruitment-2025-apply-online-for-2158-post&amp;id=c25eb6bb</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=uppsc-medical-officer-dental-surgeon-swastha-shiksha-adhikari-veterinary-officer-other-post-direct-recruitment-2025-apply-online-for-2158-post&amp;id=16799ddf</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=uppsc-medical-officer-dental-surgeon-swastha-shiksha-adhikari-veterinary-officer-other-post-direct-recruitment-2025-apply-online-for-2158-post&amp;id=6cedf357</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=uppsc-medical-officer-dental-surgeon-swastha-shiksha-adhikari-veterinary-officer-other-post-direct-recruitment-2025-apply-online-for-2158-post&amp;id=e918a869</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=uppsc-medical-officer-dental-surgeon-swastha-shiksha-adhikari-veterinary-officer-other-post-direct-recruitment-2025-apply-online-for-2158-post&amp;id=33f0dfc4</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=bpssc-sub-inspector-si-prohibition-recruitment-2026-apply-online-for-78-post&amp;id=99fe7879</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=haryana-police-hssc-constable-gd-recruitment-2026-apply-online-for-5500-post&amp;id=028b4f9e</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=haryana-police-hssc-constable-gd-recruitment-2026-apply-online-for-5500-post&amp;id=d7ee2881</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=haryana-police-hssc-constable-gd-recruitment-2026-apply-online-for-5500-post&amp;id=cf6304f4</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=rajasthan-staff-selection-board-rssb-lab-assistant-recruitment-2026-apply-online-for-804-post&amp;id=4b592e04</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=indian-army-jag-124rd-entry-october-2026-batch-apply-online-for-08-post&amp;id=c3ab5c73</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=indian-army-jag-124rd-entry-october-2026-batch-apply-online-for-08-post&amp;id=ddaf3487</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=india-exit-bank-deputy-managers-recruitment-2026-apply-online-for-20-post&amp;id=75a7b045</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=indian-navy-short-service-commissions-ssc-executive-education-and-technical-january-2027-course-st-online-form-2026&amp;id=ea352518</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=indian-navy-short-service-commissions-ssc-executive-education-and-technical-january-2027-course-st-online-form-2026&amp;id=feb64c04</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=indian-navy-short-service-commissions-ssc-executive-education-and-technical-january-2027-course-st-online-form-2026&amp;id=2e607329</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=indian-navy-short-service-commissions-ssc-executive-education-and-technical-january-2027-course-st-online-form-2026&amp;id=2a0649aa</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=indian-navy-short-service-commissions-ssc-executive-education-and-technical-january-2027-course-st-online-form-2026&amp;id=8bcb5a5c</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=indian-navy-short-service-commissions-ssc-executive-education-and-technical-january-2027-course-st-online-form-2026&amp;id=52039c58</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=indian-navy-short-service-commissions-ssc-executive-education-and-technical-january-2027-course-st-online-form-2026&amp;id=6f6fa8d4</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=indian-navy-short-service-commissions-ssc-executive-education-and-technical-january-2027-course-st-online-form-2026&amp;id=980fb70b</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=indian-navy-short-service-commissions-ssc-executive-education-and-technical-january-2027-course-st-online-form-2026&amp;id=58d38f5b</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=bihar-bpsc-deputy-director-recruitment-2026&amp;id=921ad960</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=bihar-bpsc-boiler-inspector-recruitment-2026&amp;id=0c606fbe</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=bihar-bpsc-acf-recruitment-2026&amp;id=c70e1348</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=mppsc-pre-recruitment-2026&amp;id=187e0f98</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=up-anganwadi-bharti-recruitment-2026&amp;id=52585470</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=bpsc-aso-mains-recruitment-2026&amp;id=4c7169f2</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=bihar-bpsc-atps-recruitment-2026&amp;id=1786c6a8</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=bank-of-maharashtra-apprentice-recruitment-2026&amp;id=466e67c0</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=rbi-bank-office-attendant-recruitment-2026&amp;id=ed0e52fc</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=bihar-bcece-junior-resident-recruitment-2026&amp;id=f628e2aa</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=nabard-development-assistant-grade-b-recruitment-2026&amp;id=45304d9b</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=csbc-bihar-prohibition-constable-recruitment-032025-rejected-list-gender-correction&amp;id=db078dcc</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=indian-army-ssc-technical-67th-women-recruitment-2026&amp;id=a33c16a5</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=indian-army-ssc-technical-67th-men-recruitment-2026&amp;id=2e0413df</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=mp-apex-bank-computer-operator-society-manager-recruitment-2026&amp;id=b4f95cdb</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=rssb-female-supervisor-recruitment-2026&amp;id=b8c7f318</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=rssb-forester-recruitment-2026&amp;id=375deb91</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=bpsc-project-manager-recruitment-2026&amp;id=e806e701</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=airforce-group-y-medical-assistant-airmen-intake-012027-online-form&amp;id=fb7ead8d</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=indian-airforce-agniveer-vayu-intake-012027-online-form&amp;id=69e04c0d</loc>
+    <lastmod>2026-01-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=iffco-phulpur-apprentice-recruitment-2026&amp;id=d4c240ff</loc>
     <lastmod>2026-01-24</lastmod>
@@ -734,18 +1154,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://govfitai.com/job-details.html?job=ongc-junior-engineer-recruitment-2025&amp;id=3aa7d23f</loc>
-    <lastmod>2025-12-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://govfitai.com/job-details.html?job=mazagon-dock-apprentice-recruitment-2025&amp;id=f5eb885c</loc>
-    <lastmod>2025-12-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://govfitai.com/job-details.html?job=rrb-junior-engineer-recruitment-2025&amp;id=e43df19e</loc>
     <lastmod>2025-12-05</lastmod>
     <changefreq>weekly</changefreq>
@@ -759,6 +1167,18 @@
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=ssc-junior-engineer-recruitment-2025&amp;id=0be824bc</loc>
+    <lastmod>2025-12-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=mazagon-dock-apprentice-recruitment-2025&amp;id=f5eb885c</loc>
+    <lastmod>2025-12-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=ongc-junior-engineer-recruitment-2025&amp;id=3aa7d23f</loc>
     <lastmod>2025-12-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
