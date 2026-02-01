@@ -3,7 +3,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://govfitai.com/</loc>
-    <lastmod>2026-01-30</lastmod>
+    <lastmod>2026-02-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -11,25 +11,25 @@
   <!-- Static Pages -->
   <url>
     <loc>https://govfitai.com/about.html</loc>
-    <lastmod>2026-01-30</lastmod>
+    <lastmod>2026-02-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/resources.html</loc>
-    <lastmod>2026-01-30</lastmod>
+    <lastmod>2026-02-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://govfitai.com/privacy-policy.html</loc>
-    <lastmod>2026-01-30</lastmod>
+    <lastmod>2026-02-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://govfitai.com/terms.html</loc>
-    <lastmod>2026-01-30</lastmod>
+    <lastmod>2026-02-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -37,54 +37,168 @@
   <!-- Job Category Pages -->
   <url>
     <loc>https://govfitai.com/ssc-jobs.html</loc>
-    <lastmod>2026-01-30</lastmod>
+    <lastmod>2026-02-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/railway-jobs.html</loc>
-    <lastmod>2026-01-30</lastmod>
+    <lastmod>2026-02-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/banking-jobs.html</loc>
-    <lastmod>2026-01-30</lastmod>
+    <lastmod>2026-02-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/defense-jobs.html</loc>
-    <lastmod>2026-01-30</lastmod>
+    <lastmod>2026-02-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/PSU-jobs.html</loc>
-    <lastmod>2026-01-30</lastmod>
+    <lastmod>2026-02-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/SSC-CGL-Preparation.html</loc>
-    <lastmod>2026-01-30</lastmod>
+    <lastmod>2026-02-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://govfitai.com/UPSC-jobs.html</loc>
-    <lastmod>2026-01-30</lastmod>
+    <lastmod>2026-02-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/UPSC-Preparation-Strategy.html</loc>
-    <lastmod>2026-01-30</lastmod>
+    <lastmod>2026-02-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <!-- Dynamic Job Pages -->
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=bihar-btsc-junior-engineer-recruitment-2026&amp;id=f7b7cb5b</loc>
+    <lastmod>2026-02-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=bihar-btsc-junior-engineer-recruitment-2026&amp;id=aa3acf7c</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=bihar-btsc-junior-engineer-recruitment-2026&amp;id=9ec64e83</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=nta-cuet-ug-online-form-2026&amp;id=82d3d469</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=rrb-group-d-level-1-recruitment-2026&amp;id=bcf36277</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=rrb-group-d-level-1-recruitment-2026&amp;id=8a147828</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=rrb-group-d-level-1-recruitment-2026&amp;id=379dd36e</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=rrb-group-d-level-1-recruitment-2026&amp;id=70e362bf</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=rrb-group-d-level-1-recruitment-2026&amp;id=db5800c9</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=rrb-group-d-level-1-recruitment-2026&amp;id=c7ca24f8</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=rrb-group-d-level-1-recruitment-2026&amp;id=07aead0c</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=rrb-group-d-level-1-recruitment-2026&amp;id=aac0dd2b</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=rrb-group-d-level-1-recruitment-2026&amp;id=b5be7ef0</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=rrb-group-d-level-1-recruitment-2026&amp;id=55da9c1e</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=rrb-group-d-level-1-recruitment-2026&amp;id=806a77f5</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=rrb-group-d-level-1-recruitment-2026&amp;id=5c5b314b</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=rrb-group-d-level-1-recruitment-2026&amp;id=4ab0f760</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=rrb-group-d-level-1-recruitment-2026&amp;id=8eb73d64</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=rrb-group-d-level-1-recruitment-2026&amp;id=158d16a9</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=up-police-constable-recruitment-2026&amp;id=78ef9bb9</loc>
     <lastmod>2026-01-30</lastmod>
