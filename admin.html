@@ -16,40 +16,63 @@
         .btn-primary { background: #667eea; color: white; }
         .btn-success { background: #28a745; color: white; }
         .btn-danger { background: #dc3545; color: white; }
+        .btn-warning { background: #ffc107; color: #212529; }
         .btn-ai { background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 600; margin-top: 8px; }
         .btn-ai:disabled { opacity: 0.6; cursor: not-allowed; }
         .tabs { display: flex; gap: 10px; margin-bottom: 30px; border-bottom: 2px solid #eee; overflow-x: auto; }
-        .tab-btn { padding: 15px 25px; background: none; border: none; font-size: 16px; font-weight: 600; color: #666; cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; }
+        .tab-btn { padding: 15px 25px; background: none; border: none; font-size: 16px; font-weight: 600; color: #666; cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; transition: all 0.2s; }
         .tab-btn.active { color: #667eea; border-bottom-color: #667eea; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
         .form-group { margin-bottom: 20px; }
-        label { display: block; font-weight: 600; margin-bottom: 5px; }
-        input, select, textarea { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; }
+        label { display: block; font-weight: 600; margin-bottom: 5px; color: #444; }
+        input, select, textarea { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 15px; transition: border-color 0.2s; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: #667eea; }
         .row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
         .manager-box { background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
         .add-row { display: flex; gap: 10px; margin: 15px 0; }
         .add-row input, .add-row select { flex: 1; }
         .items-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
         .item-tag { background: white; padding: 10px 15px; border-radius: 6px; border: 1px solid #ddd; display: flex; align-items: center; gap: 8px; font-size: 14px; }
         .item-tag button { background: #dc3545; color: white; border: none; border-radius: 50%; width: 22px; height: 22px; cursor: pointer; font-size: 14px; }
-        .job-card { border: 2px solid #eee; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
-        .message { padding: 12px; border-radius: 8px; margin-bottom: 20px; display: none; }
+        .job-card { border: 2px solid #eee; border-radius: 12px; padding: 20px; margin-bottom: 20px; transition: border-color 0.2s; }
+        .job-card:hover { border-color: #667eea; }
+        .quiz-card { border: 2px solid #e8f0ff; border-radius: 12px; padding: 20px; margin-bottom: 20px; background: linear-gradient(135deg, #f8f9ff, #fff); transition: all 0.2s; }
+        .quiz-card:hover { border-color: #667eea; box-shadow: 0 4px 12px rgba(102,126,234,0.15); }
+        .quiz-card .q-text { font-weight: 700; color: #333; font-size: 15px; margin-bottom: 6px; }
+        .quiz-card .q-en { color: #666; font-size: 13px; margin-bottom: 12px; }
+        .option-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 8px; align-items: center; }
+        .option-label { font-weight: 600; color: #555; font-size: 13px; margin-bottom: 4px; }
+        .correct-badge { background: #d4edda; color: #155724; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; border: 1px solid #c3e6cb; display: inline-block; margin-left: 8px; }
+        .correct-selector { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+        .correct-radio { display: flex; align-items: center; gap: 6px; padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+        .correct-radio:hover { border-color: #28a745; background: #f0fff4; }
+        .correct-radio.selected { border-color: #28a745; background: #d4edda; color: #155724; }
+        .correct-radio input { display: none; }
+        .message { padding: 12px; border-radius: 8px; margin-bottom: 20px; display: none; font-weight: 600; }
         .message.success { background: #d4edda; color: #155724; display: block; }
         .message.error { background: #f8d7da; color: #721c24; display: block; }
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; overflow-y: auto; }
         .modal.active { display: block; }
-        .modal-content { background: white; max-width: 900px; margin: 50px auto; border-radius: 12px; padding: 30px; position: relative; }
-        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: #999; }
+        .modal-content { background: white; max-width: 900px; margin: 40px auto; border-radius: 12px; padding: 30px; position: relative; }
+        .quiz-modal-content { background: white; max-width: 820px; margin: 40px auto; border-radius: 16px; padding: 30px; position: relative; }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: #999; line-height: 1; }
+        .close-modal:hover { color: #333; }
         .hidden { display: none; }
         .ai-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 3000; align-items: center; justify-content: center; }
         .ai-modal.active { display: flex; }
         .ai-modal-content { background: white; max-width: 700px; width: 90%; border-radius: 16px; padding: 30px; max-height: 80vh; overflow-y: auto; }
         .ai-result { background: linear-gradient(135deg, #f5f7ff, #e8f0ff); padding: 20px; border-radius: 12px; margin: 20px 0; border: 2px solid #667eea; }
-        @media (max-width: 768px) { .row { grid-template-columns: 1fr; } }
+        .section-divider { border: none; border-top: 2px solid #f0f0f0; margin: 20px 0; }
+        .quiz-badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; background: #e8f0ff; color: #667eea; border: 1px solid #c5d5fb; }
+        .stats-bar { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+        .stat-chip { background: #f0f4ff; border: 1px solid #d0dcff; border-radius: 8px; padding: 8px 16px; font-size: 14px; font-weight: 600; color: #4a5cc4; }
+        @media (max-width: 768px) { .row, .row-3, .option-row { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
+    <!-- LOGIN -->
     <div id="loginScreen" class="container" style="max-width: 400px; margin-top: 100px;">
         <h1>🔐 Admin</h1>
         <div id="loginMessage" class="message"></div>
@@ -60,30 +83,63 @@
         </form>
     </div>
 
+    <!-- DASHBOARD -->
     <div id="dashboard" class="container hidden">
         <div class="header">
-            <div><h1>Admin</h1><span id="adminEmail"></span></div>
+            <div><h1>Admin Dashboard</h1><span id="adminEmail" style="color:#666;font-size:13px;"></span></div>
             <div>
                 <button class="btn btn-success" onclick="openAddJobModal()">+ Job</button>
+                <button class="btn" style="background:#667eea;color:white;" onclick="openAddQuizModal()">+ Quiz Question</button>
                 <button class="btn btn-danger" onclick="logout()">Logout</button>
             </div>
         </div>
 
         <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('jobs')">Jobs</button>
-            <button class="tab-btn" onclick="switchTab('levels')">Levels</button>
-            <button class="tab-btn" onclick="switchTab('fields')">Fields</button>
-            <button class="tab-btn" onclick="switchTab('cats')">Categories</button>
-            <button class="tab-btn" onclick="switchTab('states')">States</button>
+            <button class="tab-btn active" onclick="switchTab('jobs', this)">📋 Jobs</button>
+            <button class="tab-btn" onclick="switchTab('quiz', this)">📚 Quiz Questions</button>
+            <button class="tab-btn" onclick="switchTab('levels', this)">🎓 Levels</button>
+            <button class="tab-btn" onclick="switchTab('fields', this)">🔧 Fields</button>
+            <button class="tab-btn" onclick="switchTab('cats', this)">📂 Categories</button>
+            <button class="tab-btn" onclick="switchTab('states', this)">🗺️ States</button>
         </div>
 
         <div id="message" class="message"></div>
 
+        <!-- JOBS TAB -->
         <div id="jobsTab" class="tab-content active">
-            <label><input type="checkbox" id="showExpired" onchange="loadJobs()"> Show Expired</label>
-            <div id="jobsContainer" style="margin-top: 20px;"></div>
+            <label style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+                <input type="checkbox" id="showExpired" onchange="loadJobs()">
+                Show Expired Jobs
+            </label>
+            <div id="jobsContainer"></div>
         </div>
 
+        <!-- QUIZ TAB -->
+        <div id="quizTab" class="tab-content">
+            <div class="stats-bar" id="quizStats"></div>
+            <div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;align-items:center;">
+                <select id="quizCategoryFilter" onchange="loadQuizQuestions()" style="max-width:200px;">
+                    <option value="">All Categories</option>
+                    <option value="Current Affairs">Current Affairs</option>
+                    <option value="History">History</option>
+                    <option value="Geography">Geography</option>
+                    <option value="Polity">Polity</option>
+                    <option value="Economy">Economy</option>
+                    <option value="Science">Science</option>
+                    <option value="Sports">Sports</option>
+                    <option value="GK">GK</option>
+                    <option value="GS">GS</option>
+                    <option value="UPSC">UPSC</option>
+                    <option value="SSC">SSC</option>
+                    <option value="GD">GD</option>
+                </select>
+                <button class="btn btn-primary" onclick="loadQuizQuestions()">🔄 Refresh</button>
+                <button class="btn" style="background:#667eea;color:white;" onclick="openAddQuizModal()">+ Add Question</button>
+            </div>
+            <div id="quizContainer"></div>
+        </div>
+
+        <!-- LEVELS TAB -->
         <div id="levelsTab" class="tab-content">
             <div class="manager-box">
                 <h3>Education Levels</h3>
@@ -96,6 +152,7 @@
             </div>
         </div>
 
+        <!-- FIELDS TAB -->
         <div id="fieldsTab" class="tab-content">
             <div class="manager-box">
                 <h3>Education Fields</h3>
@@ -108,6 +165,7 @@
             </div>
         </div>
 
+        <!-- CATEGORIES TAB -->
         <div id="catsTab" class="tab-content">
             <div class="manager-box">
                 <h3>Categories</h3>
@@ -119,6 +177,7 @@
             </div>
         </div>
 
+        <!-- STATES TAB -->
         <div id="statesTab" class="tab-content">
             <div class="manager-box">
                 <h3>States</h3>
@@ -131,6 +190,7 @@
         </div>
     </div>
 
+    <!-- JOB MODAL -->
     <div id="jobModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeJobModal()">&times;</span>
@@ -140,13 +200,11 @@
                 <div class="form-group"><label>Title *</label><input type="text" id="title" required></div>
                 <div class="form-group"><label>Organization *</label><input type="text" id="organization" required></div>
                 <div class="form-group"><label>Post *</label><input type="text" id="postName" required></div>
-                
                 <div class="form-group">
                     <label>Description</label>
                     <textarea id="description" rows="3"></textarea>
                     <button type="button" class="btn-ai" onclick="aiRewrite('description')">✨ AI Magic</button>
                 </div>
-
                 <div class="row">
                     <div class="form-group"><label>Min Age</label><input type="number" id="minAge"></div>
                     <div class="form-group"><label>Max Age</label><input type="number" id="maxAge"></div>
@@ -158,7 +216,7 @@
                     <button type="button" class="btn btn-success" onclick="addJobFld()">Add</button>
                     <div id="fldsCont" class="items-grid" style="margin-top: 10px;"></div>
                 </div>
-                <div class="form-group"><label>Min % *</label><input type="number" id="minPct" required min="0" max="100" step="0.01"></div>                
+                <div class="form-group"><label>Min % *</label><input type="number" id="minPct" required min="0" max="100" step="0.01"></div>
                 <div class="form-group">
                     <label>Additional Requirements</label>
                     <textarea id="addReq" rows="3"></textarea>
@@ -176,11 +234,97 @@
                     <div class="form-group"><label>Result</label><input type="text" id="resDt"></div>
                 </div>
                 <div class="form-group"><label>Link *</label><input type="url" id="link" required></div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Save</button>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Save Job</button>
             </form>
         </div>
     </div>
 
+    <!-- ── QUIZ MODAL ─────────────────────────────────────── -->
+    <div id="quizModal" class="modal">
+        <div class="quiz-modal-content">
+            <span class="close-modal" onclick="closeQuizModal()">&times;</span>
+            <h2 id="quizModalTitle" style="color:#667eea;margin-bottom:6px;">📚 Add Quiz Question</h2>
+            <p style="color:#888;font-size:13px;margin-bottom:24px;">Type in Hindi / English / Both — your choice</p>
+
+            <form id="quizForm">
+                <input type="hidden" id="quizQId">
+
+                <div class="form-group">
+                    <label>Category *</label>
+                    <select id="qCategory" required>
+                        <option value="Current Affairs">Current Affairs</option>
+                        <option value="History">History</option>
+                        <option value="Geography">Geography</option>
+                        <option value="Polity">Polity</option>
+                        <option value="Economy">Economy</option>
+                        <option value="Science">Science</option>
+                        <option value="Sports">Sports</option>
+                        <option value="GK">GK</option>
+                        <option value="GS">GS</option>
+                        <option value="UPSC">UPSC</option>
+                        <option value="SSC">SSC</option>
+                        <option value="GD">GD</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Question *</label>
+                    <textarea id="qQuestion" rows="3" required placeholder="Type question in Hindi / English / both (e.g. PMO को किस भवन में स्थानांतरित किया? / Where was PMO shifted?)"></textarea>
+                </div>
+
+                <hr class="section-divider">
+                <h3 style="color:#555;margin-bottom:14px;">Answer Options</h3>
+
+                <div class="form-group">
+                    <label><span style="background:#667eea;color:white;border-radius:50%;display:inline-block;width:22px;height:22px;text-align:center;line-height:22px;font-size:12px;margin-right:6px;">A</span> Option A *</label>
+                    <input type="text" id="qOpt1" required placeholder="Option A">
+                </div>
+                <div class="form-group">
+                    <label><span style="background:#667eea;color:white;border-radius:50%;display:inline-block;width:22px;height:22px;text-align:center;line-height:22px;font-size:12px;margin-right:6px;">B</span> Option B *</label>
+                    <input type="text" id="qOpt2" required placeholder="Option B">
+                </div>
+                <div class="form-group">
+                    <label><span style="background:#667eea;color:white;border-radius:50%;display:inline-block;width:22px;height:22px;text-align:center;line-height:22px;font-size:12px;margin-right:6px;">C</span> Option C *</label>
+                    <input type="text" id="qOpt3" required placeholder="Option C">
+                </div>
+                <div class="form-group">
+                    <label><span style="background:#667eea;color:white;border-radius:50%;display:inline-block;width:22px;height:22px;text-align:center;line-height:22px;font-size:12px;margin-right:6px;">D</span> Option D *</label>
+                    <input type="text" id="qOpt4" required placeholder="Option D">
+                </div>
+
+                <hr class="section-divider">
+
+                <div class="form-group">
+                    <label>✅ Correct Answer *</label>
+                    <p style="font-size:12px;color:#888;margin-bottom:8px;">Select which option is correct</p>
+                    <div class="correct-selector" id="correctSelector">
+                        <label class="correct-radio" onclick="selectCorrect(1)">
+                            <input type="radio" name="correctOpt" value="1" required>
+                            <span>🅐 A</span>
+                        </label>
+                        <label class="correct-radio" onclick="selectCorrect(2)">
+                            <input type="radio" name="correctOpt" value="2">
+                            <span>🅑 B</span>
+                        </label>
+                        <label class="correct-radio" onclick="selectCorrect(3)">
+                            <input type="radio" name="correctOpt" value="3">
+                            <span>🅒 C</span>
+                        </label>
+                        <label class="correct-radio" onclick="selectCorrect(4)">
+                            <input type="radio" name="correctOpt" value="4">
+                            <span>🅓 D</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success" style="width:100%;padding:14px;font-size:16px;margin-top:8px;">
+                    💾 Save Question
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- AI MODAL -->
     <div id="aiModal" class="ai-modal">
         <div class="ai-modal-content">
             <h2 style="color: #667eea;">✨ AI Generated</h2>
@@ -192,6 +336,7 @@
             </div>
         </div>
     </div>
+
     <script src="admin.js"></script>
 </body>
 </html>
