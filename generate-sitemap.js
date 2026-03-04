@@ -50,16 +50,16 @@ async function generateSitemap() {
     const allMcqs = await fetchFromSupabase('quiz_questions', 'posted_date');
     console.log(`  Found ${allMcqs.length} MCQ questions`);
 
-    // ── Deduplicate jobs (by slug) ──────────────────────────────────
-    const seenJobSlugs = new Set();
+    // ── Deduplicate jobs by unique ID only (NOT by title slug)
+    // Same title + different post_name = different job = different URL
+    const seenJobIds = new Set();
     const uniqueJobs = allJobs.filter(job => {
-        if (!job.title) return false;
-        const slug = generateSlug(job.title);
-        if (seenJobSlugs.has(slug)) return false;
-        seenJobSlugs.add(slug);
+        if (!job.id || !job.title) return false;
+        if (seenJobIds.has(job.id)) return false;
+        seenJobIds.add(job.id);
         return true;
     });
-    console.log(`  Unique jobs: ${uniqueJobs.length} (removed ${allJobs.length - uniqueJobs.length} duplicates)`);
+    console.log(`  Unique jobs: ${uniqueJobs.length} (removed ${allJobs.length - uniqueJobs.length} true ID duplicates)`);
 
     // ── Deduplicate MCQs (by slug) ─────────────────────────────────
     const seenMcqSlugs = new Set();
@@ -106,7 +106,9 @@ async function generateSitemap() {
     // Dynamic job pages
     xml += `\n  <!-- JOB DETAIL PAGES (${uniqueJobs.length}) -->\n`;
     uniqueJobs.forEach(job => {
-        const slug = generateSlug(job.title);
+        // slug = title + post_name — same title, different post = different URL
+        const postPart = job.post_name ? '-' + generateSlug(job.post_name) : '';
+        const slug = generateSlug(job.title) + postPart;
         const sid  = shortId(job.id);
         const lmod = job.posted_date ? job.posted_date.split('T')[0] : today;
         const expired = job.application_deadline && new Date(job.application_deadline) < new Date();

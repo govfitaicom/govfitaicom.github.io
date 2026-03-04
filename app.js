@@ -37,7 +37,7 @@ let quizLoaded        = false;
     loadAllJobs(true);
     if (userProfile) showRecommendedBanner();
 
-    // If returning from quiz-details.html, open quiz tab automatically
+    // If returning from quiz-details.html, open quiz tab
     const openTab = localStorage.getItem('openTab');
     if (openTab) {
         localStorage.removeItem('openTab');
@@ -201,7 +201,7 @@ async function loadAllJobs(reset = false) {
 
         // Update SEO links
         const seo = document.getElementById('seoJobLinks');
-        if (seo) seo.innerHTML = allJobsData.map(j => `<a href="${getJobUrl(j.id,j.title)}">${j.title}</a><br>`).join('');
+        if (seo) seo.innerHTML = allJobsData.map(j => `<a href="${getJobUrl(j.id,j.title,j.post_name)}">${j.title} - ${j.post_name||''}</a><br>`).join('');
 
         const hasMore = allJobsData.length < allJobsTotal;
         if (btn) {
@@ -292,7 +292,7 @@ function appendJobCards(jobs, containerId) {
         el.setAttribute('itemtype', 'https://schema.org/JobPosting');
         const desc    = job.description || `${job.organization} invites applications for ${job.post_name}.`;
         const short   = desc.length > 120 ? desc.substring(0, 120) + '…' : desc;
-        const jobUrl  = getJobUrl(job.id, job.title);
+        const jobUrl  = getJobUrl(job.id, job.title, job.post_name);
         const isPinned = pinnedJobs.includes(job.id);
         el.innerHTML = `
             <meta itemprop="datePosted" content="${job.posted_date}"/>
@@ -358,7 +358,7 @@ function shareJob(jobId, jobTitle, jobUrl) {
 
 // ── HELPERS ────────────────────────────────────────────────────────────────────
 function generateJobSlug(title) {
-    return title.toLowerCase().trim()
+    return (title || '').toLowerCase().trim()
         .replace(/[^\w\s-]/g, '').replace(/\s+/g, '-')
         .replace(/-+/g, '-').replace(/^-+|-+$/g, '');
 }
@@ -367,9 +367,12 @@ function generateQuizSlug(text) {
         .replace(/[^\w\s-]/g, '').replace(/\s+/g, '-')
         .replace(/-+/g, '-').replace(/^-+|-+$/g, '').substring(0, 80);
 }
-function getShortId(id)        { return id.substring(0, 8); }
-function getJobUrl(id, title)  { return `job-details.html?job=${generateJobSlug(title)}&id=${getShortId(id)}`; }
-function getQuizUrl(id, text)  { return `quiz-details.html?q=${generateQuizSlug(text)}&id=${getShortId(id)}`; }
+function getShortId(id)       { return (id || '').substring(0, 8); }
+function getJobUrl(id, title, postName) {
+    const postPart = postName ? '-' + generateJobSlug(postName) : '';
+    return `job-details.html?job=${generateJobSlug(title)}${postPart}&id=${getShortId(id)}`;
+}
+function getQuizUrl(id, text) { return `quiz-details.html?q=${generateQuizSlug(text)}&id=${getShortId(id)}`; }
 function formatDate(ds) {
     if (!ds) return 'N/A';
     return new Date(ds).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
@@ -533,7 +536,7 @@ async function loadQuizQuestions() {
         if (error) throw error;
         quizAllQuestions = data || [];
 
-        // Inject SEO links so Google can discover all quiz-details pages
+        // SEO links for Google to discover quiz-details pages
         const seoDiv = document.getElementById('seoQuizLinks');
         if (seoDiv) {
             seoDiv.innerHTML = quizAllQuestions.map(q => {
@@ -576,6 +579,7 @@ function renderQuestion() {
     const qText  = (q.question_en?.trim()) ? q.question_en : q.question_hi;
     const labels = ['A','B','C','D'];
     const pct    = Math.round((quizIndex / quizQuestions.length) * 100);
+
     const quizUrl = getQuizUrl(q.id, qText);
 
     document.getElementById('quizArea').innerHTML = `
@@ -586,7 +590,7 @@ function renderQuestion() {
                 <span class="badge" style="background:#e8f0ff;color:#667eea;">${q.category}</span>
             </div>
             <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
-            <a href="${quizUrl}" class="quiz-question-text" style="display:block;text-decoration:none;color:inherit;cursor:pointer;" title="Open full question page">${qText}</a>
+            <a href="${quizUrl}" class="quiz-question-text" style="display:block;text-decoration:none;color:inherit;" title="Open full question">${qText}</a>
             <div class="quiz-options">
                 ${(opts||[]).map((opt,i) => `
                     <button class="quiz-option" id="qopt_${i}"
@@ -599,7 +603,7 @@ function renderQuestion() {
                 ${quizIndex + 1 < quizQuestions.length ? 'Next Question →' : 'See My Score 🏆'}
             </button>
             <div style="text-align:right;margin-top:8px;">
-                <a href="${quizUrl}" style="font-size:12px;color:#aaa;text-decoration:none;" title="Share this question">🔗 Share this question</a>
+                <a href="${quizUrl}" style="font-size:12px;color:#aaa;text-decoration:none;">🔗 Share this question</a>
             </div>
         </div>`;
 }
