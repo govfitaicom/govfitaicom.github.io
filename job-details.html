@@ -697,14 +697,30 @@ function init() {
         document.getElementById('canonicalTag').setAttribute('href', canonicalUrl);
 
         // Inject Schema.org JobPosting
+        // Build salary only if actual data exists (empty baseSalary = critical Google error)
+        const salaryText = job.salary_range || job.pay_scale || '';
+        const salaryMatch = salaryText.match(/[\d,]+/g);
+        const salaryObj = salaryMatch && salaryMatch.length >= 1 ? {
+            "baseSalary": {
+                "@type": "MonetaryAmount",
+                "currency": "INR",
+                "value": {
+                    "@type": "QuantitativeValue",
+                    "minValue": parseInt(salaryMatch[0].replace(/,/g,'')),
+                    "maxValue": parseInt((salaryMatch[1] || salaryMatch[0]).replace(/,/g,'')),
+                    "unitText": "MONTH"
+                }
+            }
+        } : {};
+
         const schema = {
             "@context": "https://schema.org/",
             "@type": "JobPosting",
             "title": job.title,
-            "description": job.description || `${job.organization} has announced recruitment for the post of ${job.post_name}. Eligible candidates can apply online before the deadline.`,
+            "description": job.description || `${job.organization} has announced recruitment for the post of ${job.post_name}. Eligible candidates with ${job.education_required} qualification can apply online before the deadline. This is a government job opportunity in ${job.state}.`,
             "identifier": { "@type": "PropertyValue", "name": job.organization, "value": job.id },
-            "datePosted": job.posted_date || new Date().toISOString().split('T')[0],
-            "validThrough": job.application_deadline,
+            "datePosted": (job.posted_date || new Date().toISOString()).split('T')[0],
+            ...(job.application_deadline ? { "validThrough": job.application_deadline.split('T')[0] + "T23:59:59" } : {}),
             "hiringOrganization": {
                 "@type": "Organization",
                 "name": job.organization,
@@ -714,18 +730,21 @@ function init() {
                 "@type": "Place",
                 "address": {
                     "@type": "PostalAddress",
+                    "addressLocality": job.state === 'All India' ? 'India' : job.state,
                     "addressRegion": job.state,
                     "addressCountry": "IN"
                 }
             },
-            "baseSalary": {
-                "@type": "MonetaryAmount",
-                "currency": "INR",
-                "value": { "@type": "QuantitativeValue", "unitText": "MONTH" }
-            },
+            ...(job.state === 'All India' ? { "jobLocationType": "TELECOMMUTE" } : {}),
             "employmentType": "FULL_TIME",
-            "qualifications": job.education_required,
-            "url": canonicalUrl
+            "educationRequirements": {
+                "@type": "EducationalOccupationalCredential",
+                "credentialCategory": job.education_required || "bachelor degree"
+            },
+            "experienceRequirements": "Freshers eligible",
+            "directApply": true,
+            "url": canonicalUrl,
+            ...salaryObj
         };
         document.getElementById('jobSchema').textContent = JSON.stringify(schema);
 
