@@ -35,8 +35,14 @@ let quizLoaded        = false;
     await loadProfileFromStorage();
     updateProfileNavBtn();
     loadAllJobs(true);
-    // Only load recommended banner count if profile exists
     if (userProfile) showRecommendedBanner();
+
+    // If returning from quiz-details.html, open quiz tab automatically
+    const openTab = localStorage.getItem('openTab');
+    if (openTab) {
+        localStorage.removeItem('openTab');
+        setTimeout(() => showTab(openTab), 300);
+    }
 })();
 
 // ── CONFIG ─────────────────────────────────────────────────────────────────────
@@ -356,8 +362,14 @@ function generateJobSlug(title) {
         .replace(/[^\w\s-]/g, '').replace(/\s+/g, '-')
         .replace(/-+/g, '-').replace(/^-+|-+$/g, '');
 }
-function getShortId(id)       { return id.substring(0, 8); }
-function getJobUrl(id, title) { return `job-details.html?job=${generateJobSlug(title)}&id=${getShortId(id)}`; }
+function generateQuizSlug(text) {
+    return (text || '').toLowerCase().trim()
+        .replace(/[^\w\s-]/g, '').replace(/\s+/g, '-')
+        .replace(/-+/g, '-').replace(/^-+|-+$/g, '').substring(0, 80);
+}
+function getShortId(id)        { return id.substring(0, 8); }
+function getJobUrl(id, title)  { return `job-details.html?job=${generateJobSlug(title)}&id=${getShortId(id)}`; }
+function getQuizUrl(id, text)  { return `quiz-details.html?q=${generateQuizSlug(text)}&id=${getShortId(id)}`; }
 function formatDate(ds) {
     if (!ds) return 'N/A';
     return new Date(ds).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
@@ -520,6 +532,16 @@ async function loadQuizQuestions() {
             .from('quiz_questions').select('*').order('posted_date', { ascending: false }).limit(100);
         if (error) throw error;
         quizAllQuestions = data || [];
+
+        // Inject SEO links so Google can discover all quiz-details pages
+        const seoDiv = document.getElementById('seoQuizLinks');
+        if (seoDiv) {
+            seoDiv.innerHTML = quizAllQuestions.map(q => {
+                const text = (q.question_en || q.question_hi || '').trim();
+                return `<a href="${getQuizUrl(q.id, text)}">${text.substring(0, 80)}</a><br>`;
+            }).join('');
+        }
+
         startQuizSession();
     } catch (e) {
         document.getElementById('quizArea').innerHTML =
@@ -554,6 +576,7 @@ function renderQuestion() {
     const qText  = (q.question_en?.trim()) ? q.question_en : q.question_hi;
     const labels = ['A','B','C','D'];
     const pct    = Math.round((quizIndex / quizQuestions.length) * 100);
+    const quizUrl = getQuizUrl(q.id, qText);
 
     document.getElementById('quizArea').innerHTML = `
         <div class="quiz-card">
@@ -563,7 +586,7 @@ function renderQuestion() {
                 <span class="badge" style="background:#e8f0ff;color:#667eea;">${q.category}</span>
             </div>
             <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
-            <div class="quiz-question-text">${qText}</div>
+            <a href="${quizUrl}" class="quiz-question-text" style="display:block;text-decoration:none;color:inherit;cursor:pointer;" title="Open full question page">${qText}</a>
             <div class="quiz-options">
                 ${(opts||[]).map((opt,i) => `
                     <button class="quiz-option" id="qopt_${i}"
@@ -575,6 +598,9 @@ function renderQuestion() {
             <button class="quiz-next-btn" id="quizNextBtn" onclick="nextQ()">
                 ${quizIndex + 1 < quizQuestions.length ? 'Next Question →' : 'See My Score 🏆'}
             </button>
+            <div style="text-align:right;margin-top:8px;">
+                <a href="${quizUrl}" style="font-size:12px;color:#aaa;text-decoration:none;" title="Share this question">🔗 Share this question</a>
+            </div>
         </div>`;
 }
 

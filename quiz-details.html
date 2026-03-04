@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">GK Quiz Question - GovFitAI</title>
+    <meta name="google-adsense-account" content="ca-pub-2221858776975716">
+    <meta name="description" id="pageDesc" content="Practice government exam MCQ questions with answers and explanations. SSC, UPSC, Railway, Banking GK quiz.">
+    <link rel="canonical" id="canonicalTag" href="https://govfitai.com/quiz-details.html" />
+    <meta property="og:type" content="article">
+    <meta property="og:title" id="ogTitle" content="GK Quiz - GovFitAI">
+    <meta property="og:description" id="ogDesc" content="Practice MCQ for government exams">
+    <script type="application/ld+json" id="pageSchema"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <noscript>
+        <div style="max-width:800px;margin:40px auto;padding:20px;font-family:sans-serif;">
+            <h1>Government Exam Quiz - GovFitAI</h1>
+            <p>This page requires JavaScript to display quiz questions. Please enable JavaScript or <a href="index.html">visit GovFitAI</a> to practice thousands of MCQs for SSC, UPSC, Railway, Banking and other government exams.</p>
+        </div>
+    </noscript>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f7fa; line-height: 1.6; }
+
+        header { background: white; padding: 14px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #e0e0e0; }
+        .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 10px; cursor: pointer; text-decoration: none; }
+        .logo-img { height: 50px; width: auto; }
+        .back-btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px; }
+
+        /* Loading */
+        .loading { text-align: center; padding: 60px 20px; }
+        .spinner { width: 44px; height: 44px; border: 4px solid #e0e0e0; border-top-color: #667eea; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .container { max-width: 900px; margin: 30px auto; padding: 0 20px; }
+
+        /* Breadcrumb */
+        .breadcrumb { background: white; padding: 12px 18px; border-radius: 8px; margin-bottom: 20px; font-size: 13px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+        .breadcrumb a { color: #667eea; text-decoration: none; }
+        .breadcrumb span { color: #bbb; margin: 0 6px; }
+
+        /* Question Card */
+        .question-card { background: white; border-radius: 14px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); margin-bottom: 20px; }
+        .q-meta { display: flex; gap: 10px; align-items: center; margin-bottom: 18px; flex-wrap: wrap; }
+        .q-badge { background: #e8f0fe; color: #667eea; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+        .q-date { color: #aaa; font-size: 12px; }
+        .question-text { font-size: 20px; font-weight: 700; color: #222; line-height: 1.5; margin-bottom: 24px; }
+        .question-hi { font-size: 16px; color: #555; margin-bottom: 24px; line-height: 1.6; border-left: 3px solid #667eea; padding-left: 14px; }
+
+        /* Options */
+        .options { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+        .option { display: flex; align-items: flex-start; gap: 14px; padding: 14px 18px; border-radius: 10px; border: 2px solid #e8e8e8; cursor: pointer; transition: all 0.2s; font-size: 15px; background: white; }
+        .option:hover { border-color: #667eea; background: #f0f4ff; }
+        .option.correct { border-color: #28a745; background: #f0fff4; }
+        .option.wrong { border-color: #dc3545; background: #fff5f5; }
+        .option.reveal { border-color: #28a745; background: #f0fff4; }
+        .option-label { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+        .option .option-label { background: #f0f0f0; color: #555; }
+        .option.correct .option-label { background: #28a745; color: white; }
+        .option.wrong .option-label { background: #dc3545; color: white; }
+        .option.reveal .option-label { background: #28a745; color: white; }
+        .option-text { flex: 1; line-height: 1.5; }
+
+        /* Show Answer Button */
+        .show-answer-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; transition: opacity 0.2s; margin-bottom: 16px; }
+        .show-answer-btn:hover { opacity: 0.9; }
+        .show-answer-btn.shown { display: none; }
+
+        /* Answer revealed */
+        .answer-box { display: none; background: #f0fff4; border: 2px solid #28a745; border-radius: 10px; padding: 18px 20px; margin-bottom: 20px; }
+        .answer-box.visible { display: block; }
+        .answer-box h4 { color: #28a745; font-size: 16px; margin-bottom: 6px; }
+        .answer-box p { color: #444; font-size: 15px; }
+
+        /* Explanation */
+        .explanation-box { background: #fff8e1; border: 2px solid #ffc107; border-radius: 10px; padding: 18px 20px; margin-bottom: 20px; display: none; }
+        .explanation-box.visible { display: block; }
+        .explanation-box h4 { color: #e65100; font-size: 15px; margin-bottom: 6px; }
+        .explanation-box p { color: #444; font-size: 14px; line-height: 1.6; }
+
+        /* Actions */
+        .action-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+        .btn-action { flex: 1; min-width: 140px; padding: 12px 20px; border-radius: 8px; border: none; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .btn-practice { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
+        .btn-practice:hover { opacity: 0.9; }
+        .btn-share { background: #e8f5e9; color: #2e7d32; }
+        .btn-share:hover { background: #4caf50; color: white; }
+
+        /* Info cards */
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .info-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 1px 6px rgba(0,0,0,0.06); }
+        .info-card h3 { color: #667eea; font-size: 15px; margin-bottom: 10px; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; }
+        .info-card p, .info-card li { color: #555; font-size: 14px; line-height: 1.7; }
+        .info-card ul { margin-left: 18px; }
+
+        /* Related questions */
+        .related-section { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 1px 6px rgba(0,0,0,0.06); margin-bottom: 30px; }
+        .related-section h2 { color: #333; font-size: 20px; margin-bottom: 18px; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+        .related-card { background: #f8f9fa; border-radius: 8px; padding: 14px 16px; cursor: pointer; transition: all 0.2s; border: 1px solid #e8e8e8; text-decoration: none; display: block; }
+        .related-card:hover { background: #e8f0fe; border-color: #667eea; }
+        .related-card .r-category { font-size: 11px; color: #667eea; font-weight: 700; margin-bottom: 6px; }
+        .related-card .r-question { color: #333; font-size: 13px; line-height: 1.4; font-weight: 500; }
+
+        footer { background: #2d3748; color: white; text-align: center; padding: 20px; margin-top: 40px; }
+        footer a { color: #a0aec0; text-decoration: none; margin: 0 8px; }
+
+        @media (max-width: 600px) {
+            .question-text { font-size: 17px; }
+            .action-row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="GovFitAI" class="logo-img">
+            </a>
+            <a href="index.html#jobsSection" onclick="localStorage.setItem('openTab','quiz')" class="back-btn">📚 More Quiz</a>
+        </div>
+    </header>
+
+    <div id="loadingState" class="loading">
+        <div class="spinner"></div>
+        <p style="color:#aaa;">Loading question...</p>
+    </div>
+
+    <div id="mainContent" class="container" style="display:none;">
+
+        <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span>›</span>
+            <a href="index.html#jobsSection" onclick="localStorage.setItem('openTab','quiz')">Quiz</a>
+            <span>›</span>
+            <span id="breadcrumbCat">Question</span>
+        </div>
+
+        <!-- Main Question Card -->
+        <div class="question-card">
+            <div class="q-meta">
+                <span class="q-badge" id="qCategoryBadge">GK</span>
+                <span class="q-date" id="qDate"></span>
+            </div>
+
+            <div class="question-text" id="questionText"></div>
+            <div class="question-hi" id="questionHi" style="display:none;"></div>
+
+            <div class="options" id="optionsContainer"></div>
+
+            <button class="show-answer-btn" id="showAnswerBtn" onclick="revealAnswer()">
+                👁️ Show Answer
+            </button>
+
+            <div class="answer-box" id="answerBox">
+                <h4>✅ Correct Answer</h4>
+                <p id="correctAnswerText"></p>
+            </div>
+
+            <div class="explanation-box" id="explanationBox">
+                <h4>💡 Explanation</h4>
+                <p id="explanationText"></p>
+            </div>
+
+            <div class="action-row">
+                <button class="btn-action btn-practice" onclick="window.location.href='index.html#jobsSection'; localStorage.setItem('openTab','quiz');">
+                    🎯 Practice More Questions
+                </button>
+                <button class="btn-action btn-share" onclick="shareQuestion()">
+                    🔗 Share This Question
+                </button>
+            </div>
+        </div>
+
+        <!-- Category Info -->
+        <div class="info-grid" id="categoryInfoGrid"></div>
+
+        <!-- Related Questions -->
+        <div class="related-section" id="relatedSection" style="display:none;">
+            <h2>📚 More Questions in This Category</h2>
+            <div class="related-grid" id="relatedGrid"></div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 GovFitAI. All rights reserved.</p>
+        <p style="margin-top:8px;">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="SSC-CGL-Preparation.html">SSC Guide</a>
+            <a href="UPSC-Preparation-Strategy.html">UPSC Guide</a>
+            <a href="privacy-policy.html">Privacy</a>
+        </p>
+    </footer>
+
+<script>
+// ── Supabase ───────────────────────────────────────────────────────────────────
+const SUPABASE_URL = 'https://yhgqtbbxsbptssybgbrl.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InloZ3F0YmJ4c2JwdHNzeWJnYnJsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU1OTQ4NDYsImV4cCI6MjA4MTE3MDg0Nn0.cktVnZkay3MjYIG_v0WJSkotyq79Nnkr3JJn_munDi8';
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const labels = ['A', 'B', 'C', 'D'];
+
+// Category descriptions for rich content
+const CATEGORY_INFO = {
+    'GK': {
+        title: 'General Knowledge (GK)',
+        desc: 'General Knowledge questions cover a wide range of topics including science, history, geography, culture, and current events. GK is tested in almost every government exam — SSC, Railway, Banking, UPSC, and State PSC exams all include a dedicated GK section.',
+        tips: ['Read newspaper daily for current GK', 'Use GK capsules for monthly updates', 'Revise static GK from standard books like Lucent GK', 'Focus on India-related facts, awards, sports, and appointments']
+    },
+    'Current Affairs': {
+        title: 'Current Affairs',
+        desc: 'Current Affairs questions test your awareness of recent events in India and the world. Questions cover government schemes, appointments, summits, awards, sports achievements, economic developments, and international relations from the past 6–12 months.',
+        tips: ['Read The Hindu or Indian Express daily', 'Follow PIB (Press Information Bureau) for govt schemes', 'Use monthly current affairs PDF capsules', 'Focus on last 6 months before your exam date']
+    },
+    'History': {
+        title: 'Indian History',
+        desc: 'History questions in government exams cover Ancient India (Indus Valley to Gupta period), Medieval India (Delhi Sultanate, Mughal Empire), Modern India (British rule, freedom movement, independence), and Post-independence events. NCERT books are the best source.',
+        tips: ['Complete NCERT History books (Class 6–12)', 'Focus on Modern Indian History for SSC and UPSC', 'Make timeline charts for important events', 'Learn about freedom fighters and their movements']
+    },
+    'Geography': {
+        title: 'Geography',
+        desc: 'Geography questions cover Physical Geography (mountains, rivers, climate, soils), Indian Geography (states, capitals, rivers, national parks), and World Geography (continents, oceans, countries). Both static and map-based questions are asked.',
+        tips: ['Atlas practice is essential — know Indian rivers and mountains', 'Learn state capitals, districts, and borders', 'Study climate zones and soil types in India', 'Cover national parks, wildlife sanctuaries, and biosphere reserves']
+    },
+    'Polity': {
+        title: 'Indian Polity & Constitution',
+        desc: 'Polity questions test knowledge of the Indian Constitution, governance, and political system. Topics include Fundamental Rights, Directive Principles, Parliament, Supreme Court, President, Governor, elections, and local self-government. M. Laxmikanth is the standard reference.',
+        tips: ['Read M. Laxmikanth\'s Indian Polity (mandatory for UPSC)', 'Know all Constitutional Amendments and their effects', 'Understand structure of Parliament, Judiciary, and Executive', 'Focus on recent Supreme Court judgments and electoral reforms']
+    },
+    'Economy': {
+        title: 'Indian Economy',
+        desc: 'Economy questions cover macroeconomic concepts (GDP, inflation, fiscal policy), banking system (RBI, monetary policy), Five Year Plans, government schemes (Make in India, PM Kisan, etc.), Union Budget highlights, and international economic organizations.',
+        tips: ['Follow RBI policy announcements and Union Budget', 'Learn basic economic terms and indicators', 'Study government flagship schemes and their objectives', 'Cover India\'s trade, exports, and international economic relations']
+    },
+    'Science': {
+        title: 'General Science',
+        desc: 'Science questions in government exams are generally at Class 9–10 level. Topics include Physics (force, motion, light, electricity), Chemistry (elements, compounds, acids, bases), Biology (human body systems, diseases, nutrition), and Computer Science basics.',
+        tips: ['Revise NCERT Science from Class 8–10', 'Focus on everyday science applications and inventions', 'Learn about diseases, their causes and vaccines', 'Cover basic computer and technology concepts for clerical posts']
+    },
+    'SSC': {
+        title: 'SSC Exam Questions',
+        desc: 'Staff Selection Commission (SSC) conducts exams for CGL, CHSL, MTS, GD Constable, and Stenographer posts. SSC questions have a distinct pattern — Reasoning, Maths, English, and GK. Speed and accuracy are critical as negative marking applies.',
+        tips: ['Practice at least 50 questions daily for each section', 'Learn shortcuts for quantitative aptitude', 'Focus on error detection and sentence correction for English', 'Solve 10 previous year papers before your exam']
+    },
+    'UPSC': {
+        title: 'UPSC Civil Services Questions',
+        desc: 'UPSC Civil Services Examination (IAS/IPS/IFS) is India\'s most prestigious exam. The Prelims tests GS Paper I (History, Geography, Polity, Economy, Environment, Science, Current Affairs) and CSAT. Questions test analytical understanding, not just memory.',
+        tips: ['Complete NCERTs before moving to standard references', 'Integrate current affairs with static syllabus topics', 'Practice previous year Prelims papers from last 10 years', 'Focus on environment, ecology, and international relations in GS Paper I']
+    }
+};
+
+function generateSlug(text) {
+    return (text || '').toLowerCase().trim()
+        .replace(/[^\w\s-]/g, '').replace(/\s+/g, '-')
+        .replace(/-+/g, '-').replace(/^-+|-+$/g, '').substring(0, 80);
+}
+
+window.addEventListener('DOMContentLoaded', init);
+
+async function init() {
+    const params = new URLSearchParams(window.location.search);
+    const shortId = params.get('id');
+    const slugParam = params.get('q');
+
+    if (!shortId && !slugParam) {
+        window.location.href = 'index.html';
+        return;
+    }
+
+    try {
+        // Fetch all questions and find by short ID
+        const { data: allQ } = await sb.from('quiz_questions').select('*').order('posted_date', { ascending: false });
+
+        if (!allQ || allQ.length === 0) {
+            document.getElementById('loadingState').innerHTML = '<p style="color:#aaa;padding:60px;">No questions found.</p>';
+            return;
+        }
+
+        let q = null;
+        if (shortId) {
+            q = allQ.find(x => x.id && x.id.startsWith(shortId));
+        }
+        if (!q && slugParam) {
+            q = allQ.find(x => generateSlug(x.question_en || x.question_hi) === slugParam ||
+                                generateSlug(x.question_en || x.question_hi).startsWith(slugParam));
+        }
+
+        if (!q) {
+            document.getElementById('loadingState').innerHTML = '<p style="color:#aaa;padding:60px;text-align:center;">Question not found. <a href="index.html">Back to Home</a></p>';
+            return;
+        }
+
+        // Set canonical
+        const slug = generateSlug(q.question_en || q.question_hi);
+        const sid = q.id.substring(0, 8);
+        const canonicalUrl = `https://govfitai.com/quiz-details.html?q=${slug}&id=${sid}`;
+        document.getElementById('canonicalTag').href = canonicalUrl;
+
+        renderQuestion(q);
+        injectSchema(q, canonicalUrl);
+        loadRelated(q, allQ);
+
+    } catch (err) {
+        console.error(err);
+        document.getElementById('loadingState').innerHTML = '<p style="color:#aaa;padding:60px;text-align:center;">Error loading. <a href="index.html">Back to Home</a></p>';
+    }
+}
+
+function renderQuestion(q) {
+    const qTextEn = (q.question_en || '').trim();
+    const qTextHi = (q.question_hi || '').trim();
+    const displayQ = qTextEn || qTextHi;
+    const opts = (q.options_en && q.options_en.some(o => o?.trim())) ? q.options_en : (q.options_hi || []);
+    const correctIdx = (q.correct_option || 1) - 1; // 0-indexed
+
+    // Page meta
+    const titleText = `${displayQ.substring(0, 80)} | ${q.category} Quiz | GovFitAI`;
+    document.getElementById('pageTitle').textContent = titleText;
+    document.getElementById('pageDesc').content = `${displayQ.substring(0, 140)} — Practice ${q.category} MCQ for government exams. Answer: ${opts[correctIdx] || ''}`;
+    document.getElementById('ogTitle').content = titleText;
+    document.getElementById('ogDesc').content = displayQ.substring(0, 140);
+
+    document.getElementById('breadcrumbCat').textContent = q.category;
+    document.getElementById('qCategoryBadge').textContent = q.category;
+
+    if (q.posted_date) {
+        document.getElementById('qDate').textContent = new Date(q.posted_date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+
+    document.getElementById('questionText').textContent = displayQ;
+
+    if (qTextHi && qTextEn && qTextHi !== qTextEn) {
+        document.getElementById('questionHi').textContent = qTextHi;
+        document.getElementById('questionHi').style.display = 'block';
+    }
+
+    // Render options
+    const container = document.getElementById('optionsContainer');
+    container.innerHTML = opts.map((opt, i) => `
+        <div class="option" id="opt_${i}" onclick="handleOptionClick(${i}, ${correctIdx})">
+            <span class="option-label">${labels[i]}</span>
+            <span class="option-text">${opt}</span>
+        </div>
+    `).join('');
+
+    // Store correct answer text
+    document.getElementById('correctAnswerText').textContent = `Option ${labels[correctIdx]}: ${opts[correctIdx] || ''}`;
+
+    // Explanation if exists
+    if (q.explanation) {
+        document.getElementById('explanationText').textContent = q.explanation;
+    }
+
+    // Category info cards
+    const catInfo = CATEGORY_INFO[q.category] || CATEGORY_INFO['GK'];
+    document.getElementById('categoryInfoGrid').innerHTML = `
+        <div class="info-card">
+            <h3>📖 About ${catInfo.title}</h3>
+            <p>${catInfo.desc}</p>
+        </div>
+        <div class="info-card">
+            <h3>💡 Preparation Tips</h3>
+            <ul>${catInfo.tips.map(t => `<li>${t}</li>`).join('')}</ul>
+        </div>
+    `;
+
+    document.getElementById('loadingState').style.display = 'none';
+    document.getElementById('mainContent').style.display = 'block';
+}
+
+let answered = false;
+
+function handleOptionClick(selected, correct) {
+    if (answered) return;
+    answered = true;
+
+    const opts = document.querySelectorAll('.option');
+    opts.forEach(o => o.style.cursor = 'default');
+
+    if (selected === correct) {
+        opts[selected].classList.add('correct');
+        opts[selected].querySelector('.option-label').textContent = '✓';
+    } else {
+        opts[selected].classList.add('wrong');
+        opts[selected].querySelector('.option-label').textContent = '✗';
+        opts[correct].classList.add('reveal');
+        opts[correct].querySelector('.option-label').textContent = '✓';
+    }
+
+    document.getElementById('showAnswerBtn').classList.add('shown');
+    document.getElementById('answerBox').classList.add('visible');
+    if (document.getElementById('explanationText').textContent.trim()) {
+        document.getElementById('explanationBox').classList.add('visible');
+    }
+}
+
+function revealAnswer() {
+    const correct = parseInt(document.getElementById('optionsContainer')
+        .querySelector('.option')?.getAttribute('onclick')?.match(/\d+,(\d+)/)?.[1] ?? '0');
+    handleOptionClick(-1, correct);
+
+    // Just show answer box without marking any option wrong
+    answered = true;
+    const opts = document.querySelectorAll('.option');
+    opts.forEach(o => o.style.cursor = 'default');
+    opts[correct].classList.add('reveal');
+    opts[correct].querySelector('.option-label').textContent = '✓';
+    document.getElementById('showAnswerBtn').classList.add('shown');
+    document.getElementById('answerBox').classList.add('visible');
+    if (document.getElementById('explanationText').textContent.trim()) {
+        document.getElementById('explanationBox').classList.add('visible');
+    }
+}
+
+function injectSchema(q, canonicalUrl) {
+    const qText = (q.question_en || q.question_hi || '').trim();
+    const opts = (q.options_en && q.options_en.some(o => o?.trim())) ? q.options_en : (q.options_hi || []);
+    const correctIdx = (q.correct_option || 1) - 1;
+    const correctAnswer = opts[correctIdx] || '';
+
+    const schema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [{
+            "@type": "Question",
+            "name": qText,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": `The correct answer is: ${labels[correctIdx]}) ${correctAnswer}. ${q.explanation || 'This is a ' + q.category + ' question for government exam preparation.'}`
+            }
+        }]
+    };
+
+    document.getElementById('pageSchema').textContent = JSON.stringify(schema);
+
+    // Also add BreadcrumbList schema
+    const breadcrumbScript = document.createElement('script');
+    breadcrumbScript.type = 'application/ld+json';
+    breadcrumbScript.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://govfitai.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Quiz", "item": "https://govfitai.com/#quiz" },
+            { "@type": "ListItem", "position": 3, "name": q.category, "item": canonicalUrl }
+        ]
+    });
+    document.head.appendChild(breadcrumbScript);
+}
+
+function loadRelated(currentQ, allQ) {
+    const related = allQ
+        .filter(x => x.id !== currentQ.id && x.category === currentQ.category)
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 6);
+
+    if (!related.length) return;
+
+    const grid = document.getElementById('relatedGrid');
+    grid.innerHTML = related.map(q => {
+        const qText = (q.question_en || q.question_hi || '').trim();
+        const slug = generateSlug(qText);
+        const sid = q.id.substring(0, 8);
+        return `
+            <a href="quiz-details.html?q=${slug}&id=${sid}" class="related-card">
+                <div class="r-category">${q.category}</div>
+                <div class="r-question">${qText.substring(0, 90)}${qText.length > 90 ? '...' : ''}</div>
+            </a>
+        `;
+    }).join('');
+
+    document.getElementById('relatedSection').style.display = 'block';
+}
+
+function shareQuestion() {
+    const url = window.location.href;
+    if (navigator.share) {
+        navigator.share({ title: document.title, url });
+    } else {
+        navigator.clipboard.writeText(url).then(() => alert('Link copied!'));
+    }
+}
+</script>
+</body>
+</html>

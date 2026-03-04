@@ -13,6 +13,8 @@
     <meta property="og:title" id="ogTitle" content="Job Details - GovFitAI">
     <meta property="og:description" id="ogDescription" content="Government job details and eligibility">
     
+    <link rel="canonical" id="canonicalTag" href="https://govfitai.com/job-details.html" />
+    <script type="application/ld+json" id="jobSchema"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -405,6 +407,14 @@
         </div>
     </header>
 
+    <noscript>
+        <div style="max-width:900px;margin:40px auto;padding:20px;font-family:sans-serif;">
+            <h1>Government Job Details - GovFitAI</h1>
+            <p>This page requires JavaScript to display full job details. Please enable JavaScript or visit <a href="index.html">GovFitAI homepage</a> to browse all government job listings.</p>
+            <p>GovFitAI provides the latest Sarkari Naukri notifications including SSC, Railway, UPSC, Banking, Defense and State Government jobs across India.</p>
+        </div>
+    </noscript>
+
     <div id="loadingState" class="loading">
         <div class="loading-spinner"></div>
         <p>Loading job details...</p>
@@ -512,15 +522,23 @@
                     <div class="content-section">
                         <p>Follow these steps to apply for this job:</p>
                         <ol>
-                            <li>Click on the "Apply Now" button in the sidebar</li>
-                            <li>You will be redirected to the official government portal</li>
-                            <li>Register/Login on the official website</li>
-                            <li>Fill the application form carefully</li>
-                            <li>Upload required documents (photo, signature, certificates)</li>
-                            <li>Pay application fee (if applicable)</li>
-                            <li>Submit the form and take a printout for future reference</li>
+                            <li>Click on the <strong>"Apply Now"</strong> button in the sidebar to go to the official government portal</li>
+                            <li>Register or login on the official recruitment website using your email and mobile number</li>
+                            <li>Fill the application form carefully with your personal, educational and category details</li>
+                            <li>Upload required documents: recent passport photo, signature, educational certificates, caste/category certificate (if applicable), and valid ID proof</li>
+                            <li>Pay the application fee online (if applicable) via Net Banking, Debit/Credit Card, or UPI. SC/ST/PWD/Ex-Servicemen candidates are usually exempted</li>
+                            <li>Review the filled form before final submission to avoid errors</li>
+                            <li>Submit the form and save/print the confirmation page and application number for future reference</li>
                         </ol>
-                        <p><strong>Note:</strong> Make sure you meet all eligibility criteria before applying. Keep all your documents ready in the specified format.</p>
+                        <p><strong>⚠️ Important:</strong> Verify all eligibility criteria (age, education, category) before applying. Keep scanned copies of documents ready in specified format (JPG/PDF, file size limits).</p>
+                    </div>
+                </div>
+
+                <!-- Preparation Tips (dynamic per category) -->
+                <div class="info-card" id="prepTipsCard">
+                    <h2>📚 Preparation Tips</h2>
+                    <div class="content-section" id="prepTipsContent">
+                        <p>Loading preparation tips...</p>
                     </div>
                 </div>
 
@@ -528,17 +546,23 @@
                 <div class="info-card">
                     <h2>❓ Frequently Asked Questions</h2>
                     <div class="content-section">
-                        <h3>Q: Is there any application fee?</h3>
-                        <p>A: Application fees vary by category. Check the official notification for exact details. SC/ST/PWD candidates are usually exempted from fees.</p>
+                        <h3 id="faqQ1">Q: Is there any application fee for this recruitment?</h3>
+                        <p id="faqA1">A: Application fees vary by category and organization. SC/ST/PWD/Women (in many state recruitments) and Ex-Servicemen candidates are usually exempted. Check the official notification linked on this page for exact fee details.</p>
 
                         <h3>Q: Can I edit my application after submission?</h3>
-                        <p>A: Most government portals allow corrections during a specified correction window. Check the official website for details.</p>
+                        <p>A: Most government portals open a correction window 1–2 weeks after the initial application period closes. You can update basic details during this window. Final submission after correction is binding — no further changes are permitted.</p>
 
-                        <h3>Q: What documents do I need?</h3>
-                        <p>A: Typically you need: Recent photograph, Signature, Educational certificates, Caste certificate (if applicable), and ID proof.</p>
+                        <h3>Q: What documents are required at the time of application?</h3>
+                        <p>A: Commonly required documents include: recent passport-size photograph (JPG, 20–50 KB), scanned signature (JPG, 10–20 KB), Class 10 certificate for date-of-birth proof, educational qualification certificates, caste/category certificate (for SC/ST/OBC/EWS), Aadhaar card or valid government ID, and disability certificate (if applicable).</p>
 
-                        <h3>Q: When will the exam be conducted?</h3>
-                        <p>A: Exam dates are announced separately after the application deadline. Keep checking the official website.</p>
+                        <h3 id="faqQ4">Q: When will the exam/selection be conducted?</h3>
+                        <p id="faqA4">A: Exam dates are announced separately via official admit card notifications after the application deadline. Bookmark the official website and check GovFitAI regularly for updates on this recruitment.</p>
+
+                        <h3>Q: Is there negative marking?</h3>
+                        <p>A: Negative marking rules depend on the specific exam. Most competitive government exams have 0.25 or 0.50 marks deducted per wrong answer. Some paper-based descriptive tests have no negative marking. Refer to the official notification for exact rules.</p>
+
+                        <h3>Q: What is the selection process?</h3>
+                        <p id="faqA6">A: Selection process typically includes: Written/Online Examination → Physical/Skill Test (if applicable) → Document Verification → Medical Examination → Final Merit List. Some posts may include an interview round. Check the official notification for the complete selection process of this recruitment.</p>
                     </div>
                 </div>
             </div>
@@ -661,9 +685,49 @@ function init() {
 
     function displayJobDetails(job) {
         document.getElementById('pageTitle').textContent = `${job.title} - ${job.organization} | GovFitAI`;
-        document.getElementById('pageDescription').content = `Apply for ${job.title} at ${job.organization}. Education: ${job.education_required}. Deadline: ${formatDate(job.application_deadline)}`;
+        document.getElementById('pageDescription').content = `Apply for ${job.title} at ${job.organization}. Education: ${job.education_required}. Deadline: ${formatDate(job.application_deadline)}. Get eligibility details, exam pattern, important dates and apply online.`;
         document.getElementById('ogTitle').content = `${job.title} - ${job.organization}`;
-        document.getElementById('ogDescription').content = `Apply for ${job.title}. Deadline: ${formatDate(job.application_deadline)}`;
+        document.getElementById('ogDescription').content = `Apply for ${job.title} at ${job.organization}. Deadline: ${formatDate(job.application_deadline)}`;
+
+        // Set canonical URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const slug = urlParams.get('job') || '';
+        const sid = urlParams.get('id') || '';
+        const canonicalUrl = `https://govfitai.com/job-details.html?job=${slug}&id=${sid}`;
+        document.getElementById('canonicalTag').setAttribute('href', canonicalUrl);
+
+        // Inject Schema.org JobPosting
+        const schema = {
+            "@context": "https://schema.org/",
+            "@type": "JobPosting",
+            "title": job.title,
+            "description": job.description || `${job.organization} has announced recruitment for the post of ${job.post_name}. Eligible candidates can apply online before the deadline.`,
+            "identifier": { "@type": "PropertyValue", "name": job.organization, "value": job.id },
+            "datePosted": job.posted_date || new Date().toISOString().split('T')[0],
+            "validThrough": job.application_deadline,
+            "hiringOrganization": {
+                "@type": "Organization",
+                "name": job.organization,
+                "sameAs": "https://govfitai.com"
+            },
+            "jobLocation": {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressRegion": job.state,
+                    "addressCountry": "IN"
+                }
+            },
+            "baseSalary": {
+                "@type": "MonetaryAmount",
+                "currency": "INR",
+                "value": { "@type": "QuantitativeValue", "unitText": "MONTH" }
+            },
+            "employmentType": "FULL_TIME",
+            "qualifications": job.education_required,
+            "url": canonicalUrl
+        };
+        document.getElementById('jobSchema').textContent = JSON.stringify(schema);
 
         document.getElementById('jobTitle').textContent = job.title;
         document.getElementById('jobOrg').textContent = `${job.organization} • ${job.post_name}`;
@@ -681,7 +745,7 @@ function init() {
         document.getElementById('jobBadges').innerHTML = badges.join('');
 
         document.getElementById('jobDescription').textContent = job.description || 
-            `${job.organization} has announced recruitment for the post of ${job.post_name}. Eligible candidates can apply online through the official website before the deadline.`;
+            `${job.organization} has announced recruitment for the post of ${job.post_name}. Eligible candidates with ${job.education_required} qualification can apply online through the official website before ${formatDate(job.application_deadline)}. This is a great opportunity to work with ${job.organization}, a prestigious government organization. Selected candidates will be posted in ${job.state} and will receive benefits as per the ${job.organization} pay scale.`;
 
         document.getElementById('ageRange').textContent = formatAge(job.min_age, job.max_age);
         document.getElementById('educationRequired').textContent = job.education_required;
@@ -721,8 +785,81 @@ function init() {
         document.getElementById('qfLocation').textContent = job.state;
         document.getElementById('qfPercentage').textContent = `${job.min_percentage}%`;
 
+        // Inject job-specific preparation tips
+        injectPrepTips(job);
+
         document.getElementById('loadingState').style.display = 'none';
         document.getElementById('mainContent').style.display = 'block';
+    }
+
+    function injectPrepTips(job) {
+        const edu = (job.education_required || '').toLowerCase();
+        const title = (job.title || '').toLowerCase();
+        const org = (job.organization || '').toLowerCase();
+        let tips = '';
+
+        if (title.includes('upsc') || title.includes('ias') || title.includes('ips') || org.includes('upsc')) {
+            tips = `<p>Preparing for UPSC recruitment requires a structured long-term approach. Here are key tips:</p>
+            <ul>
+                <li><strong>NCERT Foundation:</strong> Complete NCERT books from Class 6–12 for History, Geography, Polity, Economics, and Science before moving to advanced references.</li>
+                <li><strong>Standard Books:</strong> Use M. Laxmikanth for Polity, Bipin Chandra for Modern History, G.C. Leong for Geography, and Indian Economy by Ramesh Singh.</li>
+                <li><strong>Current Affairs:</strong> Read The Hindu or Indian Express daily; make notes on government schemes, international relations, and economic issues.</li>
+                <li><strong>Answer Writing:</strong> Practice daily answer writing for Mains — focus on structure, introduction, body, and conclusion within 150–250 words.</li>
+                <li><strong>Previous Papers:</strong> Solve last 10 years' UPSC Prelims and Mains papers to understand question trends and difficulty.</li>
+                <li><strong>Optional Subject:</strong> Choose optional wisely based on your background, availability of resources, and scoring history of that subject.</li>
+            </ul>`;
+        } else if (title.includes('ssc') || title.includes('cgl') || title.includes('chsl') || title.includes('mts') || org.includes('ssc')) {
+            tips = `<p>Cracking SSC examinations requires focused preparation across four main subjects. Follow this strategy:</p>
+            <ul>
+                <li><strong>Quantitative Aptitude:</strong> Master percentage, profit & loss, time-work-speed, geometry, and algebra. Use Rakesh Yadav or R.S. Aggarwal for practice.</li>
+                <li><strong>English Language:</strong> Focus on grammar rules (error detection, fill in the blanks), vocabulary (synonyms, antonyms, idioms), and reading comprehension. Read editorials daily.</li>
+                <li><strong>General Intelligence & Reasoning:</strong> Practice analogy, series, coding-decoding, blood relations, direction sense, and matrix problems. Speed is key.</li>
+                <li><strong>General Awareness:</strong> Cover static GK (History, Geography, Polity, Science) and current affairs from the last 6 months. Use monthly GK capsules.</li>
+                <li><strong>Mock Tests:</strong> Attempt at least 2–3 full-length mock tests per week. Analyze errors and revisit weak areas.</li>
+                <li><strong>Negative Marking:</strong> Avoid blind guessing. Attempt questions you're 80%+ confident about to maintain accuracy.</li>
+            </ul>`;
+        } else if (title.includes('railway') || title.includes('rrb') || org.includes('railway') || org.includes('rrb')) {
+            tips = `<p>Railway recruitments are highly competitive. Focus on these areas to maximize your score:</p>
+            <ul>
+                <li><strong>Mathematics:</strong> Number system, LCM/HCF, percentage, average, ratio, time & distance, and simple/compound interest are most frequently asked.</li>
+                <li><strong>General Intelligence:</strong> Practice coding-decoding, analogy, number series, syllogism, Venn diagrams, and direction sense.</li>
+                <li><strong>General Science:</strong> Physics (force, motion, electricity), Chemistry (elements, compounds, reactions), and Biology (human body, diseases) — Class 9–10 level.</li>
+                <li><strong>Current Affairs:</strong> Focus on railway-related news, government schemes, sports, and national events from the last 6–12 months.</li>
+                <li><strong>Technical Knowledge:</strong> For technical posts (ALP, JE), revise your trade/engineering subject thoroughly using standard textbooks.</li>
+                <li><strong>CBT Practice:</strong> Practice on online platforms to build speed and comfort with computer-based testing format.</li>
+            </ul>`;
+        } else if (title.includes('bank') || title.includes('ibps') || title.includes('sbi') || org.includes('bank') || org.includes('ibps')) {
+            tips = `<p>Banking exams are among the most competitive in India. Focus on these core areas:</p>
+            <ul>
+                <li><strong>Quantitative Aptitude:</strong> Data Interpretation (charts, tables, graphs) is the most important topic. Also master simplification, quadratic equations, and arithmetic topics.</li>
+                <li><strong>Reasoning Ability:</strong> Puzzles and seating arrangements are high-weightage topics. Also practice syllogisms, inequality, and input-output.</li>
+                <li><strong>English Language:</strong> Reading comprehension, error correction, sentence rearrangement (para jumbles), and cloze test are commonly asked.</li>
+                <li><strong>General/Financial Awareness:</strong> Stay updated on RBI policies, banking regulations, government schemes, and economic news.</li>
+                <li><strong>Computer Knowledge:</strong> Basics of MS Office, internet, networking, and computer hardware are frequently tested in clerical posts.</li>
+                <li><strong>Speed & Accuracy:</strong> Banking exams have sectional time limits — practice section-wise to develop speed within each area.</li>
+            </ul>`;
+        } else if (edu.includes('10th') || edu.includes('matriculation') || edu.includes('matric')) {
+            tips = `<p>For 10th-pass government job recruitments, focus on the following areas:</p>
+            <ul>
+                <li><strong>Mathematics (Class 10 level):</strong> Number systems, basic algebra, mensuration, and statistics are commonly tested. Revise NCERT Class 9–10 Math.</li>
+                <li><strong>General Science:</strong> Review Physics, Chemistry, and Biology from NCERT Class 8–10. Focus on everyday science applications.</li>
+                <li><strong>Hindi/English Language:</strong> Basic grammar, comprehension, and vocabulary at Class 10 level. Understand sentence structure and commonly misused words.</li>
+                <li><strong>General Knowledge & Current Affairs:</strong> National events, government schemes, important appointments, sports achievements, and static GK about India.</li>
+                <li><strong>Physical Fitness:</strong> For posts requiring physical tests (GD Constable, defence roles), maintain consistent fitness training — running, push-ups, and endurance exercises.</li>
+            </ul>`;
+        } else {
+            tips = `<p>To prepare effectively for this government recruitment, follow these proven strategies:</p>
+            <ul>
+                <li><strong>Read the Official Notification:</strong> Carefully go through the complete notification PDF to understand the syllabus, exam pattern, eligibility criteria, and selection process.</li>
+                <li><strong>Create a Study Plan:</strong> Allocate daily study hours based on the number of subjects and available time before the exam. Balance theory, practice, and revision.</li>
+                <li><strong>Practice Previous Papers:</strong> Solve previous years' question papers for this exam or similar government exams to understand difficulty level and frequently asked topics.</li>
+                <li><strong>Current Affairs:</strong> Stay updated with national and state news, government policies, important appointments, and general knowledge updates from the last 6–12 months.</li>
+                <li><strong>Mock Tests:</strong> Take full-length mock tests regularly to improve time management and identify weak areas before the actual exam.</li>
+                <li><strong>Official Website:</strong> Regularly check the official organization website for updates, admit card releases, and exam schedule announcements.</li>
+            </ul>`;
+        }
+
+        document.getElementById('prepTipsContent').innerHTML = tips;
     }
 
     async function loadRelatedJobs(currentJob) {

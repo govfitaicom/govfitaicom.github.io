@@ -3,18 +3,17 @@ Allow: /
 Disallow: /admin.html
 Disallow: /admin
 Disallow: /private/
+Disallow: /?*login*
+Disallow: /?*auth*
 
 Sitemap: https://govfitai.com/sitemap.xml
-
-Crawl-delay: 1
 
 User-agent: Mediapartners-Google
 Allow: /
 
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 1
+Disallow: /admin.html
 
 User-agent: Bingbot
 Allow: /
-Crawl-delay: 1
