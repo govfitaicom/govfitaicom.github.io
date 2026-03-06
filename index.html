@@ -12,41 +12,15 @@
     <meta name="description" content="Find government jobs that match your profile. AI-powered job recommendations for SSC, Railway, UPSC, State PSC and more. Get personalized job alerts.">
     <meta name="keywords" content="government jobs, sarkari naukri, AI job matching, SSC jobs, railway jobs, UPSC, state government jobs, job recommendations">
     <meta name="google-adsense-account" content="ca-pub-2221858776975716">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebSite",
-          "name": "GovFitAI",
-          "url": "https://govfitai.com/",
-          "description": "AI-powered government job matching for SSC, Railway, UPSC, State PSC and more.",
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://govfitai.com/?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-          }
-        },
-        {
-          "@type": "Organization",
-          "name": "GovFitAI",
-          "url": "https://govfitai.com/",
-          "logo": "https://govfitai.com/logo.png",
-          "description": "Smart government job matching powered by AI for Indian job seekers.",
-          "sameAs": []
-        }
-      ]
-    }
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f7fa; }
 
         /* ── HEADER ── */
-        header { background: white; padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #e0e0e0; }
-        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
-        .logo { display: flex; align-items: center; gap: 12px; cursor: pointer; transition: transform 0.3s; }
+        header { background: white; padding: 10px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #e0e0e0; display: flex; justify-content: space-between; align-items: center; }
+        .nav-container { display: contents; }
+        .logo { display: flex; align-items: center; gap: 12px; cursor: pointer; transition: transform 0.3s; flex-shrink: 0; }
         .logo:hover { transform: translateY(-2px); }
         .logo-img { height: 55px; width: auto; object-fit: contain; }
         .nav-links { display: flex; gap: 20px; align-items: center; }
@@ -231,7 +205,6 @@
     </style>
 </head>
 <body>
-
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
@@ -247,7 +220,6 @@
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
     </script>
-
     <header>
         <div class="nav-container">
             <div class="logo" onclick="window.location.href='index.html'">
@@ -262,13 +234,11 @@
             </div>
         </div>
     </header>
-
     <!-- Recommended banner (shown after profile saved) -->
     <div id="recommendedBanner">
         🎯 You have <strong><span id="matchCount">0</span> jobs</strong> matching your profile!
         <a onclick="showTab('recommended'); document.getElementById('jobsSection').scrollIntoView({behavior:'smooth'})">View Now →</a>
     </div>
-
     <!-- HERO -->
     <section class="hero">
         <h1>Find Your Perfect Government Job</h1>
@@ -295,7 +265,6 @@
             <div class="stat"><div class="stat-number">100%</div><div class="stat-label">Free to Use</div></div>
         </div>
     </section>
-
     <!-- FEATURES -->
     <div class="container">
         <h2 class="section-title" id="features">Why Choose 🇮🇳 GovFitAI?</h2>
@@ -306,7 +275,6 @@
             <div class="feature-card"><div class="feature-icon">📱</div><h3>Mobile Friendly</h3><p>Access jobs and quiz anywhere, anytime on any device</p></div>
         </div>
     </div>
-
     <!-- TABS + JOBS/QUIZ SECTION -->
     <div id="jobsSection">
         <div class="tabs-wrapper">
@@ -316,21 +284,17 @@
                 <button class="tab" id="tabQuiz" onclick="showTab('quiz')">📚 Quiz &amp; Leaderboard</button>
             </div>
         </div>
-
         <div class="container" style="padding-top:28px;">
-
             <!-- RECOMMENDED TAB -->
             <div id="recommendedSection" class="hidden">
                 <div id="recommendedJobs"></div>
                 <button id="loadMoreRec" class="hidden" onclick="loadMoreRecommended()">Load More Jobs</button>
             </div>
-
             <!-- ALL JOBS TAB -->
             <div id="allSection">
                 <div id="allJobs" class="jobs-grid"></div>
                 <button id="loadMoreBtn" onclick="loadMoreJobs()">Load More Jobs</button>
             </div>
-
             <!-- QUIZ TAB -->
             <div id="quizSection" class="hidden">
                 <div class="quiz-tab-wrapper">
@@ -347,7 +311,6 @@
                         <button class="quiz-cat-tab" onclick="setQuizCategory('SSC', this)">SSC</button>
                         <button class="quiz-cat-tab" onclick="setQuizCategory('UPSC', this)">UPSC</button>
                     </div>
-
                     <!-- Quiz + Leaderboard side by side on desktop -->
                     <div class="quiz-layout">
                         <div id="quizArea">
@@ -371,11 +334,9 @@
 
         </div>
     </div>
-
     <!-- SEO links (hidden) -->
     <div style="position:absolute;left:-9999px;" id="seoJobLinks"></div>
     <div style="position:absolute;left:-9999px;" id="seoQuizLinks"></div>
-
     <!-- SEO content -->
     <div class="container">
         <div style="background:white;border-radius:12px;padding:36px;box-shadow:0 2px 10px rgba(0,0,0,0.05);">
@@ -385,7 +346,6 @@
             </div>
         </div>
     </div>
-
     <!-- PROFILE SECTION (shown when user has profile) -->
     <div id="profileSection" class="container hidden">
         <h2 class="section-title">My Profile</h2>
@@ -398,7 +358,6 @@
         </div>
         <button onclick="deleteProfile()" style="margin-top:16px;padding:10px 24px;background:#fee;color:#dc3545;border:2px solid #dc3545;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;">🗑️ Delete Profile & Data</button>
     </div>
-
     <!-- PROFILE MODAL (create / edit — no password, just email like the app) -->
     <div id="profileModal" class="modal">
         <div class="modal-content">
@@ -440,15 +399,13 @@
             </form>
         </div>
     </div>
-
     <footer>
         <div class="footer-content">
             <div class="footer-section"><h3>🇮🇳 GovFitAI</h3><p style="color:#a0aec0;font-size:14px;">Smart government job matching powered by AI.</p></div>
             <div class="footer-section"><h3>Quick Links</h3>
+                <a href="#features">Features</a>
                 <a href="#jobsSection" onclick="showTab('all')">Browse Jobs</a>
                 <a href="#jobsSection" onclick="showTab('quiz')">Daily Quiz</a>
-                <a href="#features">Features</a>
-                <a href="about.html">About Us</a>
                 <a href="agristack-farmer-registration-app.html">AgriStack Farmer Registration Link</a>
                 <a href="ladki-bahin-yojana-ekyc-app.html">Ladki Bahin Yojana eKYC App</a>
             </div>
@@ -461,13 +418,13 @@
                 <a href="UPSC-jobs.html">UPSC Jobs</a>
             </div>
             <div class="footer-section"><h3>Legal</h3>
+                <a href="about.html">About Us</a>
                 <a href="privacy-policy.html">Privacy Policy</a>
                 <a href="terms.html">Terms of Service</a>
             </div>
         </div>
         <div class="footer-bottom"><p>&copy; 2026 🇮🇳GovFitAI. All rights reserved.</p></div>
     </footer>
-
     <script src="app.js"></script>
 </body>
 </html>
