@@ -14,7 +14,7 @@
     <meta property="og:description" id="ogDescription" content="Government job details and eligibility">
     
     <link rel="canonical" id="canonicalTag" href="https://govfitai.com/job-details.html" />
-    <script type="application/ld+json" id="jobSchema"></script>
+    <script type="application/ld+json" id="jobSchema">{"@context":"https://schema.org/","@type":"JobPosting","title":"Government Job - GovFitAI","description":"Find government job details on GovFitAI","datePosted":"2026-01-01","hiringOrganization":{"@type":"Organization","name":"GovFitAI"},"jobLocation":{"@type":"Place","address":{"@type":"PostalAddress","addressCountry":"IN"}},"employmentType":"FULL_TIME"}</script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -723,19 +723,17 @@ function init() {
             ...(job.application_deadline ? { "validThrough": job.application_deadline.split('T')[0] + "T23:59:59" } : {}),
             "hiringOrganization": {
                 "@type": "Organization",
-                "name": job.organization,
-                "sameAs": "https://govfitai.com"
+                "name": job.organization
             },
             "jobLocation": {
                 "@type": "Place",
                 "address": {
                     "@type": "PostalAddress",
                     "addressLocality": job.state === 'All India' ? 'India' : job.state,
-                    "addressRegion": job.state,
+                    "addressRegion": job.state === 'All India' ? 'India' : job.state,
                     "addressCountry": "IN"
                 }
             },
-            ...(job.state === 'All India' ? { "jobLocationType": "TELECOMMUTE" } : {}),
             "employmentType": "FULL_TIME",
             "educationRequirements": {
                 "@type": "EducationalOccupationalCredential",
