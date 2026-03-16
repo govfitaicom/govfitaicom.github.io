@@ -4,7 +4,7 @@
   <!-- HOMEPAGE -->
   <url>
     <loc>https://govfitai.com/</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -12,37 +12,37 @@
   <!-- STATIC PAGES -->
   <url>
     <loc>https://govfitai.com/about.html</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/resources.html</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://govfitai.com/government-job-salary-guide.html</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://govfitai.com/government-exam-eligibility-guide.html</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://govfitai.com/privacy-policy.html</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://govfitai.com/terms.html</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -50,37 +50,37 @@
   <!-- JOB CATEGORY PAGES -->
   <url>
     <loc>https://govfitai.com/ssc-jobs.html</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/railway-jobs.html</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/banking-jobs.html</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/defense-jobs.html</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/PSU-jobs.html</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/UPSC-jobs.html</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -88,13 +88,13 @@
   <!-- PREPARATION GUIDES -->
   <url>
     <loc>https://govfitai.com/SSC-CGL-Preparation.html</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/UPSC-Preparation-Strategy.html</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -2545,8 +2545,8 @@
   <url>
     <loc>https://govfitai.com/job-details.html?job=indian-army-ncc-special-entry-recruitment-2026-apply-online-for-70-posts-short-service-commission-non-technical-ncc-special-entry&amp;id=af3c1889</loc>
     <lastmod>2026-02-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=pnb-bank-apprentices-recruitment-2026-apply-online-for-5138-posts-pnb-bank-apprentices-recruitment-2026&amp;id=be5cab46</loc>
@@ -2557,8 +2557,8 @@
   <url>
     <loc>https://govfitai.com/job-details.html?job=aiims-norcet-10-recruitment-notification-2026-short-notice-out-nursing-officer&amp;id=65dc78a4</loc>
     <lastmod>2026-02-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=indian-army-agniveer-recruitment-rally-notification-2026-out-apply-online-agniveer-gd-tradesman-clerk-other-posts&amp;id=bd337119</loc>
