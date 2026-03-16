@@ -4,7 +4,7 @@
   <!-- HOMEPAGE -->
   <url>
     <loc>https://govfitai.com/</loc>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -12,37 +12,37 @@
   <!-- STATIC PAGES -->
   <url>
     <loc>https://govfitai.com/about.html</loc>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/resources.html</loc>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://govfitai.com/government-job-salary-guide.html</loc>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://govfitai.com/government-exam-eligibility-guide.html</loc>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://govfitai.com/privacy-policy.html</loc>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://govfitai.com/terms.html</loc>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -50,37 +50,37 @@
   <!-- JOB CATEGORY PAGES -->
   <url>
     <loc>https://govfitai.com/ssc-jobs.html</loc>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/railway-jobs.html</loc>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/banking-jobs.html</loc>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/defense-jobs.html</loc>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/PSU-jobs.html</loc>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/UPSC-jobs.html</loc>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -88,18 +88,378 @@
   <!-- PREPARATION GUIDES -->
   <url>
     <loc>https://govfitai.com/SSC-CGL-Preparation.html</loc>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/UPSC-Preparation-Strategy.html</loc>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- JOB DETAIL PAGES (734) -->
+  <!-- JOB DETAIL PAGES (794) -->
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=upsssc-pharmacist-recruitment-2026-apply-online-for-560-post-pharmacist&amp;id=79723097</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=iiit-allahabad-iiit-allahabad-administrative-technical-cadre-2026-recruitment-20-junior-technician-labmaintenance&amp;id=e359ce60</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=iiit-allahabad-iiit-allahabad-administrative-technical-cadre-2026-recruitment-20-junior-assistant&amp;id=d0553225</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=iiit-allahabad-iiit-allahabad-administrative-technical-cadre-2026-recruitment-20-physical-training-instructor&amp;id=dfe19092</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=western-railway-rrc-mumbai-various-trade-apprentices-2026-apply-online-for-5349--rrc-wr-trade-apprentice&amp;id=3abc1d51</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=bihar-police-csbc-constable-operator-recruitment-2026-apply-online-for-993-post-bihar-police-bp-constables-operator&amp;id=a23f1256</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=bihar-police-csbc-constable-operator-recruitment-2026-apply-online-for-993-post-constables-operator&amp;id=555c941e</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=afms-medical-officer-short-service-commission-recruitment-2026-apply-online-for--medical-officer-short-service-commission&amp;id=376cf8ac</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=federal-bank-associate-officer-sales-recruitment-2026-apply-for-online-form-federal-bank-associate-officer-sales&amp;id=38bfe73e</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=central-railway-rrc-cr-various-trade-apprentices-2026-apply-online-for-51-post-rrc-central-railway-cr-various-trade-apprentices-2026&amp;id=3479ec31</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=up-uttar-pradesh-anganwadi-worker-bharti-recruitment-2026-apply-online-district--aganwadi-worker-karyakatri&amp;id=19f3a31f</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=south-central-railway-rrc-scr-various-trade-apprentices-2026-apply-online-for-28-rrc-south-central-railway-scr-various-trade-apprentices-2026&amp;id=ffa00549</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=join-indian-navy-agniveer-ssr-mr-012027-022027-batch-inet-2026-apply-online-form-agniveer-mr-chef-steward-hygienist&amp;id=c7661469</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=join-indian-navy-agniveer-ssr-mr-012027-022027-batch-inet-2026-apply-online-form-agniveer-ssr&amp;id=e168923c</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=mpesb-mp-van-rakshak-kshetra-rakshak-karyapalik-van-vibhag-jail-prahari-karyapal-jail-superintend&amp;id=1d0f9c14</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=mpesb-mp-van-rakshak-kshetra-rakshak-karyapalik-van-vibhag-jail-prahari-karyapal-jail-prahari&amp;id=74aee70a</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=mpesb-mp-van-rakshak-kshetra-rakshak-karyapalik-van-vibhag-jail-prahari-karyapal-kshetra-rakshak&amp;id=920a07b8</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=mpesb-mp-van-rakshak-kshetra-rakshak-karyapalik-van-vibhag-jail-prahari-karyapal-vanrakshak&amp;id=56f878d0</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=mpesb-mp-group-5-staff-nurse-paramedical-and-other-post-combined-recruitment-tes-group-5-staff-nurse-paramedical-and-other-post-combined-recruitment-test-2026&amp;id=fbb9dd79</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=up-uttar-pradesh-state-road-transport-corporation-upsrtc-bus-conductor-recruitme-bus-conductor-out-sourcing-vacancy&amp;id=527b57cc</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=vnit-nagpur-non-academic-post-recruitment-2026-apply-online-for-45-post-office-attendant-lab-attendant&amp;id=3bc25a7a</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=vnit-nagpur-non-academic-post-recruitment-2026-apply-online-for-45-post-technician&amp;id=845d1597</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=vnit-nagpur-non-academic-post-recruitment-2026-apply-online-for-45-post-junior-assistant&amp;id=a7d705f6</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=vnit-nagpur-non-academic-post-recruitment-2026-apply-online-for-45-post-senior-technician&amp;id=53320acf</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=vnit-nagpur-non-academic-post-recruitment-2026-apply-online-for-45-post-technical-assistant&amp;id=0ac5125d</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=vnit-nagpur-non-academic-post-recruitment-2026-apply-online-for-45-post-junior-engineer&amp;id=3668000b</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=vnit-nagpur-non-academic-post-recruitment-2026-apply-online-for-45-post-library-and-information-assistant&amp;id=a65045fc</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=vnit-nagpur-non-academic-post-recruitment-2026-apply-online-for-45-post-superintendent&amp;id=96cfda80</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=vnit-nagpur-non-academic-post-recruitment-2026-apply-online-for-45-post-executive-engineer&amp;id=9510a019</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=vnit-nagpur-non-academic-post-recruitment-2026-apply-online-for-45-post-scientific-technical-officer&amp;id=d2d99cad</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=vnit-nagpur-non-academic-post-recruitment-2026-apply-online-for-45-post-senior-scientific-technical-officer&amp;id=86b52d51</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=vnit-nagpur-non-academic-post-recruitment-2026-apply-online-for-45-post-librarian&amp;id=8c938eeb</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=upsssc-pharmacist-recruitment-2026-apply-online-for-560-post-upsssc-pharmacist&amp;id=df3c9da7</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=upsc-civil-services-ias-ifs-recruitment-2026-apply-for-1013-post-indian-forest-service-ifs&amp;id=92e07c56</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=upsc-civil-services-ias-ifs-recruitment-2026-apply-for-1013-post-civil-services-indian-administrative-service-ias&amp;id=f623cf54</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=mpesb-mp-van-rakshak-kshetra-rakshak-karyapalik-van-vibhag-jail-prahari-karyapal-jail-superintend&amp;id=4eb9365c</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=mpesb-mp-van-rakshak-kshetra-rakshak-karyapalik-van-vibhag-jail-prahari-karyapal-jail-prahari&amp;id=58f42454</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=mpesb-mp-van-rakshak-kshetra-rakshak-karyapalik-van-vibhag-jail-prahari-karyapal-kshetra-rakshak&amp;id=5b94b9ee</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=mpesb-mp-van-rakshak-kshetra-rakshak-karyapalik-van-vibhag-jail-prahari-karyapal-vanrakshak&amp;id=20397600</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=central-teacher-eligibility-test-ctet-february-2026-answer-key-central-teacher-eligibility-test-ctet-february-2026&amp;id=6278e52d</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=punjab-pspcl-statutory-manpower-post-online-form-2026-recruitment-2026-apply-for-mining-sirdar&amp;id=a5d562be</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=punjab-pspcl-statutory-manpower-post-online-form-2026-recruitment-2026-apply-for-assistant-manager-on-contractual-basis-assistant-manager-under-manager&amp;id=e3c29e29</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=punjab-pspcl-statutory-manpower-post-online-form-2026-recruitment-2026-apply-for-manager&amp;id=642bbf1a</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=nta-jeemain-session-ii-admissions-april-2026-apply-online-form-re-open-be-btech-barch&amp;id=e8a81559</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=vnit-nagpur-non-academic-post-recruitment-2026-apply-online-for-45-post-librarian&amp;id=a5798384</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=mpesb-mp-group-5-staff-nurse-paramedical-and-other-post-combined-recruitment-tes-group-5-staff-nurse-paramedical-and-other-post-combined-recruitment-test-2026&amp;id=4c81333b</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=allahabad-high-court-ahc-private-secretary-grade-i-recruitment-2026-apply-online-private-secretary-grade-i&amp;id=5f7c5048</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=upsc-combined-medical-services-cms-examination-2026-apply-online-form-general-duty-medical-officer-gdmo-in-various-delhi-municipal-council&amp;id=87d7648f</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=upsc-combined-medical-services-cms-examination-2026-apply-online-form-general-duty-medical-officer-gdmo-grade-ii-in-ndms&amp;id=8afc3f14</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=upsc-combined-medical-services-cms-examination-2026-apply-online-form-assistant-division-medical-officer-admo-in-railway&amp;id=e327abc5</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=upsc-combined-medical-services-cms-examination-2026-apply-online-form-medical-officers-grade-in-general-duty-medical-officers-sub-cadre-of-central-hea&amp;id=69f8a755</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=upsssc-up-pollution-control-board-upcb-scientific-assistant-accountant-law-assis-junior-engineer&amp;id=7b6201b4</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=upsssc-up-pollution-control-board-upcb-scientific-assistant-accountant-law-assis-junior-engineer-special&amp;id=addef00c</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=upsssc-up-pollution-control-board-upcb-scientific-assistant-accountant-law-assis-monitoring-assistant&amp;id=0a6bb99f</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=upsssc-up-pollution-control-board-upcb-scientific-assistant-accountant-law-assis-laboratory-assistant&amp;id=01e4a975</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=upsssc-up-pollution-control-board-upcb-scientific-assistant-accountant-law-assis-law-assistant&amp;id=7003d728</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=upsssc-up-pollution-control-board-upcb-scientific-assistant-accountant-law-assis-accountant-auditor&amp;id=181b3e06</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=upsssc-up-pollution-control-board-upcb-scientific-assistant-accountant-law-assis-scientific-assistant-special&amp;id=7fab4eca</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=upsssc-up-pollution-control-board-upcb-scientific-assistant-accountant-law-assis-scientific-assistant&amp;id=8081eeae</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=nta-national-eligibility-cum-entrance-test-neet-ug-admissions-2026-apply-correct-nta-national-eligibility-cum-entrance-test-neet-ug-admissions-2026&amp;id=f1c95e29</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=vnit-nagpur-non-academic-post-recruitment-2026-apply-online-for-45-post-library-and-information-assistant&amp;id=16e5cc3b</loc>
     <lastmod>2026-03-11</lastmod>
@@ -313,26 +673,26 @@
   <url>
     <loc>https://govfitai.com/job-details.html?job=mpesb-mp-van-rakshak-kshetra-rakshak-karyapalik-van-vibhag-jail-prahari-karyapal-jail-superintend&amp;id=bbfa601c</loc>
     <lastmod>2026-03-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=mpesb-mp-van-rakshak-kshetra-rakshak-karyapalik-van-vibhag-jail-prahari-karyapal-jail-prahari&amp;id=1f0f82c8</loc>
     <lastmod>2026-03-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=mpesb-mp-van-rakshak-kshetra-rakshak-karyapalik-van-vibhag-jail-prahari-karyapal-kshetra-rakshak&amp;id=61c9919b</loc>
     <lastmod>2026-03-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=mpesb-mp-van-rakshak-kshetra-rakshak-karyapalik-van-vibhag-jail-prahari-karyapal-vanrakshak&amp;id=72695d6e</loc>
     <lastmod>2026-03-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=upsssc-pharmacist-recruitment-2026-apply-online-for-560-post-pharmacist&amp;id=a163bd5c</loc>
@@ -1345,8 +1705,8 @@
   <url>
     <loc>https://govfitai.com/job-details.html?job=jpsc-jharkhand-lecturer-govt-polytechnicwomen-polytechnic-backlog-recruitment-20-jpsc-lecturer-govt-polytechnicwomen-polytechnic-backlog&amp;id=ba07f5f7</loc>
     <lastmod>2026-02-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=himanchal-pradesh-english-mathematics-teacher-recruitment-2026-apply-online-for--mathematics-teacher&amp;id=277dc626</loc>
@@ -4475,19 +4835,7 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://govfitai.com/job-details.html?job=rrb-junior-engineer-recruitment-2025-junior-engineer-mechanical&amp;id=e43df19e</loc>
-    <lastmod>2025-12-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://govfitai.com/job-details.html?job=indian-navy-ssr-recruitment-2025-senior-secondary-recruit-ssr&amp;id=29ad6121</loc>
-    <lastmod>2025-12-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://govfitai.com/job-details.html?job=ssc-junior-engineer-recruitment-2025-junior-engineer-civil&amp;id=0be824bc</loc>
+    <loc>https://govfitai.com/job-details.html?job=ongc-junior-engineer-recruitment-2025-junior-engineer-electrical&amp;id=3aa7d23f</loc>
     <lastmod>2025-12-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -4499,13 +4847,409 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://govfitai.com/job-details.html?job=ongc-junior-engineer-recruitment-2025-junior-engineer-electrical&amp;id=3aa7d23f</loc>
+    <loc>https://govfitai.com/job-details.html?job=rrb-junior-engineer-recruitment-2025-junior-engineer-mechanical&amp;id=e43df19e</loc>
+    <lastmod>2025-12-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=ssc-junior-engineer-recruitment-2025-junior-engineer-civil&amp;id=0be824bc</loc>
+    <lastmod>2025-12-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=indian-navy-ssr-recruitment-2025-senior-secondary-recruit-ssr&amp;id=29ad6121</loc>
     <lastmod>2025-12-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
-  <!-- QUIZ / MCQ PAGES (110) -->
+  <!-- QUIZ / MCQ PAGES (173) -->
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=8-nss-2025-where-was-the-8th-national-security-strategies-nss-conference-2025-or&amp;id=57ded60b</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=the-earliest-stage-of-planet-formation-observed-by-scientists-for-the-first-time&amp;id=9767ee6d</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=who-has-been-appointed-as-the-brand-ambassador-for-jharkhand-state-tourism&amp;id=518ec6a5</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=for-the-socio-economic-uplift-of-sanitation-workers-the-safai-karmachari-commiss&amp;id=d0d2faf1</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=where-was-the-exercise-drone-prahaar-conducted-by-the-indian-army&amp;id=90b8c1a9</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=which-two-new-units-has-the-indian-army-announced-anonymous-quiz&amp;id=a04dae62</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=artificial-intelligence-powered-anganwadi-indias-first-artificial-intelligence-p&amp;id=d2aa3bb8</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=where-was-operation-mahadev-conducted-by-the-indian-army&amp;id=460dd829</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=recently-discussed-ashtamudi-wetland-lake-is-located-in-which-state&amp;id=396bcf5c</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=apna-ghar-initiative-has-been-launched-by-which-ministry-anonymous-quiz&amp;id=18989bb6</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=which-player-scored-the-most-runs-in-the-first-edition-of-the-tendulkar-anderson&amp;id=89eecbbd</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=43-who-has-been-honored-with-the-43rd-lokmanya-tilak-national-award-anonymous-qu&amp;id=714efc74</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=shibu-soren-who-passed-away-recently-was-the-chief-minister-of-which-state-anony&amp;id=e0e3492a</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=in-which-ocean-has-typhoon-kajiki-come-anonymous-quiz&amp;id=556683c3</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=mpc-mpc-anonymous-quiz&amp;id=f3d259f5</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=agricultural-and-processed-food-products-export-development-authority-apeda-3-ap&amp;id=81565d73</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=gouher-sultana-who-recently-announced-her-retirement-is-associated-with-which-sp&amp;id=7da781dc</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=un-famine-the-united-nations-un-has-declared-famine-in-which-place-anonymous-qui&amp;id=f55d95d3</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=stealth-fighter-jet-amca&amp;id=70ea2428</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=i-gftch-indias-first-fintech-hub-i-gftch-has-been-launched-by-which-state&amp;id=7d75d2d7</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=&amp;id=fe7aa56d</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=international-slavery-remembrance-day-is-observed-every-year-on-which-date-anony&amp;id=af783fd3</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=surya-ai-surya-ai-for-studying-solar-weather-has-been-launched-by-which-organiza&amp;id=575f7cc5</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=fssai-ceo-who-has-been-appointed-as-the-new-ceo-of-fssai-anonymous-quiz&amp;id=34c31809</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=biff-2025-which-indian-movie-has-been-selected-for-screening-at-the-busan-intern&amp;id=96e5cbab</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=bcci-along-with-the-yo-yo-test-which-new-test-has-bcci-introduced-to-measure-pla&amp;id=abc6e94f</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=uranus-uranus-recently-nasa-discovered-a-new-moon-of-uranus-now-how-many-total-m&amp;id=77d3ff17</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=who-has-been-re-elected-as-the-president-of-the-boxing-federation-of-india-for-t&amp;id=0064c25a</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=swraj-paul-who-recently-passed-away-was-associated-with-which-field-anonymous-qu&amp;id=154d4def</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=in-which-state-is-the-buxar-thermal-power-plant-being-constructed-anonymous-quiz&amp;id=1ec5c617</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=the-yamuna-water-pipeline-project-will-be-built-between-which-two-states-anonymo&amp;id=8c776200</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=75-drake-passage-where-a-magnitude-75-earthquake-struck-lies-between-which-two-l&amp;id=c87c9638</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=globally-important-agricultural-heritage-systems-giahs-giahs-anonymous-quiz&amp;id=5decf7ae</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=the-demand-for-a-separate-state-tipraland-is-being-made-in-which-state&amp;id=e40da016</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=30-the-anna-chakra-tool-implemented-in-30-states-and-union-territories-was-launc&amp;id=6dda642a</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=what-has-jalalabad-in-uttar-pradesh-been-renamed-to-anonymous-quiz&amp;id=79713834</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=28-nceg-the-28th-national-conference-on-e-governance-nceg-will-be-held-in-which-&amp;id=59111825</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=q7-a-b-4-3-10-a-2-9800-b-anonymous-quiz&amp;id=a71e1bfc</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=q4-find-the-smallest-number-which-when-divided-by-8-12-and-15-leaves-a-remainder&amp;id=2f71f138</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=q3-a-chord-of-length-24-cm-is-at-a-distance-of-5-cm-from-the-center-of-a-circle-&amp;id=4f33a88c</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=q2-22-42-kg-33-kg-39-kg-2-24-anonymous-quiz&amp;id=82e64201</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=q1-50-40-10-5&amp;id=f303d742</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=2025-in-which-country-will-the-2025-world-boxing-championships-be-held&amp;id=35988f35</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=1200-ii-the-1200-mw-kalai-ii-hydro-project-is-located-in-which-state-anonymous-q&amp;id=9e70a44c</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=134-who-has-won-the-134th-edition-of-the-football-tournament-durand-cup-anonymou&amp;id=f7f8c4c1</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=25-anonymous-quiz&amp;id=5c0739d4</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=miss-ocean-world-2025-evelyn-neem-mohamed-saleh-has-won-the-title-of-miss-ocean-&amp;id=2b37125a</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=who-has-been-appointed-as-the-executive-chairman-of-the-asia-pacific-institute-f&amp;id=63b4035c</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=in-which-country-is-the-druzhba-pipeline-located-anonymous-quiz&amp;id=4c94cb28</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=2025-medal-tally-who-has-topped-the-medal-tally-of-the-first-khelo-india-water-g&amp;id=dffc4acc</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=68th-who-will-lead-the-indian-parliamentary-delegation-to-the-68th-commonwealth-&amp;id=443202a9</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=who-has-been-appointed-as-the-president-of-the-advertising-agencies-association-&amp;id=427bc73c</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=cricketer-cheteshwar-pujara-has-announced-his-retirement-from-international-cric&amp;id=f929f741</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=ajay-kumar-bhalla-who-has-been-given-the-additional-charge-of-nagaland-is-the-go&amp;id=e9a68cf1</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=which-nuclear-power-plant-in-russia-caught-fire-due-to-a-ukrainian-drone-attack&amp;id=8f08484e</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=ibca-which-country-has-officially-joined-the-international-big-cat-alliance-ibca&amp;id=5ced0473</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=in-which-category-has-the-security-of-delhis-chief-minister-rekha-gupta-been-upg&amp;id=498c3ebc</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=which-state-has-become-indias-first-fully-digitally-literate-state-under-the-dig&amp;id=a28b8d2f</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=2035-isro-has-announced-that-it-will-launch-its-heaviest-rocket-by-2035-whats-th&amp;id=e1d089e1</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=nari-2025-the-nari-2025-report-was-launched-by-which-institution&amp;id=db4fb7a4</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=scientific-panel-on-ai-global-dialogue-on-ai-governance-the-scientific-panel-on-&amp;id=003cd049</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=10000-anonymous-quiz&amp;id=a1397fb5</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=mount-shinmoedake-volcano-is-located-in-which-country-anonymous-quiz&amp;id=a83b0be5</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/quiz-details.html?q=5-the-5th-edition-of-the-asean-india-youth-summit-is-being-held-at-which-place&amp;id=9fd84ef0</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
     <loc>https://govfitai.com/quiz-details.html?q=2025-mans-category-who-has-been-awarded-the-ballon-dor-award-in-the-mans-categor&amp;id=f76cab7c</loc>
     <lastmod>2026-03-11</lastmod>
@@ -4730,12 +5474,6 @@
   </url>
   <url>
     <loc>https://govfitai.com/quiz-details.html?q=padi-kaushik-reddy-v-state-of-telangana-the-case-padi-kaushik-reddy-v-state-of-t&amp;id=bf57311a</loc>
-    <lastmod>2026-03-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://govfitai.com/quiz-details.html?q=&amp;id=a6cad29a</loc>
     <lastmod>2026-03-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
