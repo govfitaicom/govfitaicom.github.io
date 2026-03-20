@@ -68,6 +68,53 @@
         .quiz-badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; background: #e8f0ff; color: #667eea; border: 1px solid #c5d5fb; }
         .stats-bar { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
         .stat-chip { background: #f0f4ff; border: 1px solid #d0dcff; border-radius: 8px; padding: 8px 16px; font-size: 14px; font-weight: 600; color: #4a5cc4; }
+
+        /* ── CATEGORY CHECKBOXES — bordered grid ── */
+        .cats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 10px;
+            margin-top: 8px;
+        }
+        .cat-item {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 10px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.18s;
+            background: #fafafa;
+        }
+        .cat-item:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        .cat-item input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            min-width: 16px;
+            padding: 0;
+            margin: 0;
+            cursor: pointer;
+            accent-color: #667eea;
+            border: none;
+        }
+        .cat-item span {
+            font-size: 13px;
+            font-weight: 600;
+            color: #444;
+            line-height: 1.2;
+        }
+        .cat-item:has(input:checked) {
+            border-color: #667eea;
+            background: #eef1ff;
+        }
+        .cat-item:has(input:checked) span {
+            color: #667eea;
+        }
+
         @media (max-width: 768px) { .row, .row-3, .option-row { grid-template-columns: 1fr; } }
     </style>
 </head>
@@ -197,43 +244,49 @@
             <h2 id="modalTitle">Add Job</h2>
             <form id="jobForm">
                 <input type="hidden" id="jobId">
-                <div class="form-group"><label>Title *</label><input type="text" id="title" required></div>
-                <div class="form-group"><label>Organization *</label><input type="text" id="organization" required></div>
-                <div class="form-group"><label>Post *</label><input type="text" id="postName" required></div>
+                <div class="form-group"><label>Title</label><input type="text" id="title" placeholder="e.g. SSC CGL 2025"></div>
+                <div class="form-group"><label>Organization</label><input type="text" id="organization" placeholder="e.g. Staff Selection Commission"></div>
+                <div class="form-group"><label>Post</label><input type="text" id="postName" placeholder="e.g. Combined Graduate Level"></div>
                 <div class="form-group">
                     <label>Description</label>
-                    <textarea id="description" rows="3"></textarea>
+                    <textarea id="description" rows="3" placeholder="Job description (optional)"></textarea>
                     <button type="button" class="btn-ai" onclick="aiRewrite('description')">✨ AI Magic</button>
                 </div>
                 <div class="row">
-                    <div class="form-group"><label>Min Age</label><input type="number" id="minAge"></div>
-                    <div class="form-group"><label>Max Age</label><input type="number" id="maxAge"></div>
+                    <div class="form-group"><label>Min Age</label><input type="number" id="minAge" placeholder="e.g. 18"></div>
+                    <div class="form-group"><label>Max Age</label><input type="number" id="maxAge" placeholder="e.g. 35"></div>
                 </div>
-                <div class="form-group"><label>Education *</label><select id="eduReq" required onchange="updFlds()"></select></div>
+                <div class="form-group"><label>Education</label><select id="eduReq" onchange="updFlds()"></select></div>
                 <div class="form-group">
                     <label>Fields</label>
                     <select id="fldInput"></select>
                     <button type="button" class="btn btn-success" onclick="addJobFld()">Add</button>
                     <div id="fldsCont" class="items-grid" style="margin-top: 10px;"></div>
                 </div>
-                <div class="form-group"><label>Min % *</label><input type="number" id="minPct" required min="0" max="100" step="0.01"></div>
+                <div class="form-group"><label>Min %</label><input type="number" id="minPct" min="0" max="100" step="0.01" placeholder="e.g. 50"></div>
                 <div class="form-group">
                     <label>Additional Requirements</label>
-                    <textarea id="addReq" rows="3"></textarea>
+                    <textarea id="addReq" rows="3" placeholder="Any extra requirements (optional)"></textarea>
                     <button type="button" class="btn-ai" onclick="aiRewrite('addReq')">✨ AI Magic</button>
                 </div>
-                <div class="form-group"><label>Categories</label><div id="catsCb"></div></div>
-                <div class="form-group"><label>State *</label><select id="stateSel" required></select></div>
+
+                <!-- FIXED: Categories with bordered boxes -->
+                <div class="form-group">
+                    <label>Categories</label>
+                    <div id="catsCb" class="cats-grid"></div>
+                </div>
+
+                <div class="form-group"><label>State</label><select id="stateSel"></select></div>
                 <h3 style="color: #667eea; margin: 20px 0;">Dates</h3>
                 <div class="row">
-                    <div class="form-group"><label>Start *</label><input type="date" id="startDt" required></div>
-                    <div class="form-group"><label>Deadline *</label><input type="date" id="deadDt" required></div>
+                    <div class="form-group"><label>Start Date</label><input type="date" id="startDt"></div>
+                    <div class="form-group"><label>Deadline</label><input type="date" id="deadDt"></div>
                 </div>
                 <div class="row">
-                    <div class="form-group"><label>Admit Card</label><input type="text" id="admitDt"></div>
-                    <div class="form-group"><label>Result</label><input type="text" id="resDt"></div>
+                    <div class="form-group"><label>Admit Card</label><input type="text" id="admitDt" placeholder="e.g. January 2026"></div>
+                    <div class="form-group"><label>Result</label><input type="text" id="resDt" placeholder="e.g. March 2026"></div>
                 </div>
-                <div class="form-group"><label>Link *</label><input type="url" id="link" required></div>
+                <div class="form-group"><label>Apply Link</label><input type="url" id="link" placeholder="https://..."></div>
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Save Job</button>
             </form>
         </div>

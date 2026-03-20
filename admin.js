@@ -70,8 +70,8 @@ async function loadJobs() {
     if (!data || !data.length) { c.innerHTML = '<p>No jobs found.</p>'; return; }
     c.innerHTML = data.map(j => `
         <div class="job-card">
-            <h3 style="color:#667eea;">${j.title}</h3>
-            <p style="color:#666;">${j.organization} • ${j.post_name}</p>
+            <h3 style="color:#667eea;">${j.title || '(No Title)'}</h3>
+            <p style="color:#666;">${j.organization || ''} • ${j.post_name || ''}</p>
             <p style="margin-top:8px;font-size:13px;"><b>Start:</b> ${fd(j.application_start_date || j.posted_date)} &nbsp; <b>Deadline:</b> ${fd(j.application_deadline)}</p>
             <div style="margin-top:12px;">
                 <button class="btn btn-primary" onclick="editJobById('${j.id}')">✏️ Edit</button>
@@ -95,12 +95,27 @@ async function openAddJobModal() {
 function closeJobModal() { document.getElementById('jobModal').classList.remove('active'); }
 
 async function popMdl() {
+    // Education levels — add blank first option
     const { data: lvls } = await sb.from('education_levels').select('name').order('hierarchy');
-    document.getElementById('eduReq').innerHTML = (lvls || []).map(l => `<option value="${l.name}">${l.name}</option>`).join('');
+    document.getElementById('eduReq').innerHTML =
+        '<option value="">-- Select --</option>' +
+        (lvls || []).map(l => `<option value="${l.name}">${l.name}</option>`).join('');
+
+    // States — add blank first option
     const { data: sts } = await sb.from('states').select('name').order('name');
-    document.getElementById('stateSel').innerHTML = (sts || []).map(s => `<option value="${s.name}">${s.name}</option>`).join('');
+    document.getElementById('stateSel').innerHTML =
+        '<option value="">-- Select --</option>' +
+        (sts || []).map(s => `<option value="${s.name}">${s.name}</option>`).join('');
+
+    // Categories — bordered box grid (FIXED)
     const { data: cats } = await sb.from('categories').select('name').order('name');
-    document.getElementById('catsCb').innerHTML = (cats || []).map(c => `<label style="margin-right:15px;"><input type="checkbox" value="${c.name}" class="cat-cb"> ${c.name}</label>`).join('');
+    document.getElementById('catsCb').innerHTML = (cats || []).map(c => `
+        <label class="cat-item">
+            <input type="checkbox" value="${c.name}" class="cat-cb">
+            <span>${c.name}</span>
+        </label>
+    `).join('');
+
     await updFlds();
 }
 
@@ -135,51 +150,61 @@ async function editJobById(id) {
     isEdit = true;
     document.getElementById('modalTitle').textContent = 'Edit Job';
     document.getElementById('jobId').value = j.id;
-    document.getElementById('title').value = j.title;
-    document.getElementById('organization').value = j.organization;
-    document.getElementById('postName').value = j.post_name;
+    document.getElementById('title').value = j.title || '';
+    document.getElementById('organization').value = j.organization || '';
+    document.getElementById('postName').value = j.post_name || '';
     document.getElementById('description').value = j.description || '';
     document.getElementById('minAge').value = j.min_age || '';
     document.getElementById('maxAge').value = j.max_age || '';
-    document.getElementById('minPct').value = j.min_percentage;
+    document.getElementById('minPct').value = j.min_percentage || '';
     document.getElementById('addReq').value = j.additional_requirements || '';
     document.getElementById('startDt').value = (j.application_start_date || j.posted_date || '').split('T')[0];
     document.getElementById('deadDt').value = (j.application_deadline || '').split('T')[0];
     document.getElementById('admitDt').value = j.admit_card_date || '';
     document.getElementById('resDt').value = j.result_date || '';
-    document.getElementById('link').value = j.apply_link;
+    document.getElementById('link').value = j.apply_link || '';
     selFlds = j.education_fields || [];
     await popMdl();
-    document.getElementById('eduReq').value = j.education_required;
+    document.getElementById('eduReq').value = j.education_required || '';
     await updFlds();
-    document.getElementById('stateSel').value = j.state;
+    document.getElementById('stateSel').value = j.state || '';
     renderSelFlds();
-    document.querySelectorAll('.cat-cb').forEach(cb => { cb.checked = j.categories?.includes(cb.value); });
+    // Restore checked categories
+    document.querySelectorAll('.cat-cb').forEach(cb => {
+        cb.checked = (j.categories || []).includes(cb.value);
+    });
     document.getElementById('jobModal').classList.add('active');
 }
 
 document.getElementById('jobForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const cats = Array.from(document.querySelectorAll('.cat-cb:checked')).map(c => c.value);
+
+    // All fields optional — use empty string '' instead of null so DB stores cleanly
     const d = {
-        title: document.getElementById('title').value,
-        organization: document.getElementById('organization').value,
-        post_name: document.getElementById('postName').value,
-        description: document.getElementById('description').value || null,
-        min_age: document.getElementById('minAge').value || null,
-        max_age: document.getElementById('maxAge').value || null,
-        education_required: document.getElementById('eduReq').value,
-        education_fields: selFlds,
-        min_percentage: parseFloat(document.getElementById('minPct').value) || 0,
-        additional_requirements: document.getElementById('addReq').value || null,
-        categories: cats,
-        state: document.getElementById('stateSel').value,
-        application_start_date: document.getElementById('startDt').value,
-        application_deadline: document.getElementById('deadDt').value,
-        admit_card_date: document.getElementById('admitDt').value || null,
-        result_date: document.getElementById('resDt').value || null,
-        apply_link: document.getElementById('link').value
+        title:                  document.getElementById('title').value || '',
+        organization:           document.getElementById('organization').value || '',
+        post_name:              document.getElementById('postName').value || '',
+        description:            document.getElementById('description').value || '',
+        min_age:                document.getElementById('minAge').value ? parseInt(document.getElementById('minAge').value) : null,
+        max_age:                document.getElementById('maxAge').value ? parseInt(document.getElementById('maxAge').value) : null,
+        education_required:     document.getElementById('eduReq').value || '',
+        education_fields:       selFlds,
+        min_percentage:         document.getElementById('minPct').value ? parseFloat(document.getElementById('minPct').value) : 0,
+        additional_requirements:document.getElementById('addReq').value || '',
+        categories:             cats,
+        state:                  document.getElementById('stateSel').value || '',
+        application_start_date: document.getElementById('startDt').value || null,
+        application_deadline:   document.getElementById('deadDt').value || null,
+        admit_card_date:        document.getElementById('admitDt').value || '',
+        result_date:            document.getElementById('resDt').value || '',
+        apply_link:             document.getElementById('link').value || '',
+        posted_date:            isEdit ? undefined : new Date().toISOString(),
     };
+
+    // Remove posted_date key entirely if editing (don't overwrite original)
+    if (isEdit) delete d.posted_date;
+
     try {
         if (isEdit) {
             const { error } = await sb.from('jobs').update(d).eq('id', document.getElementById('jobId').value);
@@ -231,7 +256,7 @@ async function loadQuizQuestions() {
     c.innerHTML = data.map(q => {
         const opts_hi = q.options_hi || [];
         const opts_en = q.options_en || [];
-        const correct = (q.correct_option || 1) - 1; // 0-indexed
+        const correct = (q.correct_option || 1) - 1;
 
         const optionsHtml = labels.map((lbl, i) => {
             const isCorrect = i === correct;
@@ -284,7 +309,6 @@ function selectCorrect(num) {
     document.querySelectorAll('.correct-radio').forEach(r => r.classList.remove('selected'));
     const radios = document.querySelectorAll('.correct-radio');
     if (radios[num - 1]) radios[num - 1].classList.add('selected');
-    // Set radio value
     const radio = document.querySelector(`input[name="correctOpt"][value="${num}"]`);
     if (radio) radio.checked = true;
 }
@@ -298,11 +322,9 @@ async function editQuizQuestion(id) {
     document.getElementById('quizQId').value = q.id;
     document.getElementById('qCategory').value = q.category || 'GK';
 
-    // Support both old bilingual and new single-field storage
     const qText = q.question_en || q.question_hi || '';
     document.getElementById('qQuestion').value = qText;
 
-    // Options: prefer options_en, fallback to options_hi
     const opts = (q.options_en && q.options_en.length ? q.options_en : q.options_hi) || [];
     document.getElementById('qOpt1').value = opts[0] || '';
     document.getElementById('qOpt2').value = opts[1] || '';
@@ -330,7 +352,6 @@ document.getElementById('quizForm').addEventListener('submit', async (e) => {
 
     if (options.some(o => !o)) { alert('Please fill all 4 options!'); return; }
 
-    // Store same text in both fields so old clients (if any) still work
     const payload = {
         question_hi: qText,
         question_en: qText,
@@ -361,7 +382,6 @@ document.getElementById('quizForm').addEventListener('submit', async (e) => {
 async function delQuizQuestion(id) {
     if (!confirm('Delete this quiz question? This will also remove all user attempts for it.')) return;
     try {
-        // Delete attempts first
         await sb.from('quiz_attempts').delete().eq('question_id', id);
         const { error } = await sb.from('quiz_questions').delete().eq('id', id);
         if (error) throw error;
