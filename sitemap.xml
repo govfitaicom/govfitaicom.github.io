@@ -4,7 +4,7 @@
   <!-- HOMEPAGE -->
   <url>
     <loc>https://govfitai.com/</loc>
-    <lastmod>2026-03-24</lastmod>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -12,37 +12,37 @@
   <!-- STATIC PAGES -->
   <url>
     <loc>https://govfitai.com/about.html</loc>
-    <lastmod>2026-03-24</lastmod>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/resources.html</loc>
-    <lastmod>2026-03-24</lastmod>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://govfitai.com/government-job-salary-guide.html</loc>
-    <lastmod>2026-03-24</lastmod>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://govfitai.com/government-exam-eligibility-guide.html</loc>
-    <lastmod>2026-03-24</lastmod>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://govfitai.com/privacy-policy.html</loc>
-    <lastmod>2026-03-24</lastmod>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://govfitai.com/terms.html</loc>
-    <lastmod>2026-03-24</lastmod>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -50,37 +50,37 @@
   <!-- JOB CATEGORY PAGES -->
   <url>
     <loc>https://govfitai.com/ssc-jobs.html</loc>
-    <lastmod>2026-03-24</lastmod>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/railway-jobs.html</loc>
-    <lastmod>2026-03-24</lastmod>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/banking-jobs.html</loc>
-    <lastmod>2026-03-24</lastmod>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/defense-jobs.html</loc>
-    <lastmod>2026-03-24</lastmod>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/PSU-jobs.html</loc>
-    <lastmod>2026-03-24</lastmod>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/UPSC-jobs.html</loc>
-    <lastmod>2026-03-24</lastmod>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -88,18 +88,132 @@
   <!-- PREPARATION GUIDES -->
   <url>
     <loc>https://govfitai.com/SSC-CGL-Preparation.html</loc>
-    <lastmod>2026-03-24</lastmod>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/UPSC-Preparation-Strategy.html</loc>
-    <lastmod>2026-03-24</lastmod>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- JOB DETAIL PAGES (934) -->
+  <!-- JOB DETAIL PAGES (953) -->
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=bihar-school-teacher-tre-40-recruitment-2026-otr-registration-for-40000-post-tgt-teacher-class-9-10-special&amp;id=00020663</loc>
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=bihar-school-teacher-tre-40-recruitment-2026-otr-registration-for-40000-post-tgt-teacher-class-9-10&amp;id=fc96b12c</loc>
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=bihar-school-teacher-tre-40-recruitment-2026-otr-registration-for-40000-post-middle-school-teacher-class-6-8&amp;id=0580a9b4</loc>
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=bihar-school-teacher-tre-40-recruitment-2026-otr-registration-for-40000-post-primary-school-teacher-class-1-5&amp;id=dcf05567</loc>
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=upsssc-up-technical-assistant-group-c-recruitment-2026-apply-online-for-2759-pos-technical-assistant-group-c-exam&amp;id=90ffe91a</loc>
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=up-uttar-pradesh-anganwadi-worker-bharti-recruitment-2026-apply-online-district--aganwadi-worker-karyakatri&amp;id=789f400b</loc>
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=indian-army-rally-recruitment-agniveer-aro-zro-agniveer-women-sepoy-pharma-soldi-jco-religious-teacher-dharm-guru-pandit-pandit-gorkha-granthi-maulvi-padre-bodh-&amp;id=bf99dc0a</loc>
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=indian-army-rally-recruitment-agniveer-aro-zro-agniveer-women-sepoy-pharma-soldi-sepoy-pharma&amp;id=c919e351</loc>
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=indian-army-rally-recruitment-agniveer-aro-zro-agniveer-women-sepoy-pharma-soldi-soldier-technical-nursing-assistant&amp;id=3120bed4</loc>
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=indian-army-rally-recruitment-agniveer-aro-zro-agniveer-women-sepoy-pharma-soldi-agniveer-in-general-duty-gd-women-military-police-women&amp;id=168a88cc</loc>
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=indian-army-rally-recruitment-agniveer-aro-zro-agniveer-women-sepoy-pharma-soldi-agniveer-in-general-duty-gd-technical-assistant-store-keeper-tradesman-men&amp;id=2edbe4c3</loc>
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=delhi-high-court-junior-judicial-assistant-jja-restorer-recruitment-2026-answer--junior-judicial-assistant-jja-restorer&amp;id=340d82e9</loc>
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=up-uttar-pradesh-state-road-transport-corporation-upsrtc-female-bus-conductor-ma-female-bus-conductor-out-sourcing-vacancy&amp;id=52721afb</loc>
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=up-co-operative-institutional-service-board-upcisb-combined-cooperative-banking--assistant-engineer-ae-civil&amp;id=f2abb1fe</loc>
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=up-co-operative-institutional-service-board-upcisb-combined-cooperative-banking--assistant-typist&amp;id=31ed8ee5</loc>
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=up-co-operative-institutional-service-board-upcisb-combined-cooperative-banking--assistant-cashier-banking-assistant-clerical-staff&amp;id=5a73920c</loc>
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=up-co-operative-institutional-service-board-upcisb-combined-cooperative-banking--junior-manager&amp;id=7f013c5d</loc>
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=up-co-operative-institutional-service-board-upcisb-combined-cooperative-banking--manager&amp;id=66232713</loc>
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=rajasthan-board-rbse-class-5th-v-class-8th-viii-exam-results-today-at-1-pm-2026-rajasthan-board-rbse-class-5th-v-class-8th-viii-exam-results-today-at-1-pm-2026&amp;id=34be3750</loc>
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=bihar-bpsc-teacher-tre-40-online-form-2026-for-40000-post-apply-online-tgt-teacher-class-9-10-special&amp;id=6c5daa6f</loc>
     <lastmod>2026-03-24</lastmod>
@@ -1615,122 +1729,122 @@
   <url>
     <loc>https://govfitai.com/job-details.html?job=jkssb-recruitment-2026-apply-for-239-post-nursing-aid-g-iii-nursing-administration&amp;id=2e9f1769</loc>
     <lastmod>2026-03-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=jkssb-recruitment-2026-apply-for-239-post-barber-g-iii-nursing-administration&amp;id=0620ba15</loc>
     <lastmod>2026-03-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=jkssb-recruitment-2026-apply-for-239-post-attendant-general-cadreagc-g-ii-general-administration&amp;id=04ae33a8</loc>
     <lastmod>2026-03-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=jkssb-recruitment-2026-apply-for-239-post-vocational-counsellor-physical-medicine-and-rehabilitation&amp;id=f4a2654b</loc>
     <lastmod>2026-03-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=jkssb-recruitment-2026-apply-for-239-post-technician-g-ii-theatre-group&amp;id=bc171e2a</loc>
     <lastmod>2026-03-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=jkssb-recruitment-2026-apply-for-239-post-technician-g-ii-radiation-group&amp;id=5dfe9d9f</loc>
     <lastmod>2026-03-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=jkssb-recruitment-2026-apply-for-239-post-technician-g-ii-perfusionist&amp;id=6c75eb1e</loc>
     <lastmod>2026-03-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=jkssb-recruitment-2026-apply-for-239-post-technician-g-ii-medical-group&amp;id=5eb7f6a4</loc>
     <lastmod>2026-03-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=jkssb-recruitment-2026-apply-for-239-post-technician-g-ii-lab-group&amp;id=2aea6b4b</loc>
     <lastmod>2026-03-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=jkssb-recruitment-2026-apply-for-239-post-staff-nurse-g-ii-nursing-administration&amp;id=1884e3ce</loc>
     <lastmod>2026-03-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=jkssb-recruitment-2026-apply-for-239-post-speech-therapist-physical-medicine-rehabilitation&amp;id=6231b1e3</loc>
     <lastmod>2026-03-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=jkssb-recruitment-2026-apply-for-239-post-medical-record-assistant-medical-records-department&amp;id=075a5a32</loc>
     <lastmod>2026-03-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=jkssb-recruitment-2026-apply-for-239-post-library-assistant-g-ii-library-service&amp;id=99b6e9e9</loc>
     <lastmod>2026-03-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=jkssb-recruitment-2026-apply-for-239-post-junior-store-clerk-materials-management-department&amp;id=2a9a6211</loc>
     <lastmod>2026-03-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=jkssb-recruitment-2026-apply-for-239-post-junior-pharmacist-g-ii-drug-pharmacy&amp;id=5192686c</loc>
     <lastmod>2026-03-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=jkssb-recruitment-2026-apply-for-239-post-jr-occupational-therapist-physical-medicine-rehabilitation&amp;id=398afead</loc>
     <lastmod>2026-03-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=jkssb-recruitment-2026-apply-for-239-post-jr-basic-physiotherapist-g-ii-physical-medicine-rehabilitation&amp;id=c912425d</loc>
     <lastmod>2026-03-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=jkssb-recruitment-2026-apply-for-239-post-chest-physiotherapist-physical-medicine-rehabilitation&amp;id=ede29767</loc>
     <lastmod>2026-03-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=jkssb-recruitment-2026-apply-for-239-post-assistant-cook-g-ii-department-of-dietetics-therapeutics-dt&amp;id=dfe2dec0</loc>
     <lastmod>2026-03-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=jkssb-recruitment-2026-apply-for-239-post-health-and-medical-education-department-various-post&amp;id=15a5ad08</loc>
     <lastmod>2026-03-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=punjab-national-bank-pnb-apprentice-recruitment-2026-apply-for-5138-post-apprentice&amp;id=3ec36449</loc>
@@ -2485,14 +2599,14 @@
   <url>
     <loc>https://govfitai.com/job-details.html?job=dsssb-recruitment-2026-notification-911-vacancies-for-aso-ae-je-legal-assistant--assistant-engineer-civil&amp;id=181a7bb2</loc>
     <lastmod>2026-02-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=dsssb-recruitment-2026-notification-911-vacancies-for-aso-ae-je-legal-assistant--grade-ii-gnctdss-assistant-section-officer&amp;id=0a008280</loc>
     <lastmod>2026-02-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=ecil-technical-officer-contract-recruitment-2026-walk-in-for-200-engineering-pos-technical-officer-on-contract-to-c&amp;id=c7fb3812</loc>
@@ -5669,13 +5783,25 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://govfitai.com/job-details.html?job=indian-navy-ssr-recruitment-2025-senior-secondary-recruit-ssr&amp;id=29ad6121</loc>
+    <loc>https://govfitai.com/job-details.html?job=railway-group-d-recruitment-2025-track-maintainer-grade-iv&amp;id=339397b7</loc>
     <lastmod>2025-12-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=rrb-junior-engineer-recruitment-2025-junior-engineer-mechanical&amp;id=e43df19e</loc>
+    <lastmod>2025-12-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=indian-navy-ssr-recruitment-2025-senior-secondary-recruit-ssr&amp;id=29ad6121</loc>
+    <lastmod>2025-12-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://govfitai.com/job-details.html?job=ssc-junior-engineer-recruitment-2025-junior-engineer-civil&amp;id=0be824bc</loc>
     <lastmod>2025-12-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -5688,18 +5814,6 @@
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=ongc-junior-engineer-recruitment-2025-junior-engineer-electrical&amp;id=3aa7d23f</loc>
-    <lastmod>2025-12-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://govfitai.com/job-details.html?job=ssc-junior-engineer-recruitment-2025-junior-engineer-civil&amp;id=0be824bc</loc>
-    <lastmod>2025-12-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://govfitai.com/job-details.html?job=railway-group-d-recruitment-2025-track-maintainer-grade-iv&amp;id=339397b7</loc>
     <lastmod>2025-12-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
