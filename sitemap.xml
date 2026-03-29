@@ -101,6 +101,12 @@
 
   <!-- JOB DETAIL PAGES (1000) -->
   <url>
+    <loc>https://govfitai.com/job-details.html?job=dhruv-rathi-free-ai-masterclass&amp;id=eeed74d0</loc>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://govfitai.com/job-details.html?job=sainik-school-jhansi-contractual-and-temporary-recruitment-2026-apply-for-07-pos-sainik-school-jhansi-recruitment-2026&amp;id=abad9a76</loc>
     <lastmod>2026-03-29</lastmod>
     <changefreq>weekly</changefreq>
@@ -6090,12 +6096,6 @@
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=railway-rrc-nr-apprentice-recruitment-2025-rrc-nr-apprentice&amp;id=b4b7b6c8</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://govfitai.com/job-details.html?job=rcf-kapurthala-apprentice-recruitment-2025-rail-coach-factory-kapurthala-apprentice&amp;id=b3435b9e</loc>
     <lastmod>2025-12-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
