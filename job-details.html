@@ -655,17 +655,35 @@ function init() {
 
     async function loadJobDetails() {
         try {
-            const { data: allJobs, error } = await supabaseClient
-                .from('jobs')
-                .select('*');
+            // Fetch IDs in batches to find matching shortId, then fetch full job by exact UUID
+            let job = null;
+            let from = 0;
+            const batchSize = 1000;
 
-            if (error) {
-                console.error('Supabase Error:', error);
-                alert('Database error');
-                return;
+            while (!job) {
+                const { data: batch, error: batchError } = await supabaseClient
+                    .from('jobs')
+                    .select('id')
+                    .range(from, from + batchSize - 1);
+
+                if (batchError) throw batchError;
+                if (!batch || batch.length === 0) break;
+
+                const match = batch.find(j => j.id.startsWith(shortId));
+                if (match) {
+                    const { data: fullJob, error: fullError } = await supabaseClient
+                        .from('jobs')
+                        .select('*')
+                        .eq('id', match.id)
+                        .single();
+                    if (fullError) throw fullError;
+                    job = fullJob;
+                    break;
+                }
+
+                if (batch.length < batchSize) break;
+                from += batchSize;
             }
-
-            const job = allJobs.find(j => j.id.startsWith(shortId));
 
             if (!job) {
                 alert('Job not found!');
@@ -752,9 +770,9 @@ function init() {
 
         const badges = [];
         const daysLeft = getDaysLeft(job.application_deadline);
-        if (daysLeft <= 7) {
+        if (daysLeft > 0 && daysLeft <= 7) {
             badges.push(`<span class="badge deadline">⚠️ ${daysLeft} days left</span>`);
-        } else if (daysLeft <= 15) {
+        } else if (daysLeft > 7 && daysLeft <= 15) {
             badges.push(`<span class="badge urgent">⏰ Apply Soon</span>`);
         }
         badges.push(`<span class="badge">🎓 ${job.education_required}</span>`);
@@ -793,7 +811,12 @@ function init() {
         document.getElementById('admitCardDate').textContent = job.admit_card_date || 'Will Be Updated Here Soon';
         document.getElementById('resultDateDisplay').textContent = job.result_date || 'Will Be Updated Here Soon';
         document.getElementById('deadlineDisplay').textContent = formatDate(job.application_deadline);
-        document.getElementById('daysLeft').textContent = daysLeft > 0 ? `${daysLeft} days remaining` : 'EXPIRED';
+        if (daysLeft > 0) {
+            document.getElementById('daysLeft').textContent = `${daysLeft} days remaining`;
+        } else {
+            document.getElementById('daysLeft').textContent = '';
+            document.querySelector('.deadline-timer').style.background = '#888';
+        }
 
         document.getElementById('applyBtn').href = job.apply_link;
 
