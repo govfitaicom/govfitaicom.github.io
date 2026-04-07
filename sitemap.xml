@@ -4,7 +4,7 @@
   <!-- HOMEPAGE -->
   <url>
     <loc>https://govfitai.com/</loc>
-    <lastmod>2026-04-06</lastmod>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -12,37 +12,37 @@
   <!-- STATIC PAGES -->
   <url>
     <loc>https://govfitai.com/about.html</loc>
-    <lastmod>2026-04-06</lastmod>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/resources.html</loc>
-    <lastmod>2026-04-06</lastmod>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://govfitai.com/government-job-salary-guide.html</loc>
-    <lastmod>2026-04-06</lastmod>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://govfitai.com/government-exam-eligibility-guide.html</loc>
-    <lastmod>2026-04-06</lastmod>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://govfitai.com/privacy-policy.html</loc>
-    <lastmod>2026-04-06</lastmod>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://govfitai.com/terms.html</loc>
-    <lastmod>2026-04-06</lastmod>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -50,37 +50,37 @@
   <!-- JOB CATEGORY PAGES -->
   <url>
     <loc>https://govfitai.com/ssc-jobs.html</loc>
-    <lastmod>2026-04-06</lastmod>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/railway-jobs.html</loc>
-    <lastmod>2026-04-06</lastmod>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/banking-jobs.html</loc>
-    <lastmod>2026-04-06</lastmod>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/defense-jobs.html</loc>
-    <lastmod>2026-04-06</lastmod>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/PSU-jobs.html</loc>
-    <lastmod>2026-04-06</lastmod>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/UPSC-jobs.html</loc>
-    <lastmod>2026-04-06</lastmod>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -88,13 +88,13 @@
   <!-- PREPARATION GUIDES -->
   <url>
     <loc>https://govfitai.com/SSC-CGL-Preparation.html</loc>
-    <lastmod>2026-04-06</lastmod>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://govfitai.com/UPSC-Preparation-Strategy.html</loc>
-    <lastmod>2026-04-06</lastmod>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1189,26 +1189,26 @@
   <url>
     <loc>https://govfitai.com/job-details.html?job=sidbi-bank-so-recruitment-2026-application-form-apply-for-14-post-specialist-officers&amp;id=8ed727b0</loc>
     <lastmod>2026-03-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=mp-employees-selection-board-mpesb-pre-agriculture-test-pat-admissions-2026-appl-bsc-forestry&amp;id=183a9df0</loc>
     <lastmod>2026-03-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=mp-employees-selection-board-mpesb-pre-agriculture-test-pat-admissions-2026-appl-bsc-horticulture&amp;id=02402e6f</loc>
     <lastmod>2026-03-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=mp-employees-selection-board-mpesb-pre-agriculture-test-pat-admissions-2026-appl-bsc-ag&amp;id=c9e1ce29</loc>
     <lastmod>2026-03-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=niper-hajipur-teaching-non-teaching-post-recruitment-2026-apply-online-for-06-po-assistant-registrar-administration-non-teaching&amp;id=79d10482</loc>
@@ -1981,26 +1981,26 @@
   <url>
     <loc>https://govfitai.com/job-details.html?job=mpesb-pre-agriculture-test-pat-examination-2026-apply-online-form-btech-agriculture&amp;id=5ff6bcc8</loc>
     <lastmod>2026-03-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=mpesb-pre-agriculture-test-pat-examination-2026-apply-online-form-bsc-forestry&amp;id=520c67cc</loc>
     <lastmod>2026-03-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=mpesb-pre-agriculture-test-pat-examination-2026-apply-online-form-bsc-horticulture&amp;id=4aaef89c</loc>
     <lastmod>2026-03-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=mpesb-pre-agriculture-test-pat-examination-2026-apply-online-form-bsc-ag&amp;id=8cbcb2bc</loc>
     <lastmod>2026-03-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://govfitai.com/job-details.html?job=bihar-bpsc-33-civil-judge-pcs-j-recruitment-2026-apply-online-date-extended-for--civil-judge-pcs-j-service&amp;id=ce64ebcf</loc>
