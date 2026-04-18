@@ -358,14 +358,24 @@ function shareJob(jobId, jobTitle, jobUrl) {
 
 // ── HELPERS ────────────────────────────────────────────────────────────────────
 function generateJobSlug(title) {
-    return (title || '').toLowerCase().trim()
-        .replace(/[^\p{L}\p{N}\s-]/gu, '').replace(/\s+/g, '-')
-        .replace(/-+/g, '-').replace(/^-+|-+$/g, '');
+    if (!title) return '';
+    title = title.toLowerCase().trim();
+    if (/[a-z]/.test(title)) {
+        title = title.replace(/[^a-z0-9\s-]/g, ' ');
+    } else {
+        title = title.replace(/[^\p{L}\p{M}\p{N}\s-]/gu, ' ');
+    }
+    return title.replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-+|-+$/g, '');
 }
 function generateQuizSlug(text) {
-    return (text || '').toLowerCase().trim()
-        .replace(/[^\p{L}\p{N}\s-]/gu, '').replace(/\s+/g, '-')
-        .replace(/-+/g, '-').replace(/^-+|-+$/g, '').substring(0, 80);
+    if (!text) return '';
+    text = text.toLowerCase().trim();
+    if (/[a-z]/.test(text)) {
+        text = text.replace(/[^a-z0-9\s-]/g, ' ');
+    } else {
+        text = text.replace(/[^\p{L}\p{M}\p{N}\s-]/gu, ' ');
+    }
+    return text.replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-+|-+$/g, '').substring(0, 80);
 }
 function getShortId(id)       { return (id || '').substring(0, 8); }
 function getJobUrl(id, title, postName) {

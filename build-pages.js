@@ -6,8 +6,18 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const SUPABASE_HOST = 'yhgqtbbxsbptssybgbrl.supabase.co';
 
 function generateSlug(text) {
-    return (text || '').toLowerCase().trim()
-        .replace(/[^\p{L}\p{N}\s-]/gu, '').replace(/\s+/g, '-')
+    if (!text) return '';
+    text = text.toLowerCase().trim();
+    
+    // If English characters exist, create slug using mostly English/numbers for cleaner URLs
+    if (/[a-z]/.test(text)) {
+        text = text.replace(/[^a-z0-9\s-]/g, ' ');
+    } else {
+        // If pure Hindi (or other non-English language), keep Unicode letters, marks (matras), and numbers
+        text = text.replace(/[^\p{L}\p{M}\p{N}\s-]/gu, ' ');
+    }
+    
+    return text.replace(/\s+/g, '-')
         .replace(/-+/g, '-').replace(/^-+|-+$/g, '').substring(0, 80);
 }
 
