@@ -58,9 +58,10 @@ function urlEntry(loc, lastmod, changefreq, priority) {
     return `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${changefreq}</changefreq>\n    <priority>${priority}</priority>\n  </url>\n`;
 }
 
-// Ensure dir exists
-function ensureDir(dir) {
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+// Ensure dir exists and is empty
+function emptyDir(dir) {
+    if (fs.existsSync(dir)) fs.rmSync(dir, { recursive: true, force: true });
+    fs.mkdirSync(dir, { recursive: true });
 }
 
 // -----------------------------------------------------------------------------------------
@@ -305,8 +306,8 @@ function getQuizHtmlTemplate(quiz, slug) {
 
 async function run() {
     console.log('🚀 Starting Static Site Generation Pipeline...');
-    ensureDir(path.join(__dirname, 'jobs'));
-    ensureDir(path.join(__dirname, 'quiz'));
+    emptyDir(path.join(__dirname, 'jobs'));
+    emptyDir(path.join(__dirname, 'quiz'));
 
     console.log('Fetching Jobs...');
     const allJobs = await fetchFromSupabase('jobs', 'posted_date');
