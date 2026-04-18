@@ -19,9 +19,10 @@
         // SMART SSG ROUTER: Redirect old query parameter URLs to new physical Static HTML files
         (function() {
             var params = new URLSearchParams(window.location.search);
+            var fallback = params.get('fallback');
             var id = params.get('id');
             var jobSlug = params.get('job');
-            if (id && jobSlug) {
+            if (id && jobSlug && !fallback) {
                 // Instantly redirect without waiting for DOM or API calls
                 window.location.replace('/jobs/' + jobSlug + '-' + id + '.html');
             }

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - GovFitAI</title>
+    <!-- Dynamic Next-Gen Fallback Router -->
+    <script>
+        (function() {
+            try {
+                // If the URL matches a Static Generated URL pattern `/jobs/slug-id.html` and it's missing,
+                // we can dynamically rebuild it using the frontend fallbacks.
+                const path = window.location.pathname;
+
+                if (path.startsWith('/jobs/') && path.endsWith('.html')) {
+                    const parts = path.split('-');
+                    const idWithHtml = parts[parts.length - 1]; // "id.html"
+                    const id = idWithHtml.replace('.html', '');
+                    const slug = path.substring(6).replace('-' + idWithHtml, '');
+                    
+                    if (id) {
+                        // The `fallback=true` forces job-details.html to skip SSG redirection and render instantly!
+                        window.location.replace('/job-details.html?id=' + id + '&job=' + slug + '&fallback=true');
+                        return;
+                    }
+                }
+                
+                else if (path.startsWith('/quiz/') && path.endsWith('.html')) {
+                    const parts = path.split('-');
+                    const idWithHtml = parts[parts.length - 1]; // "id.html"
+                    const id = idWithHtml.replace('.html', '');
+                    const slug = path.substring(6).replace('-' + idWithHtml, '');
+                    
+                    if (id) {
+                        window.location.replace('/quiz-details.html?id=' + id + '&q=' + slug + '&fallback=true');
+                        return;
+                    }
+                }
+            } catch (e) {
+                console.error("Fallback routing failed", e);
+            }
+        })();
+    </script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f7fa; text-align: center; padding: 100px 20px; color: #333; }
+        h1 { font-size: 80px; color: #667eea; margin-bottom: 20px; }
+        p { font-size: 20px; color: #666; margin-bottom: 30px; }
+        a { text-decoration: none; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 24px; border-radius: 8px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>404</h1>
+    <p>Oops! The page you're looking for doesn't exist.</p>
+    <a href="/">Go Back Home</a>
+</body>
+</html>
