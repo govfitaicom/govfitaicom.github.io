@@ -4,8 +4,8 @@ on:
   schedule:
     - cron: '0 0 * * *'  # Runs daily at midnight UTC
   
-  # Triggered by Supabase Webhook instantly
-  repository_dispatch:
+  # Adds a "Run workflow" button in GitHub Actions tab for manual instant triggers
+  workflow_dispatch:
     types: [supabase_update]
   
   # Runs on manually push to main branch
