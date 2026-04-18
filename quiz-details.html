@@ -6,11 +6,20 @@
     <title id="pageTitle">GK Quiz Question - GovFitAI</title>
     <meta name="google-adsense-account" content="ca-pub-2221858776975716">
     <meta name="description" id="pageDesc" content="Practice government exam MCQ questions with answers and explanations. SSC, UPSC, Railway, Banking GK quiz.">
-    <link rel="canonical" id="canonicalTag" href="https://govfitai.com/quiz-details.html" />
-    <meta property="og:type" content="article">
-    <meta property="og:title" id="ogTitle" content="GK Quiz - GovFitAI">
-    <meta property="og:description" id="ogDesc" content="Practice MCQ for government exams">
-    <script type="application/ld+json" id="pageSchema"></script>
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="https://govfitai.com/" />
+    <script>
+        // SMART SSG ROUTER: Redirect old query parameter URLs to new physical Static HTML files
+        (function() {
+            var params = new URLSearchParams(window.location.search);
+            var id = params.get('id');
+            var qSlug = params.get('q');
+            if (id && qSlug) {
+                // Instantly redirect without waiting for DOM or API calls
+                window.location.replace('/quiz/' + qSlug + '-' + id + '.html');
+            }
+        })();
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <noscript>

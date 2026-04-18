@@ -370,9 +370,9 @@ function generateQuizSlug(text) {
 function getShortId(id)       { return (id || '').substring(0, 8); }
 function getJobUrl(id, title, postName) {
     const postPart = postName ? '-' + generateJobSlug(postName) : '';
-    return `job-details.html?job=${generateJobSlug(title)}${postPart}&id=${getShortId(id)}`;
+    return `jobs/${generateJobSlug(title)}${postPart}-${getShortId(id)}.html`;
 }
-function getQuizUrl(id, text) { return `quiz-details.html?q=${generateQuizSlug(text)}&id=${getShortId(id)}`; }
+function getQuizUrl(id, text) { return `quiz/${generateQuizSlug(text)}-${getShortId(id)}.html`; }
 function formatDate(ds) {
     if (!ds) return 'N/A';
     return new Date(ds).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });

@@ -1,10 +1,14 @@
-name: Update Sitemap
+name: Build Static Pages & Sitemap
 
 on:
   schedule:
-    - cron: '0 2 * * 0'  # Har Sunday subah 2 baje
+    - cron: '0 0 * * *'  # Runs daily at midnight UTC
   
-  # Also run when you push to main branch
+  # Triggered by Supabase Webhook instantly
+  repository_dispatch:
+    types: [supabase_update]
+  
+  # Runs on manually push to main branch
   push:
     branches:
       - main
@@ -13,7 +17,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  update-sitemap:
+  build-ssg:
     runs-on: ubuntu-latest
     
     steps:
@@ -25,12 +29,12 @@ jobs:
         with:
           node-version: '18'
       
-      - name: 🔄 Generate Sitemap
-        run: node generate-sitemap.js
+      - name: 🏗️ Run Static Site Generator
+        run: node build-pages.js
       
-      - name: 📤 Commit and Push
+      - name: 📤 Commit and Push Static Files
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "GitHub Actions Bot"
-          git add sitemap.xml
-          git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 Auto-update sitemap [skip ci]" && git push)
+          git add sitemap.xml jobs/ quiz/
+          git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 Auto-build static HTML pages & sitemap [skip ci]" && git push)
