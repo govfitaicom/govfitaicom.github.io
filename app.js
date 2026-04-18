@@ -359,12 +359,12 @@ function shareJob(jobId, jobTitle, jobUrl) {
 // ── HELPERS ────────────────────────────────────────────────────────────────────
 function generateJobSlug(title) {
     return (title || '').toLowerCase().trim()
-        .replace(/[^\w\s-]/g, '').replace(/\s+/g, '-')
+        .replace(/[^\p{L}\p{N}\s-]/gu, '').replace(/\s+/g, '-')
         .replace(/-+/g, '-').replace(/^-+|-+$/g, '');
 }
 function generateQuizSlug(text) {
     return (text || '').toLowerCase().trim()
-        .replace(/[^\w\s-]/g, '').replace(/\s+/g, '-')
+        .replace(/[^\p{L}\p{N}\s-]/gu, '').replace(/\s+/g, '-')
         .replace(/-+/g, '-').replace(/^-+|-+$/g, '').substring(0, 80);
 }
 function getShortId(id)       { return (id || '').substring(0, 8); }

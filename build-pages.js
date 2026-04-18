@@ -7,7 +7,7 @@ const SUPABASE_HOST = 'yhgqtbbxsbptssybgbrl.supabase.co';
 
 function generateSlug(text) {
     return (text || '').toLowerCase().trim()
-        .replace(/[^\w\s-]/g, '').replace(/\s+/g, '-')
+        .replace(/[^\p{L}\p{N}\s-]/gu, '').replace(/\s+/g, '-')
         .replace(/-+/g, '-').replace(/^-+|-+$/g, '').substring(0, 80);
 }
 
@@ -29,6 +29,7 @@ async function fetchFromSupabase(table, orderCol) {
                     'Content-Type': 'application/json'
                 }
             }, (res) => {
+                res.setEncoding('utf8');
                 let data = '';
                 res.on('data', c => data += c);
                 res.on('end', () => {
