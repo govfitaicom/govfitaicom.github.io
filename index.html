@@ -512,56 +512,257 @@
             </form>
         </div>
     </div>
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section"><h3>🇮🇳 GovFitAI</h3><p style="color:#a0aec0;font-size:14px;">Smart government job matching powered by AI.</p></div>
-            <div class="footer-section"><h3>Quick Links</h3>
-                <a href="#features">Features</a>
-                <a href="#jobsSection" onclick="showTab('all')">Browse Jobs</a>
-                <a href="#jobsSection" onclick="showTab('quiz')">Daily Quiz</a>
-                <a href="mars-exploration-internship.html">MARS Exploration Internship Program</a> 
-                <a href="dhruv-rathee-free-ai-masterclass.html">Dhruv Rathee Free AI Masterclass 2026</a>                               
-                <a href="agristack-farmer-registration-app.html">AgriStack Farmer Registration Link</a>
-                <a href="ladki-bahin-yojana-ekyc-app.html">Ladki Bahin Yojana eKYC App</a>
-                <a href="setkari-karjmafi-krushi-yojana-app.html">Setkari Karjmafi Krushi Yojana App</a>
-                <a href="kisan-credit-card-kcc-marathi-guide.html">Kisan Credit Card KCC 2026 Guide</a>
-                <a href="msp-bazar-bhav-2026-marathi.html">MSP Rates 2026-27 Marathi Guide</a>
-                <a href="namo-shetkari-mahasanman-nidhi-2026.html">Namo Shetkari Mahasanman Nidhi 2026</a>
-                <a href="pashudhan-vima-yojana-marathi-2026.html">Pashudhan Vima Livestock Insurance 2026</a>
-                <a href="pm-kisan-marathi-guide-2026.html">PM-KISAN 2026 Marathi Guide</a>
-                <a href="pmfby-pik-vima-marathi-guide-2026.html">PMFBY पीक विमा 2026</a>
-                <a href="pm-kisan-marathi-guide-2026.html">PMKSY Drip Irrigation Subsidy 2026</a>
-                <a href="pmksy-drip-irrigation-subsidy-marathi.html">PMKSY Drip Irrigation Subsidy 2026</a>
-                <a href="rkvy-krushi-anudan-yojana-2026.html">RKVY Krushi Anudan 2026</a>
-                <a href="setkari-karjmafi-blog.html">Setkari Karjmafi Blog — All Farmer Scheme Guides 2026</a>
-                <a href="shetkari-karjmafi-app-marathi.html">शेतकरी कर्जमाफी कृषी योजना App 2026</a>
-                <a href="shetkari-karjmafi-yojana-2026.html">Shetkari Karjmafi Yojana 2026</a>
-                <a href="evm-voting-machine-mock-poll.html">EVM Voting Machine Mock Poll App – Conduct Your Own Election on Android (2026)</a>                    
-                <a href="udhari-book-app.html">Udhari Book – Cash Counter, GST Calculator & Daily Register App for Indian Shopkeepers (2026)</a>
-                <a href="wa-status-saver-app.html">WA Status Saver – Save & Share WhatsApp Statuses Free Android App (2026)</a>
-                <a href="car-kundali-obd2-scanner-app.html">Car Kundali – OBD2 Scanner &amp; ELM327 Diagnostic Tool for Android (2026)</a>
-                <a href="udhari-book-vs-okcredit-khatabook-vyapar.html">Why Udhari Book beats OkCredit & Khatabook</a>     
-                <a href="govfitai-vs-sarkariresult.html">GovFitAI vs SarkariResult </a>     
-                <a href="check-engine-light-dtc-codes-indian-cars-obd2-guide.html">Check Engine Light on Indian Cars? Read & Clear DTC Codes Free with Car Kundali OBD2 App (2026)</a>                    
-                <a href="evm-voting-machine-review-2026.html">EVM Voting Machine App Review 2026</a>                    
-                          
-            </div>
-            <div class="footer-section"><h3>Categories</h3>
-                <a href="ssc-jobs.html">SSC Jobs</a>
-                <a href="railway-jobs.html">Railway Jobs</a>
-                <a href="banking-jobs.html">Banking Jobs</a>
-                <a href="defense-jobs.html">Defence Jobs</a>
-                <a href="PSU-jobs.html">PSU Jobs</a>
-                <a href="UPSC-jobs.html">UPSC Jobs</a>
-            </div>
-            <div class="footer-section"><h3>Legal</h3>
-                <a href="about.html">About Us</a>
-                <a href="privacy-policy.html">Privacy Policy</a>
-                <a href="terms.html">Terms of Service</a>
-            </div>
-        </div>
-        <div class="footer-bottom"><p>&copy; 2026 🇮🇳GovFitAI. All rights reserved.</p></div>
-    </footer>
+  <!-- ══════════════════════════════════════
+     DROP-IN REPLACEMENT: <footer> block
+     Paste this over the existing <footer>…</footer>
+     ══════════════════════════════════════ -->
+
+<style>
+  /* ── NEW FOOTER STYLES ── */
+  .site-footer {
+    background: #1a202c;
+    color: #a0aec0;
+    padding: 56px 20px 0;
+    margin-top: 60px;
+    font-size: 14px;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ── TOP ROW: Brand + Newsletter-ish blurb ── */
+  .footer-brand {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid #2d3748;
+    flex-wrap: wrap;
+  }
+  .footer-brand-left h3 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 6px;
+    letter-spacing: -0.3px;
+  }
+  .footer-brand-left p {
+    font-size: 13px;
+    color: #718096;
+    max-width: 300px;
+    line-height: 1.6;
+  }
+  .footer-store-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #2d3748;
+    border: 1px solid #4a5568;
+    border-radius: 10px;
+    padding: 10px 18px;
+    color: #e2e8f0;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s;
+    margin-top: 14px;
+    white-space: nowrap;
+  }
+  .footer-store-badge:hover {
+    background: #667eea;
+    border-color: #667eea;
+    color: white;
+    transform: translateY(-1px);
+  }
+
+  /* ── LINK GRID ── */
+  .footer-link-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 36px 28px;
+    padding: 40px 0 36px;
+    border-bottom: 1px solid #2d3748;
+  }
+
+  .footer-col-title {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #667eea;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .footer-col a {
+    color: #718096;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 13px;
+    line-height: 1.4;
+    transition: color 0.18s, padding-left 0.18s;
+    border-left: 2px solid transparent;
+    padding-left: 0;
+  }
+  .footer-col a:hover {
+    color: #e2e8f0;
+    border-left-color: #667eea;
+    padding-left: 8px;
+  }
+
+  /* ── APPS PILL ROW ── */
+  .footer-apps-row {
+    padding: 32px 0 28px;
+    border-bottom: 1px solid #2d3748;
+  }
+  .footer-apps-row .footer-col-title { margin-bottom: 18px; }
+  .footer-apps-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .footer-app-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #2d3748;
+    border: 1px solid #4a5568;
+    border-radius: 30px;
+    padding: 7px 14px;
+    color: #cbd5e0;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .footer-app-pill:hover {
+    background: #667eea;
+    border-color: #667eea;
+    color: white;
+    transform: translateY(-1px);
+  }
+  .footer-app-pill .pill-icon { font-size: 15px; }
+
+  /* ── BOTTOM BAR ── */
+  .footer-bottom-bar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 12px;
+    color: #4a5568;
+  }
+  .footer-bottom-bar a { color: #667eea; text-decoration: none; margin: 0 6px; }
+  .footer-bottom-bar a:hover { color: #a3bffa; }
+</style>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+
+    <!-- BRAND ROW -->
+    <div class="footer-brand">
+      <div class="footer-brand-left">
+        <h3>🇮🇳 GovFitAI</h3>
+        <p>Smart government job matching powered by AI. Free, fast, and personalised for every Indian job seeker.</p>
+        <a href="https://play.google.com/store/apps/details?id=com.nextintinc.JobFitAI" target="_blank" rel="noopener" class="footer-store-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></svg>
+          Download on Play Store
+        </a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;text-align:right;">
+        <span style="font-size:12px;color:#4a5568;">Developed by NextInt Inc</span>
+        <span style="font-size:12px;color:#4a5568;">© 2026 GovFitAI. All rights reserved.</span>
+      </div>
+    </div>
+
+    <!-- OUR APPS — pill style -->
+    <div class="footer-apps-row">
+      <div class="footer-col-title">📱 Our Apps</div>
+      <div class="footer-apps-pills">
+        <a href="ladki-bahin-yojana-ekyc-app.html" class="footer-app-pill"><span class="pill-icon">👧</span> Ladki Bahin Yojana eKYC</a>
+        <a href="udhari-book-app.html" class="footer-app-pill"><span class="pill-icon">💰</span> Udhari Book</a>
+        <a href="car-kundali-obd2-scanner-app.html" class="footer-app-pill"><span class="pill-icon">🚗</span> Car Kundali OBD2</a>
+        <a href="wa-status-saver-app.html" class="footer-app-pill"><span class="pill-icon">💬</span> WA Status Saver</a>
+        <a href="evm-voting-machine-mock-poll.html" class="footer-app-pill"><span class="pill-icon">🗳️</span> EVM Mock Poll</a>
+        <a href="agristack-farmer-registration-app.html" class="footer-app-pill"><span class="pill-icon">🌾</span> AgriStack All India</a>
+        <a href="setkari-karjmafi-krushi-yojana-app.html" class="footer-app-pill"><span class="pill-icon">🌱</span> Setkari Karjmafi App</a>
+      </div>
+    </div>
+
+    <!-- LINK COLUMNS GRID -->
+    <div class="footer-link-grid">
+
+      <!-- COL 1: Job Categories -->
+      <div class="footer-col">
+        <div class="footer-col-title">💼 Job Categories</div>
+        <a href="ssc-jobs.html">SSC Jobs</a>
+        <a href="railway-jobs.html">Railway Jobs</a>
+        <a href="banking-jobs.html">Banking Jobs</a>
+        <a href="defense-jobs.html">Defence Jobs</a>
+        <a href="PSU-jobs.html">PSU Jobs</a>
+        <a href="UPSC-jobs.html">UPSC Jobs</a>
+      </div>
+
+      <!-- COL 2: Farmer Scheme Guides -->
+      <div class="footer-col">
+        <div class="footer-col-title">🌾 Farmer Scheme Guides</div>
+        <a href="setkari-karjmafi-blog.html">All Farmer Scheme Guides 2026</a>
+        <a href="pm-kisan-marathi-guide-2026.html">PM-KISAN 2026 Marathi Guide</a>
+        <a href="pmfby-pik-vima-marathi-guide-2026.html">PMFBY पीक विमा 2026</a>
+        <a href="kisan-credit-card-kcc-marathi-guide.html">Kisan Credit Card KCC 2026</a>
+        <a href="namo-shetkari-mahasanman-nidhi-2026.html">Namo Shetkari Mahasanman Nidhi</a>
+        <a href="msp-bazar-bhav-2026-marathi.html">MSP Rates 2026-27 Marathi</a>
+        <a href="pashudhan-vima-yojana-marathi-2026.html">Pashudhan Vima 2026</a>
+        <a href="pmksy-drip-irrigation-subsidy-marathi.html">PMKSY Drip Irrigation Subsidy</a>
+        <a href="rkvy-krushi-anudan-yojana-2026.html">RKVY Krushi Anudan 2026</a>
+        <a href="shetkari-karjmafi-yojana-2026.html">Shetkari Karjmafi Yojana 2026</a>
+        <a href="shetkari-karjmafi-app-marathi.html">शेतकरी कर्जमाफी App 2026</a>
+      </div>
+
+      <!-- COL 3: Blog & Guides -->
+      <div class="footer-col">
+        <div class="footer-col-title">📰 Blog & Guides</div>
+        <a href="mars-exploration-internship.html">MARS Exploration Internship Program</a>
+        <a href="dhruv-rathee-free-ai-masterclass.html">Dhruv Rathee Free AI Masterclass 2026</a>
+        <a href="check-engine-light-dtc-codes-indian-cars-obd2-guide.html">Check Engine Light Guide (OBD2)</a>
+        <a href="evm-voting-machine-review-2026.html">EVM Voting Machine Review 2026</a>
+        <a href="udhari-book-vs-okcredit-khatabook-vyapar.html">Udhari Book vs OkCredit & Khatabook</a>
+        <a href="govfitai-vs-sarkariresult.html">GovFitAI vs SarkariResult</a>
+      </div>
+
+      <!-- COL 4: Legal & About -->
+      <div class="footer-col">
+        <div class="footer-col-title">🏢 Company</div>
+        <a href="about.html">About Us</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+      </div>
+
+    </div><!-- /footer-link-grid -->
+
+  </div><!-- /footer-inner -->
+
+  <!-- BOTTOM BAR -->
+  <div class="footer-bottom-bar">
+    <span>© 2026 🇮🇳 GovFitAI — All rights reserved.</span>
+    <span>
+      <a href="about.html">About</a>
+      <a href="privacy-policy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </span>
+  </div>
+</footer>
     <script src="app.js"></script>
 </body>
 </html>
