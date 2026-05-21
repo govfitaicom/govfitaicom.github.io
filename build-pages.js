@@ -2,418 +2,769 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
+const SITE_URL = 'https://govfitai.com';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InloZ3F0YmJ4c2JwdHNzeWJnYnJsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU1OTQ4NDYsImV4cCI6MjA4MTE3MDg0Nn0.cktVnZkay3MjYIG_v0WJSkotyq79Nnkr3JJn_munDi8';
 const SUPABASE_HOST = 'yhgqtbbxsbptssybgbrl.supabase.co';
 
-function generateSlug(text) {
-    if (!text) return '';
-    text = text.toLowerCase().trim();
-    
-    // If English characters exist, create slug using mostly English/numbers for cleaner URLs
+function asText(value, fallback = '') {
+    if (value === null || value === undefined) return fallback;
+    if (Array.isArray(value)) return value.filter(Boolean).join(', ') || fallback;
+    return String(value).trim() || fallback;
+}
+
+function escapeHtml(value) {
+    return asText(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+function escapeXml(value) {
+    return escapeHtml(value);
+}
+
+function stripHtml(value) {
+    return asText(value).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+function cleanQuestionText(value) {
+    return asText(value).replace(/\bAnonymous Quiz\b/gi, ' ').replace(/\s+/g, ' ').trim();
+}
+
+function getQuestionText(question) {
+    return cleanQuestionText(question.question_en || question.question_hi);
+}
+
+function formatDate(value) {
+    if (!value) return 'Not specified';
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return asText(value, 'Not specified');
+    return date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+function isoDate(value) {
+    if (!value) return '';
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return '';
+    return date.toISOString().split('T')[0];
+}
+
+function firstValidDate(values, mode = 'latest') {
+    const dates = values
+        .map(value => ({ value, time: new Date(value).getTime() }))
+        .filter(item => valueIsDate(item.time));
+    if (!dates.length) return '';
+    dates.sort((a, b) => mode === 'earliest' ? a.time - b.time : b.time - a.time);
+    return dates[0].value;
+}
+
+function valueIsDate(time) {
+    return typeof time === 'number' && !Number.isNaN(time);
+}
+
+function uniqueValues(values) {
+    const seen = new Set();
+    const out = [];
+    values.flatMap(value => Array.isArray(value) ? value : [value]).forEach(value => {
+        const text = asText(value);
+        const key = text.toLowerCase();
+        if (!text || seen.has(key)) return;
+        seen.add(key);
+        out.push(text);
+    });
+    return out;
+}
+
+function generateSlug(text, maxLength = 100) {
+    text = asText(text).toLowerCase().trim();
     if (/[a-z]/.test(text)) {
         text = text.replace(/[^a-z0-9\s-]/g, ' ');
     } else {
-        // If pure Hindi (or other non-English language), keep Unicode letters, marks (matras), and numbers
         text = text.replace(/[^\p{L}\p{M}\p{N}\s-]/gu, ' ');
     }
-    
-    return text.replace(/\s+/g, '-')
-        .replace(/-+/g, '-').replace(/^-+|-+$/g, '').substring(0, 80);
+    return text
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .substring(0, maxLength)
+        .replace(/-+$/g, '');
 }
 
-function shortId(id) { return (id || '').substring(0, 8); }
+function hashString(input) {
+    let hash = 5381;
+    const text = asText(input);
+    for (let i = 0; i < text.length; i++) {
+        hash = ((hash << 5) + hash) + text.charCodeAt(i);
+        hash >>>= 0;
+    }
+    return hash.toString(36).substring(0, 8);
+}
+
+function normalizeText(text) {
+    return asText(text)
+        .toLowerCase()
+        .replace(/&/g, ' and ')
+        .replace(/[^a-z0-9\p{L}\p{M}\s-]/gu, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+function normalizeRecruitmentTitle(title) {
+    return normalizeText(title)
+        .replace(/\b\d+\s*(post|posts|vacancy|vacancies|seat|seats)\b/g, ' ')
+        .replace(/\b(apply|online|form|forms|notification|short notice|notice|out|released|download|check|exam date|exam city|admit card|answer key|result|pre exam|mains exam|correction|edit|registration|otr|syllabus|for)\b/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+function getJobGroupKey(job) {
+    const title = normalizeRecruitmentTitle(job.title || job.post_name || 'job');
+    const org = normalizeText(job.organization || 'government');
+    return title.split(' ').length < 4 ? `${title}|${org}` : title;
+}
+
+function getJobGroupSlug(job) {
+    const titlePart = generateSlug(normalizeRecruitmentTitle(job.title || job.post_name), 80) || 'government-job';
+    const key = getJobGroupKey(job);
+    return `${titlePart}-${hashString(key)}.html`;
+}
+
+function getQuizCategorySlug(category) {
+    return `${generateSlug(category || 'general-knowledge', 80) || 'general-knowledge'}.html`;
+}
+
+function questionAnchor(question) {
+    return `question-${generateSlug(question.id || question.question_en || question.question_hi, 32) || hashString(question.question_en || question.question_hi)}`;
+}
 
 async function fetchFromSupabase(table, orderCol) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         let allData = [];
         const limit = 1000;
-        
-        async function fetchBatch(offset = 0) {
-            const path = `/rest/v1/${table}?select=*&order=${orderCol}.desc&limit=${limit}&offset=${offset}`;
+
+        function fetchBatch(offset = 0) {
+            const requestPath = `/rest/v1/${table}?select=*&order=${orderCol}.desc&limit=${limit}&offset=${offset}`;
             const req = https.request({
                 hostname: SUPABASE_HOST,
-                path, method: 'GET',
+                path: requestPath,
+                method: 'GET',
                 headers: {
-                    'apikey': SUPABASE_ANON_KEY,
-                    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                    apikey: SUPABASE_ANON_KEY,
+                    Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
                     'Content-Type': 'application/json'
                 }
             }, (res) => {
                 res.setEncoding('utf8');
                 let data = '';
-                res.on('data', c => data += c);
+                res.on('data', chunk => data += chunk);
                 res.on('end', () => {
-                    try { 
-                        const p = JSON.parse(data); 
-                        if (Array.isArray(p) && p.length > 0) {
-                            allData = allData.concat(p);
-                            if (p.length === limit) {
-                                fetchBatch(offset + limit);
-                            } else {
-                                resolve(allData);
-                            }
-                        } else {
-                            resolve(allData);
-                        }
-                    } catch { resolve(allData); }
+                    if (res.statusCode < 200 || res.statusCode >= 300) {
+                        reject(new Error(`Supabase ${table} request failed with ${res.statusCode}: ${data.slice(0, 200)}`));
+                        return;
+                    }
+
+                    let parsed;
+                    try {
+                        parsed = JSON.parse(data);
+                    } catch (error) {
+                        reject(new Error(`Could not parse ${table} response: ${error.message}`));
+                        return;
+                    }
+
+                    if (!Array.isArray(parsed)) {
+                        reject(new Error(`Expected ${table} response to be an array.`));
+                        return;
+                    }
+
+                    allData = allData.concat(parsed);
+                    if (parsed.length === limit) {
+                        fetchBatch(offset + limit);
+                    } else {
+                        resolve(allData);
+                    }
                 });
             });
-            req.on('error', () => resolve(allData));
+
+            req.on('error', reject);
             req.end();
         }
+
         fetchBatch();
     });
 }
 
-function urlEntry(loc, lastmod, changefreq, priority) {
-    return `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${changefreq}</changefreq>\n    <priority>${priority}</priority>\n  </url>\n`;
-}
-
-// Ensure dir exists and is empty
 function emptyDir(dir) {
     if (fs.existsSync(dir)) fs.rmSync(dir, { recursive: true, force: true });
     fs.mkdirSync(dir, { recursive: true });
 }
 
-// -----------------------------------------------------------------------------------------
-// HTML TEMPLATES
-// -----------------------------------------------------------------------------------------
-
-function getJobHtmlTemplate(job, slug) {
-    const canonicalUrl = `https://govfitai.com/jobs/${slug}.html`;
-    const applyDeadline = job.application_deadline ? new Date(job.application_deadline).toLocaleDateString() : 'N/A';
-    
-    // Fallback info text
-    const description = job.description || `${job.organization} has announced recruitment for the post of ${job.post_name}. Eligible candidates with ${job.education_required} qualification can apply online before the deadline. This is a government job opportunity in ${job.state}.`;
-    
-    return `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${job.title} - ${job.organization} | GovFitAI</title>
-    <meta name="description" content="Apply for ${job.title} at ${job.organization}. Education: ${job.education_required}. Deadline: ${applyDeadline}. Get eligibility details, exam pattern, and apply online.">
-    <link rel="canonical" href="${canonicalUrl}" />
-    <meta property="og:title" content="${job.title} - ${job.organization}">
-    <meta property="og:description" content="Apply for ${job.title} at ${job.organization}. Deadline: ${applyDeadline}">
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Verdana, sans-serif; background: #f5f7fa; line-height: 1.6; margin:0; padding:0; }
-        header { background: white; padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-bottom: 1px solid #e0e0e0; }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 24px; font-weight: bold; color: #333; text-decoration: none; }
-        .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
-        .breadcrumb { background: white; padding: 15px 20px; border-radius: 8px; margin-bottom: 20px; font-size: 14px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .breadcrumb a { color: #667eea; text-decoration: none; }
-        .card { background: white; border-radius: 12px; padding: 30px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        h1 { color: #667eea; font-size: 32px; margin-bottom: 10px; }
-        h2 { color: #333; font-size: 22px; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #f0f0f0; }
-        .grid { display: grid; grid-template-columns: 1fr 350px; gap: 20px; }
-        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
-        .btn-apply { display: block; text-align: center; background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 15px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-bottom: 20px; }
-        .row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f0f0f0; }
-        .label { color: #666; font-weight: 500; }
-        .value { color: #333; font-weight: 600; }
-        .meta-info { font-size: 13px; color: #777; margin-top: 10px; }
-        .badge { background: #e7f3ff; color: #004085; padding: 4px 10px; border-radius: 4px; font-size: 12px; display: inline-block; margin-right: 5px; }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="nav-container">
-            <a href="/" class="logo">🇮🇳 GovFitAI</a>
-            <a href="/jobs/" style="color:#667eea;text-decoration:none;font-weight:600;">Browse All Jobs</a>
-        </div>
-    </header>
-
-    <div class="container">
-        <div class="breadcrumb">
-            <a href="/">Home</a> › <a href="/jobs/">Jobs</a> › <span>${job.title}</span>
-        </div>
-
-        <div class="card">
-            <h1>${job.title}</h1>
-            <div style="font-size:20px;color:#666;margin-bottom:20px;">${job.organization} • ${job.post_name}</div>
-            <div>
-                <span class="badge">🎓 ${job.education_required}</span>
-                <span class="badge">📍 ${job.state}</span>
-            </div>
-        </div>
-
-        <div class="grid">
-            <div class="main-content">
-                <div class="card">
-                    <h2>📋 Job Description</h2>
-                    <p style="color:#444;line-height:1.8;">${description}</p>
-                    <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-left: 4px solid #667eea; border-radius: 4px;">
-                        <strong>Eligibility Tips:</strong> Make sure you review exactly if your degree (${job.education_required}) is fully recognized by taking a look at the official notification. Candidates from ${job.state} might have specific state-domicile benefits.
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>✅ Eligibility Criteria</h2>
-                    <div class="row"><span class="label">Age Range:</span> <span class="value">${job.min_age || 'NA'} to ${job.max_age || 'NA'} Years</span></div>
-                    <div class="row"><span class="label">Education Setup:</span> <span class="value">${job.education_required}</span></div>
-                    <div class="row"><span class="label">Minimum Percentage:</span> <span class="value">${job.min_percentage ? job.min_percentage + '%' : 'Not Specified'}</span></div>
-                    <div class="row"><span class="label">Location:</span> <span class="value">${job.state}</span></div>
-                    <div class="row"><span class="label">Eligibility Categories:</span> <span class="value">${job.categories ? job.categories.join(', ') : 'All'}</span></div>
-                </div>
-
-                <div class="card">
-                    <h2>❓ Frequently Asked Questions</h2>
-                    <div style="margin-bottom: 15px;">
-                        <h4 style="margin:0 0 5px;color:#333;">Is there any application fee for ${job.organization}?</h4>
-                        <p style="margin:0;color:#555;">Fees vary generally by category. Most government examinations waive fees for SC/ST/PWD and women candidates. Please refer to the official ${job.organization} notification.</p>
-                    </div>
-                    <div style="margin-bottom: 15px;">
-                        <h4 style="margin:0 0 5px;color:#333;">What is the last date to apply?</h4>
-                        <p style="margin:0;color:#555;">The application deadline is set for ${applyDeadline}. We recommend submitting your application at least 3 days prior to avoid server lag.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="sidebar">
-                <div class="card" style="position: sticky; top: 20px;">
-                    <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 20px;">
-                        <div style="font-size:14px;opacity:0.9;">Application Deadline</div>
-                        <div style="font-size:24px;font-weight:bold;">${applyDeadline}</div>
-                    </div>
-                    
-                    ${job.apply_link ? `<a href="${job.apply_link}" target="_blank" rel="nofollow noopener" class="btn-apply">Apply Now on Official Website →</a>` : `<div style="text-align:center;color:#666;padding:10px;border:1px solid #e0e0e0;border-radius:8px;">Link unavailable</div>`}
-                    
-                    <div class="meta-info" style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px;">
-                        <p><strong>Published By:</strong> GovFitAI Job Team</p>
-                        <p><strong>Last Updated:</strong> ${new Date().toLocaleDateString()}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>`;
+function urlEntry(loc, lastmod, changefreq, priority) {
+    return `  <url>\n    <loc>${escapeXml(loc)}</loc>\n    <lastmod>${escapeXml(lastmod)}</lastmod>\n    <changefreq>${escapeXml(changefreq)}</changefreq>\n    <priority>${escapeXml(priority)}</priority>\n  </url>\n`;
 }
 
-function getQuizHtmlTemplate(quiz, slug) {
-    const canonicalUrl = `https://govfitai.com/quiz/${slug}.html`;
-    const qText = quiz.question_en || quiz.question_hi || '';
-    const opts = (quiz.options_en && quiz.options_en.length > 0) ? quiz.options_en : (quiz.options_hi || []);
-    const labels = ['A', 'B', 'C', 'D'];
-    const correctIdx = (quiz.correct_option || 1) - 1;
-    const cat = quiz.category || 'GK';
-    
-    // Rich Explanatory Text block added for AdSense "Thin Content" circumvention
-    const learningBlock = `
-        <div style="margin-top: 25px; padding: 20px; background: #fff8e1; border-left: 4px solid #ffc107; border-radius: 8px;">
-            <h3 style="color:#e65100; margin-top:0;">📚 Learning Context: ${cat}</h3>
-            <p style="color:#444; font-size:15px; line-height:1.6;">
-                General competitive examinations frequently test candidates on <strong>${cat}</strong> topics. 
-                Questions like <em>"${qText.substring(0, 50)}..."</em> are designed to verify factual recall and 
-                general awareness. Regular practice on similar MCQs ensures a higher accuracy rate. 
-                The correct option here is <strong>${opts[correctIdx] || 'Option ' + labels[correctIdx]}</strong>.
-                ${quiz.explanation ? '<br><br><strong>Detailed Explanation:</strong> ' + quiz.explanation : ''}
-            </p>
-        </div>
-    `;
-
-    return `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${qText.substring(0, 60)} | ${cat} Quiz | GovFitAI</title>
-    <meta name="description" content="Practice ${cat} MCQ: ${qText}. See the correct answer and detailed explanation for government exam preparation.">
-    <link rel="canonical" href="${canonicalUrl}" />
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Verdana, sans-serif; background: #f5f7fa; line-height: 1.6; margin:0; padding:0; }
-        header { background: white; padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-bottom: 1px solid #e0e0e0; }
-        .nav-container { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 24px; font-weight: bold; color: #333; text-decoration: none; }
-        .container { max-width: 900px; margin: 30px auto; padding: 0 20px; }
-        .breadcrumb { background: white; padding: 15px 20px; border-radius: 8px; margin-bottom: 20px; font-size: 14px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .breadcrumb a { color: #667eea; text-decoration: none; }
-        .card { background: white; border-radius: 12px; padding: 30px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .badge { background: #e8f0fe; color: #667eea; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: bold; display: inline-block; margin-bottom: 20px; }
-        h1 { color: #222; font-size: 22px; margin-bottom: 25px; line-height: 1.5; }
-        .option { padding: 15px 20px; border: 2px solid #e8e8e8; border-radius: 10px; margin-bottom: 12px; cursor: pointer; transition: 0.2s; background: white; display:flex; gap:15px; align-items:center; }
-        .option:hover { border-color: #667eea; background: #f0f4ff; }
-        .opt-label { width: 30px; height: 30px; border-radius: 50%; background: #f0f0f0; display:flex; align-items:center; justify-content:center; font-weight:bold; color:#555; }
-        .meta-info { font-size: 13px; color: #777; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eaeaea; text-align: center; }
-        
-        /* Dynamic script classes */
-        .option.correct { border-color: #28a745; background: #f0fff4; }
-        .option.correct .opt-label { background: #28a745; color: white; }
-        .option.wrong { border-color: #dc3545; background: #fff5f5; }
-        .option.wrong .opt-label { background: #dc3545; color: white; }
-        #answerBox { display: none; margin-top: 20px; padding: 20px; border-radius: 8px; border: 2px solid #28a745; background: #f0fff4; }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="nav-container">
-            <a href="/" class="logo">🇮🇳 GovFitAI</a>
-            <a href="/quiz/" style="color:#667eea;text-decoration:none;font-weight:600;">More Quizzes</a>
-        </div>
-    </header>
-
-    <div class="container">
-        <div class="breadcrumb">
-            <a href="/">Home</a> › <a href="/quiz/">Quiz Library</a> › <span>${cat} Question</span>
-        </div>
-
-        <div class="card">
-            <div class="badge">${cat}</div>
-            <h1>${qText}</h1>
-            
-            <div id="optionsWrap">
-                ${opts.map((o, i) => `
-                    <div class="option" onclick="selectAnswer(${i}, ${correctIdx})">
-                        <div class="opt-label">${labels[i]}</div>
-                        <div>${o}</div>
-                    </div>
-                `).join('')}
-            </div>
-
-            <div id="answerBox">
-                <h3 style="color:#28a745; margin-top:0;">✅ Correct Answer: ${labels[correctIdx]}</h3>
-                <p style="margin-bottom:0; color:#333; font-weight:500;">${opts[correctIdx]}</p>
-            </div>
-
-            ${learningBlock}
-
-            <div class="meta-info">
-                Authored by GovFitAI Content Team | Last Verified: ${new Date().toLocaleDateString()}
-            </div>
-        </div>
-    </div>
-
-    <!-- The live leaderboard interaction script -->
-    <script>
-        let answered = false;
-        function selectAnswer(selected, correct) {
-            if (answered) return;
-            answered = true;
-            
-            const optsNode = document.querySelectorAll('.option');
-            optsNode[correct].classList.add('correct');
-            optsNode[correct].querySelector('.opt-label').innerText = '✓';
-            
-            if (selected !== correct) {
-                optsNode[selected].classList.add('wrong');
-                optsNode[selected].querySelector('.opt-label').innerText = '✗';
+function cleanJsonLd(value) {
+    if (Array.isArray(value)) return value.map(cleanJsonLd).filter(item => item !== undefined);
+    if (value && typeof value === 'object') {
+        const out = {};
+        Object.entries(value).forEach(([key, item]) => {
+            const cleaned = cleanJsonLd(item);
+            if (cleaned !== undefined && cleaned !== '' && !(Array.isArray(cleaned) && cleaned.length === 0)) {
+                out[key] = cleaned;
             }
-            
-            document.getElementById('answerBox').style.display = 'block';
-            
-            // Note: In a fully fleshed app, you could optionally init Supabase here 
-            // and dispatch an event or push the score to the leaderboard.
+        });
+        return out;
+    }
+    return value === undefined || value === null ? undefined : value;
+}
+
+function jsonLdScript(data) {
+    return `<script type="application/ld+json">${JSON.stringify(cleanJsonLd(data)).replace(/</g, '\\u003c')}</script>`;
+}
+
+function pageShell({ title, description, canonicalUrl, content, jsonLd = null }) {
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${escapeHtml(title)}</title>
+    <meta name="description" content="${escapeHtml(description)}">
+    <link rel="canonical" href="${escapeHtml(canonicalUrl)}">
+    <meta property="og:title" content="${escapeHtml(title)}">
+    <meta property="og:description" content="${escapeHtml(description)}">
+    <meta property="og:url" content="${escapeHtml(canonicalUrl)}">
+    ${jsonLd ? jsonLdScript(jsonLd) : ''}
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, sans-serif; color: #202124; background: #f5f7fa; line-height: 1.65; }
+        a { color: #335dcc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        header { background: #fff; border-bottom: 1px solid #e6e8ef; position: sticky; top: 0; z-index: 5; }
+        .nav { max-width: 1160px; margin: 0 auto; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; gap: 18px; }
+        .brand { font-size: 22px; font-weight: 800; color: #1f2937; }
+        .nav-links { display: flex; gap: 16px; flex-wrap: wrap; font-size: 14px; font-weight: 650; }
+        .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 20px 48px; }
+        .breadcrumb { font-size: 13px; color: #687386; margin-bottom: 18px; }
+        .hero { background: #fff; border: 1px solid #e6e8ef; border-radius: 8px; padding: 28px; margin-bottom: 20px; }
+        h1 { font-size: 30px; line-height: 1.25; margin: 0 0 12px; color: #1f2937; }
+        h2 { font-size: 22px; margin: 26px 0 12px; color: #1f2937; }
+        h3 { font-size: 17px; margin: 18px 0 8px; color: #1f2937; }
+        .subtle { color: #5f6b7a; }
+        .layout { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 20px; align-items: start; }
+        .card { background: #fff; border: 1px solid #e6e8ef; border-radius: 8px; padding: 22px; margin-bottom: 18px; }
+        .side { position: sticky; top: 78px; }
+        .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+        .badge { display: inline-flex; align-items: center; padding: 5px 10px; background: #eef4ff; color: #234a91; border-radius: 999px; font-size: 12px; font-weight: 700; }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 18px; }
+        .stat { border: 1px solid #e6e8ef; border-radius: 8px; padding: 14px; background: #fbfcff; }
+        .stat-label { font-size: 12px; color: #687386; text-transform: uppercase; letter-spacing: .04em; }
+        .stat-value { font-weight: 800; color: #1f2937; margin-top: 4px; }
+        .table-scroll { width: 100%; overflow-x: auto; }
+        .compact-list { margin: 6px 0 0 18px; padding: 0; }
+        .compact-list li { margin: 3px 0; }
+        table { width: 100%; border-collapse: collapse; overflow-wrap: anywhere; }
+        th, td { padding: 11px 10px; border-bottom: 1px solid #edf0f5; text-align: left; vertical-align: top; font-size: 14px; }
+        th { background: #f8fafc; color: #4b5563; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+        .button { display: inline-flex; align-items: center; justify-content: center; width: 100%; padding: 13px 16px; background: #335dcc; color: #fff; border-radius: 8px; font-weight: 800; margin: 8px 0; }
+        .button:hover { color: #fff; text-decoration: none; background: #274ba8; }
+        .list { display: grid; gap: 12px; }
+        .list-item { background: #fff; border: 1px solid #e6e8ef; border-radius: 8px; padding: 18px; }
+        .question { scroll-margin-top: 90px; }
+        details { background: #f8fafc; border: 1px solid #e6e8ef; border-radius: 8px; padding: 12px 14px; margin-top: 12px; }
+        summary { cursor: pointer; font-weight: 800; color: #1f2937; }
+        footer { background: #1f2937; color: #d1d5db; padding: 34px 20px; text-align: center; }
+        footer a { color: #e5e7eb; }
+        @media (max-width: 860px) {
+            .layout { grid-template-columns: 1fr; }
+            .side { position: static; }
+            h1 { font-size: 24px; }
+            .hero { padding: 22px; }
+            .nav { align-items: flex-start; flex-direction: column; }
         }
-    </script>
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav">
+            <a class="brand" href="/">GovFitAI</a>
+            <nav class="nav-links">
+                <a href="/jobs/">Jobs</a>
+                <a href="/quiz/">MCQ Practice</a>
+                <a href="/resources.html">Resources</a>
+                <a href="/about.html">About</a>
+            </nav>
+        </div>
+    </header>
+    ${content}
+    <footer>
+        <div>GovFitAI helps candidates discover government jobs and prepare with focused exam practice.</div>
+        <div style="margin-top:10px;"><a href="/privacy-policy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="/terms.html">Terms</a></div>
+    </footer>
 </body>
 </html>`;
 }
 
-// -----------------------------------------------------------------------------------------
-// MAIN SCRIPT PROCESS
-// -----------------------------------------------------------------------------------------
+function groupJobs(allJobs) {
+    const seenIds = new Set();
+    const groups = new Map();
+
+    allJobs.forEach(job => {
+        if (!job || !job.id || !job.title) return;
+        if (seenIds.has(job.id)) return;
+        seenIds.add(job.id);
+
+        const key = getJobGroupKey(job);
+        if (!groups.has(key)) {
+            groups.set(key, { key, jobs: [] });
+        }
+        groups.get(key).jobs.push(job);
+    });
+
+    return [...groups.values()].map(group => {
+        group.jobs.sort((a, b) => new Date(b.posted_date || 0) - new Date(a.posted_date || 0));
+        group.primary = group.jobs[0];
+        group.slug = getJobGroupSlug(group.primary);
+        group.title = asText(group.primary.title, 'Government Job Notification');
+        group.organization = asText(group.primary.organization, 'Government Organization');
+        group.posts = buildUniquePosts(group.jobs);
+        group.postCount = group.posts.reduce((total, job) => total + postNames(job).length, 0);
+        group.latestPosted = firstValidDate(group.jobs.map(job => job.posted_date), 'latest');
+        group.earliestStart = firstValidDate(group.jobs.map(job => job.application_start_date), 'earliest');
+        group.latestDeadline = firstValidDate(group.jobs.map(job => job.application_deadline), 'latest');
+        group.states = uniqueValues(group.jobs.map(job => job.state));
+        group.education = uniqueValues(group.jobs.map(job => job.education_required));
+        group.educationFields = uniqueValues(group.jobs.flatMap(job => job.education_fields || []));
+        group.categories = uniqueValues(group.jobs.flatMap(job => job.categories || []));
+        group.applyLinks = uniqueValues(group.jobs.map(job => job.apply_link)).filter(link => /^https?:\/\//i.test(link));
+        group.descriptions = uniqueValues(group.jobs.map(job => stripHtml(job.description))).filter(text => text.length > 40);
+        group.requirements = uniqueValues(group.jobs.map(job => stripHtml(job.additional_requirements))).filter(text => text.length > 10);
+        return group;
+    }).sort((a, b) => new Date(b.latestPosted || 0) - new Date(a.latestPosted || 0));
+}
+
+function buildUniquePosts(jobs) {
+    const posts = new Map();
+    jobs.forEach(job => {
+        const key = [
+            normalizeText(job.post_name || job.title),
+            normalizeText(job.education_required),
+            normalizeText(job.state)
+        ].join('|');
+        const current = posts.get(key);
+        if (!current || jobCompletenessScore(job) > jobCompletenessScore(current)) posts.set(key, job);
+    });
+    return [...posts.values()].sort((a, b) => asText(a.post_name || a.title).localeCompare(asText(b.post_name || b.title)));
+}
+
+function splitPostNames(value) {
+    return asText(value)
+        .split(/\r?\n|[•●▪]/)
+        .map(item => item.replace(/^\s*[-*]\s*/, '').trim())
+        .filter(Boolean);
+}
+
+function postNames(job, fallback = 'listed post') {
+    const names = splitPostNames(job.post_name);
+    return names.length ? names : [asText(job.post_name || job.title, fallback)];
+}
+
+function postNamesText(job, fallback = 'listed post') {
+    return postNames(job, fallback).join(', ');
+}
+
+function postNamesHtml(job, fallback) {
+    const names = postNames(job, fallback);
+    if (names.length === 1) return `<strong>${escapeHtml(names[0])}</strong>`;
+    return `<strong>${escapeHtml(names.length)} posts</strong><ul class="compact-list">${names.map(name => `<li>${escapeHtml(name)}</li>`).join('')}</ul>`;
+}
+
+function jobCompletenessScore(job) {
+    return [
+        job.post_name,
+        job.education_required,
+        job.education_fields,
+        job.state,
+        job.min_age,
+        job.max_age,
+        job.min_percentage,
+        job.apply_link,
+        job.description,
+        job.additional_requirements
+    ].reduce((score, value) => score + (asText(value) ? 1 : 0), 0) + stripHtml(job.description).length / 500;
+}
+
+function jobEducationSummary(job) {
+    const parts = uniqueValues([
+        job.education_required,
+        ...(Array.isArray(job.education_fields) ? job.education_fields : [])
+    ]);
+    return parts.join(', ') || 'See notification';
+}
+
+function jobRequirementSummary(job) {
+    return stripHtml(job.additional_requirements) || 'As per official notification';
+}
+
+function jobDescription(group) {
+    const primaryDescription = group.descriptions[0];
+    if (primaryDescription) return primaryDescription;
+    const posts = group.posts.slice(0, 6).map(job => postNamesText(job, 'listed post')).join(', ');
+    const education = group.education.length ? group.education.join(', ') : 'the required qualification';
+    const locations = group.states.length ? group.states.join(', ') : 'India';
+    const requirements = group.requirements.length ? ` Additional requirements noted in GovFitAI data include ${group.requirements.slice(0, 4).join('; ')}.` : '';
+    return `${group.organization} has published ${group.title}. This consolidated page covers ${group.postCount} post option${group.postCount === 1 ? '' : 's'} including ${posts}. Candidates can review eligibility, age limit, education requirement, important dates, official links, and preparation resources for ${locations}. Applicants should verify the final details in the official notification before applying. Required education includes ${education}.${requirements}`;
+}
+
+function jobJsonLd(group) {
+    return {
+        '@context': 'https://schema.org',
+        '@graph': group.posts.slice(0, 40).map(job => ({
+            '@type': 'JobPosting',
+            title: postNamesText(job, group.title),
+            description: stripHtml(job.description) || jobDescription(group),
+            datePosted: isoDate(job.posted_date || group.latestPosted),
+            validThrough: isoDate(group.latestDeadline) ? `${isoDate(group.latestDeadline)}T23:59:00+05:30` : undefined,
+            employmentType: 'FULL_TIME',
+            hiringOrganization: {
+                '@type': 'Organization',
+                name: asText(job.organization || group.organization)
+            },
+            jobLocation: {
+                '@type': 'Place',
+                address: {
+                    '@type': 'PostalAddress',
+                    addressRegion: asText(job.state, 'India'),
+                    addressCountry: 'IN'
+                }
+            },
+            educationRequirements: jobEducationSummary(job),
+            qualifications: jobRequirementSummary(job),
+            url: `${SITE_URL}/jobs/${group.slug}`
+        }))
+    };
+}
+
+function getJobHtml(group) {
+    const description = jobDescription(group);
+    const canonicalUrl = `${SITE_URL}/jobs/${group.slug}`;
+    const title = `${group.title} - Posts, Eligibility, Dates | GovFitAI`;
+    const meta = `${group.organization} ${group.title}: see ${group.postCount} post option${group.postCount === 1 ? '' : 's'}, eligibility, age limit, education, dates, official links and preparation resources.`;
+
+    const postRows = group.posts.map(job => `
+        <tr>
+            <td>${postNamesHtml(job, group.title)}</td>
+            <td>${escapeHtml(job.education_required || 'See notification')}</td>
+            <td>${escapeHtml(Array.isArray(job.education_fields) && job.education_fields.length ? job.education_fields.join(', ') : 'Any relevant field')}</td>
+            <td>${escapeHtml(job.state || 'India')}</td>
+            <td>${escapeHtml(job.min_age || 'NA')} - ${escapeHtml(job.max_age || 'NA')}</td>
+            <td>${escapeHtml(job.min_percentage ? `${job.min_percentage}%` : 'Not specified')}</td>
+            <td>${escapeHtml(uniqueValues(job.categories || []).join(', ') || 'As per rules')}</td>
+            <td>${escapeHtml(jobRequirementSummary(job))}</td>
+        </tr>`).join('');
+
+    const dateRows = [
+        ['Posted / Updated', formatDate(group.latestPosted)],
+        ['Application Start', formatDate(group.earliestStart)],
+        ['Last Date', formatDate(group.latestDeadline)],
+        ['Admit Card', formatDate(firstValidDate(group.jobs.map(job => job.admit_card_date), 'latest'))],
+        ['Result', formatDate(firstValidDate(group.jobs.map(job => job.result_date), 'latest'))]
+    ].map(([label, value]) => `<tr><th>${escapeHtml(label)}</th><td>${escapeHtml(value)}</td></tr>`).join('');
+
+    const officialLinks = group.applyLinks.length
+        ? group.applyLinks.map((link, index) => `<a class="button" href="${escapeHtml(link)}" target="_blank" rel="nofollow noopener">Official link ${index + 1}</a>`).join('')
+        : '<div class="subtle">Official apply link will be updated when available. Always verify details on the recruiting organization website.</div>';
+
+    const content = `
+    <main class="wrap">
+        <div class="breadcrumb"><a href="/">Home</a> / <a href="/jobs/">Jobs</a> / ${escapeHtml(group.title)}</div>
+        <section class="hero">
+            <h1>${escapeHtml(group.title)}</h1>
+            <p class="subtle">${escapeHtml(group.organization)} recruitment page with all available posts grouped in one place.</p>
+            <div class="badge-row">
+                <span class="badge">${escapeHtml(group.postCount)} post${group.postCount === 1 ? '' : 's'} covered</span>
+                <span class="badge">${escapeHtml(group.states.join(', ') || 'India')}</span>
+                <span class="badge">Last date: ${escapeHtml(formatDate(group.latestDeadline))}</span>
+            </div>
+            <div class="stat-grid">
+                <div class="stat"><div class="stat-label">Organization</div><div class="stat-value">${escapeHtml(group.organization)}</div></div>
+                <div class="stat"><div class="stat-label">Education</div><div class="stat-value">${escapeHtml(group.education.join(', ') || 'See notification')}</div></div>
+                <div class="stat"><div class="stat-label">Fields</div><div class="stat-value">${escapeHtml(group.educationFields.join(', ') || 'Any relevant field')}</div></div>
+                <div class="stat"><div class="stat-label">Categories</div><div class="stat-value">${escapeHtml(group.categories.join(', ') || 'As per rules')}</div></div>
+            </div>
+        </section>
+
+        <div class="layout">
+            <div>
+                <section class="card">
+                    <h2>Recruitment Overview</h2>
+                    <p>${escapeHtml(description)}</p>
+                    ${group.descriptions.slice(1, 3).map(text => `<p>${escapeHtml(text)}</p>`).join('')}
+                </section>
+
+                <section class="card">
+                    <h2>Posts Included In This Notification</h2>
+                    <p class="subtle">All available posts for this recruitment are grouped here so candidates can compare eligibility, dates and official links in one place.</p>
+                    <div class="table-scroll">
+                        <table>
+                            <thead>
+                                <tr><th>Post</th><th>Education</th><th>Field</th><th>Location</th><th>Age</th><th>Marks</th><th>Category</th><th>Extra Requirements</th></tr>
+                            </thead>
+                            <tbody>${postRows}</tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="card">
+                    <h2>Eligibility Notes</h2>
+                    <p>Check the post-wise education, age limit and category rules above, then confirm the final conditions in the official notification. Age relaxation, fee exemption and reservation benefits normally depend on the recruiting body's rules and candidate category.</p>
+                    <p>Use GovFitAI's profile matching on the homepage to compare your age, education, state and category against available government jobs.</p>
+                </section>
+
+                <section class="card">
+                    <h2>Frequently Asked Questions</h2>
+                    <h3>How many posts are covered on this page?</h3>
+                    <p>This page currently groups ${escapeHtml(group.postCount)} post option${group.postCount === 1 ? '' : 's'} for ${escapeHtml(group.organization)} under one canonical recruitment page.</p>
+                    <h3>What is the last date to apply?</h3>
+                    <p>The latest available deadline in GovFitAI data is ${escapeHtml(formatDate(group.latestDeadline))}. If the official notification has been updated, follow the official website date.</p>
+                    <h3>Where should I apply?</h3>
+                    <p>Use only the official recruiting body website or official application link. GovFitAI is an eligibility and discovery tool, not the recruiting authority.</p>
+                </section>
+            </div>
+
+            <aside class="side">
+                <section class="card">
+                    <h2>Important Dates</h2>
+                    <table><tbody>${dateRows}</tbody></table>
+                </section>
+                <section class="card">
+                    <h2>Official Links</h2>
+                    ${officialLinks}
+                </section>
+                <section class="card">
+                    <h2>Preparation Resources</h2>
+                    <p><a href="/government-exam-eligibility-guide.html">Government exam eligibility guide</a></p>
+                    <p><a href="/government-job-salary-guide.html">Government job salary guide</a></p>
+                    <p><a href="/SSC-CGL-Preparation.html">SSC CGL preparation plan</a></p>
+                </section>
+            </aside>
+        </div>
+    </main>`;
+
+    return pageShell({ title, description: meta, canonicalUrl, content, jsonLd: jobJsonLd(group) });
+}
+
+function groupMcqs(allMcqs) {
+    const seen = new Set();
+    const groups = new Map();
+
+    allMcqs.forEach(question => {
+        const text = getQuestionText(question);
+        if (!text) return;
+        const key = normalizeText(text);
+        if (seen.has(key)) return;
+        seen.add(key);
+
+        const category = asText(question.category, 'General Knowledge');
+        if (!groups.has(category)) groups.set(category, []);
+        groups.get(category).push(question);
+    });
+
+    return [...groups.entries()]
+        .map(([category, questions]) => ({ category, questions }))
+        .sort((a, b) => a.category.localeCompare(b.category));
+}
+
+function quizJsonLd(category, questions) {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'Quiz',
+        name: `${category} MCQ Practice`,
+        about: { '@type': 'Thing', name: category },
+        hasPart: questions.slice(0, 100).map(question => {
+            const qText = getQuestionText(question);
+            const options = getQuestionOptions(question);
+            const correct = options[getCorrectIndex(question)] || '';
+            return {
+                '@type': 'Question',
+                eduQuestionType: 'Flashcard',
+                text: qText,
+                acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: correct
+                }
+            };
+        })
+    };
+}
+
+function getQuestionOptions(question) {
+    const englishOptions = Array.isArray(question.options_en) ? question.options_en.filter(option => asText(option)) : [];
+    const hindiOptions = Array.isArray(question.options_hi) ? question.options_hi.filter(option => asText(option)) : [];
+    return englishOptions.length ? englishOptions : hindiOptions;
+}
+
+function getCorrectIndex(question) {
+    const index = Number(question.correct_option || 1) - 1;
+    return Math.max(0, index);
+}
+
+function getQuizCategoryHtml(group) {
+    const { category, questions } = group;
+    const slug = getQuizCategorySlug(category);
+    const canonicalUrl = `${SITE_URL}/quiz/${slug}`;
+    const title = `${category} MCQ Practice Questions With Answers | GovFitAI`;
+    const description = `Practice ${questions.length} ${category} MCQs with options, correct answers and exam-focused context for government job preparation.`;
+    const labels = ['A', 'B', 'C', 'D', 'E'];
+
+    const questionCards = questions.map((question, index) => {
+        const qText = getQuestionText(question);
+        const options = getQuestionOptions(question);
+        const correctIndex = getCorrectIndex(question);
+        const correctAnswer = options[correctIndex] || 'See answer';
+        const explanation = asText(question.explanation, `${category} questions are useful for government exams because they test accuracy, recall and concept clarity. Review the correct option, then practice similar questions to improve speed.`);
+
+        return `<article class="card question" id="${escapeHtml(questionAnchor(question))}">
+            <div class="badge">${escapeHtml(category)}</div>
+            <h2>${index + 1}. ${escapeHtml(qText)}</h2>
+            <ol type="A">
+                ${options.map((option, optionIndex) => `<li><strong>${escapeHtml(labels[optionIndex] || String(optionIndex + 1))}.</strong> ${escapeHtml(option)}</li>`).join('')}
+            </ol>
+            <details>
+                <summary>Show answer and explanation</summary>
+                <p><strong>Correct answer:</strong> ${escapeHtml(correctAnswer)}</p>
+                <p>${escapeHtml(explanation)}</p>
+            </details>
+        </article>`;
+    }).join('');
+
+    const content = `
+    <main class="wrap">
+        <div class="breadcrumb"><a href="/">Home</a> / <a href="/quiz/">MCQ Practice</a> / ${escapeHtml(category)}</div>
+        <section class="hero">
+            <h1>${escapeHtml(category)} MCQ Practice Questions</h1>
+            <p class="subtle">${escapeHtml(description)}</p>
+            <div class="badge-row">
+                <span class="badge">${questions.length} questions</span>
+                <span class="badge">Answers included</span>
+                <span class="badge">Government exam practice</span>
+            </div>
+        </section>
+        ${questionCards}
+    </main>`;
+
+    return pageShell({ title, description, canonicalUrl, content, jsonLd: quizJsonLd(category, questions) });
+}
+
+function getJobsIndexHtml(groups) {
+    const content = `
+    <main class="wrap">
+        <section class="hero">
+            <h1>Latest Government Jobs</h1>
+            <p class="subtle">Browse ${groups.length} consolidated recruitment pages with post-wise eligibility, dates and official application links.</p>
+        </section>
+        <section class="list">
+            ${groups.map(group => `<article class="list-item">
+                <h2 style="margin-top:0;"><a href="/jobs/${escapeHtml(group.slug)}">${escapeHtml(group.title)}</a></h2>
+                <p class="subtle">${escapeHtml(group.organization)} | ${escapeHtml(group.postCount)} post${group.postCount === 1 ? '' : 's'} | Last date: ${escapeHtml(formatDate(group.latestDeadline))}</p>
+                <p>${escapeHtml(jobDescription(group).slice(0, 220))}${jobDescription(group).length > 220 ? '...' : ''}</p>
+            </article>`).join('')}
+        </section>
+    </main>`;
+
+    return pageShell({
+        title: 'Latest Government Jobs - GovFitAI',
+        description: 'Browse consolidated government job notifications with post-wise eligibility, dates, official links and preparation resources.',
+        canonicalUrl: `${SITE_URL}/jobs/`,
+        content
+    });
+}
+
+function getQuizIndexHtml(groups) {
+    const content = `
+    <main class="wrap">
+        <section class="hero">
+            <h1>Government Exam MCQ Practice</h1>
+            <p class="subtle">Choose a topic and practice MCQ sets with answers, explanations and exam-focused context.</p>
+        </section>
+        <section class="list">
+            ${groups.map(group => `<article class="list-item">
+                <h2 style="margin-top:0;"><a href="/quiz/${escapeHtml(getQuizCategorySlug(group.category))}">${escapeHtml(group.category)} MCQs</a></h2>
+                <p class="subtle">${escapeHtml(group.questions.length)} questions with answers and exam context.</p>
+            </article>`).join('')}
+        </section>
+    </main>`;
+
+    return pageShell({
+        title: 'MCQ Practice for Government Exams - GovFitAI',
+        description: 'Practice GK, current affairs, SSC, UPSC and other government exam MCQs with answers and explanations.',
+        canonicalUrl: `${SITE_URL}/quiz/`,
+        content
+    });
+}
+
+function getRootPagesForSitemap(today) {
+    const excluded = new Set(['404.html', 'admin.html', 'job-details.html', 'quiz-details.html']);
+    return fs.readdirSync(__dirname)
+        .filter(file => file.endsWith('.html'))
+        .filter(file => file !== 'index.html' && !excluded.has(file))
+        .sort()
+        .map(file => urlEntry(`${SITE_URL}/${file}`, today, 'weekly', '0.8'))
+        .join('');
+}
 
 async function run() {
-    console.log('🚀 Starting Static Site Generation Pipeline...');
+    console.log('Starting GovFitAI static publishing build...');
+
+    console.log('Fetching jobs from Supabase...');
+    const allJobs = await fetchFromSupabase('jobs', 'posted_date');
+    console.log(`Fetched ${allJobs.length} job rows.`);
+
+    console.log('Fetching MCQs from Supabase...');
+    const allMcqs = await fetchFromSupabase('quiz_questions', 'posted_date');
+    console.log(`Fetched ${allMcqs.length} MCQ rows.`);
+
+    if (!allJobs.length && !allMcqs.length) {
+        throw new Error('No Supabase data was fetched. Refusing to clean generated folders.');
+    }
+
+    const jobGroups = groupJobs(allJobs);
+    const quizGroups = groupMcqs(allMcqs);
+    const today = new Date().toISOString().split('T')[0];
+
     emptyDir(path.join(__dirname, 'jobs'));
     emptyDir(path.join(__dirname, 'quiz'));
 
-    console.log('Fetching Jobs...');
-    const allJobs = await fetchFromSupabase('jobs', 'posted_date');
-    console.log(`Fetched ${allJobs.length} Jobs.`);
+    let sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+    sitemap += urlEntry(`${SITE_URL}/`, today, 'daily', '1.0');
+    sitemap += urlEntry(`${SITE_URL}/jobs/`, today, 'daily', '0.9');
+    sitemap += urlEntry(`${SITE_URL}/quiz/`, today, 'weekly', '0.9');
+    sitemap += getRootPagesForSitemap(today);
 
-    console.log('Fetching MCQs...');
-    const allMcqs = await fetchFromSupabase('quiz_questions', 'posted_date');
-    console.log(`Fetched ${allMcqs.length} MCQs.`);
-
-    const today = new Date().toISOString().split('T')[0];
-    let xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n\n`;
-    xml += urlEntry('https://govfitai.com/', today, 'daily', '1.0');
-    xml += urlEntry('https://govfitai.com/jobs/index.html', today, 'daily', '0.9');
-    xml += urlEntry('https://govfitai.com/quiz/index.html', today, 'daily', '0.9');
-
-    // 1. Process Jobs
-    let jobLinksHtml = '';
-    const seenJobIds = new Set();
-    const uniqueJobs = allJobs.filter(job => {
-        if (!job.id || !job.title) return false;
-        if (seenJobIds.has(job.id)) return false;
-        seenJobIds.add(job.id);
-        return true;
+    jobGroups.forEach(group => {
+        fs.writeFileSync(path.join(__dirname, 'jobs', group.slug), getJobHtml(group), 'utf8');
+        sitemap += urlEntry(`${SITE_URL}/jobs/${group.slug}`, isoDate(group.latestPosted) || today, 'weekly', '0.8');
     });
 
-    for (let job of uniqueJobs) {
-        const postPart = job.post_name ? '-' + generateSlug(job.post_name) : '';
-        const slug = generateSlug(job.title) + postPart + '-' + shortId(job.id);
-        
-        // Write the static file
-        const htmlContent = getJobHtmlTemplate(job, slug);
-        fs.writeFileSync(path.join(__dirname, 'jobs', `${slug}.html`), htmlContent, 'utf8');
-
-        // Append to sitemap
-        const lmod = job.posted_date ? job.posted_date.split('T')[0] : today;
-        xml += urlEntry(`https://govfitai.com/jobs/${slug}.html`, lmod, 'weekly', '0.8');
-
-        // Append to Category Listing Block
-        jobLinksHtml += `<div style="padding:15px; border:1px solid #eee; border-radius:8px; margin-bottom:10px; background:white;">
-            <a href="/jobs/${slug}.html" style="font-size:18px; color:#667eea; text-decoration:none; font-weight:bold;">${job.title}</a>
-            <div style="font-size:14px; color:#666; margin-top:5px;">${job.organization} | Location: ${job.state} | Education: ${job.education_required}</div>
-        </div>\n`;
-    }
-
-    // 2. Process MCQs
-    let mcqLinksHtml = '';
-    const seenMcqSlugs = new Set();
-    const uniqueMcqs = allMcqs.filter(q => {
-        const text = (q.question_en || q.question_hi || '').trim();
-        if (!text) return false;
-        const slug = generateSlug(text) + '-' + shortId(q.id);
-        if (seenMcqSlugs.has(slug)) return false;
-        seenMcqSlugs.add(slug);
-        q._fullSlug = slug;
-        return true;
+    quizGroups.forEach(group => {
+        const slug = getQuizCategorySlug(group.category);
+        fs.writeFileSync(path.join(__dirname, 'quiz', slug), getQuizCategoryHtml(group), 'utf8');
+        sitemap += urlEntry(`${SITE_URL}/quiz/${slug}`, today, 'weekly', '0.8');
     });
 
-    for (let q of uniqueMcqs) {
-        const slug = q._fullSlug;
-        const htmlContent = getQuizHtmlTemplate(q, slug);
-        fs.writeFileSync(path.join(__dirname, 'quiz', `${slug}.html`), htmlContent, 'utf8');
+    fs.writeFileSync(path.join(__dirname, 'jobs', 'index.html'), getJobsIndexHtml(jobGroups), 'utf8');
+    fs.writeFileSync(path.join(__dirname, 'quiz', 'index.html'), getQuizIndexHtml(quizGroups), 'utf8');
 
-        const lmod = q.posted_date ? q.posted_date.split('T')[0] : today;
-        xml += urlEntry(`https://govfitai.com/quiz/${slug}.html`, lmod, 'monthly', '0.7');
+    sitemap += '</urlset>\n';
+    fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), sitemap, 'utf8');
 
-        const qText = q.question_en || q.question_hi || '';
-        mcqLinksHtml += `<div style="padding:15px; border:1px solid #eee; border-radius:8px; margin-bottom:10px; background:white;">
-            <div style="font-size:12px; font-weight:bold; color:#aaa; margin-bottom:4px;">${q.category || 'GK'}</div>
-            <a href="/quiz/${slug}.html" style="font-size:16px; color:#333; text-decoration:none;">${qText}</a>
-        </div>\n`;
-    }
-
-    // 3. Generate Category Index Pages
-    const jobIndexHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>All Government Jobs - GovFitAI</title>
-        <style>body{font-family:sans-serif; background:#f5f7fa; padding:20px;} .c{max-width:800px; margin:0 auto;}</style></head>
-        <body><div class="c"><h1>All Government Jobs</h1>
-        <p>Browse through ${uniqueJobs.length} active government job listings. Last Updated: ${new Date().toLocaleDateString()} by GovFitAI Content Team</p>
-        ${jobLinksHtml}
-        </div></body></html>`;
-    fs.writeFileSync(path.join(__dirname, 'jobs', 'index.html'), jobIndexHtml, 'utf8');
-
-    const quizIndexHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>All MCQs & Quiz Questions - GovFitAI</title>
-        <style>body{font-family:sans-serif; background:#f5f7fa; padding:20px;} .c{max-width:800px; margin:0 auto;}</style></head>
-        <body><div class="c"><h1>GovFitAI Quiz Library</h1>
-        <p>Practice ${uniqueMcqs.length} multiple choice questions. Last Updated: ${new Date().toLocaleDateString()} by GovFitAI Content Team</p>
-        ${mcqLinksHtml}
-        </div></body></html>`;
-    fs.writeFileSync(path.join(__dirname, 'quiz', 'index.html'), quizIndexHtml, 'utf8');
-
-    // 4. Finalize Sitemap
-    xml += `\n</urlset>`;
-    fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), xml, 'utf8');
-
-    console.log(`✅ Build Complete! Generated ${uniqueJobs.length} job pages and ${uniqueMcqs.length} MCQ pages.`);
-    console.log(`✅ sitemap.xml updated with new static paths.`);
+    console.log(`Build complete: ${allJobs.length} job rows collapsed into ${jobGroups.length} recruitment pages.`);
+    console.log(`Build complete: ${allMcqs.length} MCQ rows collapsed into ${quizGroups.length} topic pages.`);
+    console.log('sitemap.xml updated with canonical public URLs only.');
 }
 
-run().catch(console.error);
+run().catch(error => {
+    console.error(error);
+    process.exitCode = 1;
+});

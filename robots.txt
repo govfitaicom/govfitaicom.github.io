@@ -6,14 +6,19 @@ Disallow: /private/
 Disallow: /?*login*
 Disallow: /?*auth*
 
-Sitemap: https://govfitai.com/sitemap.xml
-
 User-agent: Mediapartners-Google
 Allow: /
+Disallow: /admin.html
+Disallow: /admin
 
 User-agent: Googlebot
 Allow: /
 Disallow: /admin.html
+Disallow: /admin
 
 User-agent: Bingbot
 Allow: /
+Disallow: /admin.html
+Disallow: /admin
+
+Sitemap: https://govfitai.com/sitemap.xml

@@ -4,7 +4,8 @@
   "description": "Sitemap generator for GovFitAI",
   "main": "generate-sitemap.js",
   "scripts": {
-    "generate": "node generate-sitemap.js"
+    "generate": "node generate-sitemap.js",
+    "build:pages": "node build-pages.js"
   },
   "keywords": ["sitemap", "seo"],
   "author": "GovFitAI"

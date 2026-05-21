@@ -71,7 +71,7 @@ async function loadJobs() {
     c.innerHTML = data.map(j => `
         <div class="job-card">
             <h3 style="color:#667eea;">${j.title || '(No Title)'}</h3>
-            <p style="color:#666;">${j.organization || ''} • ${j.post_name || ''}</p>
+            <p style="color:#666;">${j.organization || ''} • ${oneLine(j.post_name || '')}</p>
             <p style="margin-top:8px;font-size:13px;"><b>Start:</b> ${fd(j.application_start_date || j.posted_date)} &nbsp; <b>Deadline:</b> ${fd(j.application_deadline)}</p>
             <div style="margin-top:12px;">
                 <button class="btn btn-primary" onclick="editJobById('${j.id}')">✏️ Edit</button>
@@ -82,6 +82,15 @@ async function loadJobs() {
 }
 
 function fd(d) { return d ? new Date(d).toLocaleDateString('en-IN') : 'N/A'; }
+
+function oneLine(value, maxLength = 120) {
+    const text = (value || '').replace(/\s+/g, ' ').trim();
+    return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
+}
+
+function cleanQuizText(value) {
+    return (value || '').replace(/\bAnonymous Quiz\b/gi, ' ').replace(/\s+/g, ' ').trim();
+}
 
 async function openAddJobModal() {
     isEdit = false;
@@ -283,6 +292,7 @@ async function loadQuizQuestions() {
                 <div class="q-text">${q.question_hi || ''}</div>
                 <div class="q-en">${q.question_en || ''}</div>
                 <div style="margin-bottom:12px;">${optionsHtml}</div>
+                ${q.explanation ? `<div style="background:#fff;border:1px solid #e9ecef;border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:13px;color:#555;"><b>Explanation:</b> ${q.explanation}</div>` : ''}
                 <div style="display:flex;gap:8px;">
                     <button class="btn btn-primary" onclick="editQuizQuestion('${q.id}')">✏️ Edit</button>
                     <button class="btn btn-danger" onclick="delQuizQuestion('${q.id}')">🗑️ Delete</button>
@@ -324,6 +334,7 @@ async function editQuizQuestion(id) {
 
     const qText = q.question_en || q.question_hi || '';
     document.getElementById('qQuestion').value = qText;
+    document.getElementById('qExplanation').value = q.explanation || '';
 
     const opts = (q.options_en && q.options_en.length ? q.options_en : q.options_hi) || [];
     document.getElementById('qOpt1').value = opts[0] || '';
@@ -342,14 +353,15 @@ document.getElementById('quizForm').addEventListener('submit', async (e) => {
     if (!correctRadio) { alert('Please select the correct answer option!'); return; }
     const correctOption = parseInt(correctRadio.value);
 
-    const qText = document.getElementById('qQuestion').value.trim();
+    const qText = cleanQuizText(document.getElementById('qQuestion').value);
     const options = [
-        document.getElementById('qOpt1').value.trim(),
-        document.getElementById('qOpt2').value.trim(),
-        document.getElementById('qOpt3').value.trim(),
-        document.getElementById('qOpt4').value.trim(),
+        cleanQuizText(document.getElementById('qOpt1').value),
+        cleanQuizText(document.getElementById('qOpt2').value),
+        cleanQuizText(document.getElementById('qOpt3').value),
+        cleanQuizText(document.getElementById('qOpt4').value),
     ];
 
+    if (!qText) { alert('Please enter the question text!'); return; }
     if (options.some(o => !o)) { alert('Please fill all 4 options!'); return; }
 
     const payload = {
@@ -359,18 +371,18 @@ document.getElementById('quizForm').addEventListener('submit', async (e) => {
         options_en: options,
         correct_option: correctOption,
         category: document.getElementById('qCategory').value,
+        explanation: cleanQuizText(document.getElementById('qExplanation').value),
         posted_date: new Date().toISOString(),
     };
 
     try {
         const qId = document.getElementById('quizQId').value;
-        if (isQuizEdit && qId) {
-            const { error } = await sb.from('quiz_questions').update(payload).eq('id', qId);
-            if (error) throw error;
-        } else {
-            const { error } = await sb.from('quiz_questions').insert([payload]);
-            if (error) throw error;
+        let { error } = await saveQuizPayload(payload, qId);
+        if (error && isMissingColumnError(error, 'explanation')) {
+            delete payload.explanation;
+            ({ error } = await saveQuizPayload(payload, qId));
         }
+        if (error) throw error;
         closeQuizModal();
         loadQuizQuestions();
         msg('✅ Quiz question saved!', 'success');
@@ -378,6 +390,18 @@ document.getElementById('quizForm').addEventListener('submit', async (e) => {
         msg('❌ Error: ' + err.message, 'error');
     }
 });
+
+async function saveQuizPayload(payload, qId) {
+    if (isQuizEdit && qId) {
+        return sb.from('quiz_questions').update(payload).eq('id', qId);
+    }
+    return sb.from('quiz_questions').insert([payload]);
+}
+
+function isMissingColumnError(error, column) {
+    const message = (error?.message || '').toLowerCase();
+    return message.includes(column.toLowerCase()) && (message.includes('column') || message.includes('schema cache'));
+}
 
 async function delQuizQuestion(id) {
     if (!confirm('Delete this quiz question? This will also remove all user attempts for it.')) return;

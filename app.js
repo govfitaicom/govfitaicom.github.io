@@ -30,7 +30,7 @@ let quizAttemptedIds  = new Set();
 let quizLoaded        = false;
 
 // ── BOOT ───────────────────────────────────────────────────────────────────────
-(async () => {
+document.addEventListener('DOMContentLoaded', async () => {
     await loadAppConfig();
     await loadProfileFromStorage();
     updateProfileNavBtn();
@@ -43,7 +43,7 @@ let quizLoaded        = false;
         localStorage.removeItem('openTab');
         setTimeout(() => showTab(openTab), 300);
     }
-})();
+});
 
 // ── CONFIG ─────────────────────────────────────────────────────────────────────
 async function loadAppConfig() {
@@ -199,10 +199,6 @@ async function loadAllJobs(reset = false) {
         }
         appendJobCards(data || [], 'allJobs');
 
-        // Update SEO links
-        const seo = document.getElementById('seoJobLinks');
-        if (seo) seo.innerHTML = allJobsData.map(j => `<a href="${getJobUrl(j.id,j.title,j.post_name)}">${j.title} - ${j.post_name||''}</a><br>`).join('');
-
         const hasMore = allJobsData.length < allJobsTotal;
         if (btn) {
             btn.disabled = false;
@@ -292,7 +288,7 @@ function appendJobCards(jobs, containerId) {
         el.setAttribute('itemtype', 'https://schema.org/JobPosting');
         const desc    = job.description || `${job.organization} invites applications for ${job.post_name}.`;
         const short   = desc.length > 120 ? desc.substring(0, 120) + '…' : desc;
-        const jobUrl  = getJobUrl(job.id, job.title, job.post_name);
+        const jobUrl  = getJobUrl(job);
         const isPinned = pinnedJobs.includes(job.id);
         el.innerHTML = `
             <meta itemprop="datePosted" content="${job.posted_date}"/>
@@ -365,7 +361,34 @@ function generateJobSlug(title) {
     } else {
         title = title.replace(/[^\p{L}\p{M}\p{N}\s-]/gu, ' ');
     }
-    return title.replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-+|-+$/g, '');
+    return title.replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-+|-+$/g, '').substring(0, 100);
+}
+function normalizeText(text) {
+    if (!text) return '';
+    return text.toLowerCase()
+        .replace(/&/g, ' and ')
+        .replace(/[^a-z0-9\p{L}\p{M}\s-]/gu, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+function normalizeRecruitmentTitle(title) {
+    return normalizeText(title)
+        .replace(/\b\d+\s*(post|posts|vacancy|vacancies|seat|seats)\b/g, ' ')
+        .replace(/\b(apply|online|form|forms|notification|short notice|notice|out|released|download|check|exam date|exam city|admit card|answer key|result|pre exam|mains exam|correction|edit|registration|otr|syllabus|for)\b/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+function hashString(input) {
+    let hash = 5381;
+    const text = input || '';
+    for (let i = 0; i < text.length; i++) {
+        hash = ((hash << 5) + hash) + text.charCodeAt(i);
+        hash >>>= 0;
+    }
+    return hash.toString(36).substring(0, 8);
+}
+function cleanQuestionText(text) {
+    return (text || '').replace(/\bAnonymous Quiz\b/gi, ' ').replace(/\s+/g, ' ').trim();
 }
 function generateQuizSlug(text) {
     if (!text) return '';
@@ -378,11 +401,18 @@ function generateQuizSlug(text) {
     return text.replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-+|-+$/g, '').substring(0, 80);
 }
 function getShortId(id)       { return (id || '').substring(0, 8); }
-function getJobUrl(id, title, postName) {
-    const postPart = postName ? '-' + generateJobSlug(postName) : '';
-    return `jobs/${generateJobSlug(title)}${postPart}-${getShortId(id)}.html`;
+function getJobUrl(job) {
+    const normalizedTitle = normalizeRecruitmentTitle(job.title || job.post_name || 'job');
+    const organization = normalizeText(job.organization || 'government');
+    const titlePart = generateJobSlug(normalizedTitle).substring(0, 80) || 'government-job';
+    const key = normalizedTitle.split(' ').length < 4 ? `${normalizedTitle}|${organization}` : normalizedTitle;
+    return `jobs/${titlePart}-${hashString(key)}.html`;
 }
-function getQuizUrl(id, text) { return `quiz/${generateQuizSlug(text)}-${getShortId(id)}.html`; }
+function getQuizUrl(id, text, category) {
+    const categorySlug = generateQuizSlug(category || 'general-knowledge') || 'general-knowledge';
+    const anchor = generateQuizSlug(id || text).substring(0, 32) || getShortId(id);
+    return `quiz/${categorySlug}.html#question-${anchor}`;
+}
 function formatDate(ds) {
     if (!ds) return 'N/A';
     return new Date(ds).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
@@ -546,15 +576,6 @@ async function loadQuizQuestions() {
         if (error) throw error;
         quizAllQuestions = data || [];
 
-        // SEO links for Google to discover quiz-details pages
-        const seoDiv = document.getElementById('seoQuizLinks');
-        if (seoDiv) {
-            seoDiv.innerHTML = quizAllQuestions.map(q => {
-                const text = (q.question_en || q.question_hi || '').trim();
-                return `<a href="${getQuizUrl(q.id, text)}">${text.substring(0, 80)}</a><br>`;
-            }).join('');
-        }
-
         startQuizSession();
     } catch (e) {
         document.getElementById('quizArea').innerHTML =
@@ -586,11 +607,11 @@ function renderQuestion() {
     quizAnswered = false;
     const q      = quizQuestions[quizIndex];
     const opts   = (q.options_en && q.options_en.some(o => o?.trim())) ? q.options_en : q.options_hi;
-    const qText  = (q.question_en?.trim()) ? q.question_en : q.question_hi;
+    const qText  = cleanQuestionText((q.question_en?.trim()) ? q.question_en : q.question_hi);
     const labels = ['A','B','C','D'];
     const pct    = Math.round((quizIndex / quizQuestions.length) * 100);
 
-    const quizUrl = getQuizUrl(q.id, qText);
+    const quizUrl = getQuizUrl(q.id, qText, q.category);
 
     document.getElementById('quizArea').innerHTML = `
         <div class="quiz-card">
