@@ -1,6 +1,10 @@
 const SUPABASE_URL     = 'https://yhgqtbbxsbptssybgbrl.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InloZ3F0YmJ4c2JwdHNzeWJnYnJsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU1OTQ4NDYsImV4cCI6MjA4MTE3MDg0Nn0.cktVnZkay3MjYIG_v0WJSkotyq79Nnkr3JJn_munDi8';
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const BLOCKED_JOB_IDS = new Set([
+    '3528e1aa-e255-4d09-b388-4281e5ac9792',
+    'eeed74d0-2802-43d8-ae35-0d1375ee8417'
+]);
 
 // ── STATE ──────────────────────────────────────────────────────────────────────
 let userProfile        = null;   // loaded from localStorage / DB by email
@@ -15,6 +19,7 @@ let educationLevels    = [];
 const PAGE_SIZE = 10;
 let allJobsPage      = 0;
 let allJobsTotal     = 0;
+let allJobsFetched   = 0;
 let allJobsData      = [];    // accumulated
 let recJobsData      = [];    // all matched
 let recJobsPage      = 0;
@@ -106,7 +111,7 @@ async function countMatchedJobs() {
     const { data: jobs } = await sb.from('jobs')
         .select('id, min_age, max_age, education_required, education_fields, min_percentage, categories, state, application_deadline')
         .gte('application_deadline', new Date().toISOString());
-    return (jobs || []).filter(j => jobMatchesProfile(j, userProfile, eduH)).length;
+    return filterPublishableJobs(jobs).filter(j => jobMatchesProfile(j, userProfile, eduH)).length;
 }
 
 function jobMatchesProfile(job, profile, eduH) {
@@ -176,7 +181,7 @@ function showTab(tab) {
 
 // ── ALL JOBS (paginated) ───────────────────────────────────────────────────────
 async function loadAllJobs(reset = false) {
-    if (reset) { allJobsPage = 0; allJobsData = []; allJobsTotal = 0; }
+    if (reset) { allJobsPage = 0; allJobsData = []; allJobsTotal = 0; allJobsFetched = 0; }
     const btn = document.getElementById('loadMoreBtn');
     if (btn) { btn.disabled = true; btn.textContent = 'Loading...'; }
 
@@ -190,19 +195,21 @@ async function loadAllJobs(reset = false) {
             .range(from, to);
 
         if (error) throw error;
+        const visibleJobs = filterPublishableJobs(data || []);
         allJobsTotal = count || 0;
-        allJobsData  = [...allJobsData, ...(data || [])];
+        allJobsFetched += (data || []).length;
+        allJobsData  = [...allJobsData, ...visibleJobs];
         allJobsPage++;
 
         if (reset) {
             document.getElementById('allJobs').innerHTML = '';
         }
-        appendJobCards(data || [], 'allJobs');
+        appendJobCards(visibleJobs, 'allJobs');
 
-        const hasMore = allJobsData.length < allJobsTotal;
+        const hasMore = allJobsFetched < allJobsTotal;
         if (btn) {
             btn.disabled = false;
-            btn.textContent = hasMore ? `Load More Jobs (${allJobsTotal - allJobsData.length} remaining)` : 'All Jobs Loaded';
+            btn.textContent = hasMore ? `Load More Jobs (${Math.max(allJobsTotal - allJobsFetched, 0)} remaining)` : 'All Jobs Loaded';
             btn.disabled = !hasMore;
         }
     } catch (e) {
@@ -230,7 +237,7 @@ async function loadRecommendedJobs() {
             .gte('application_deadline', new Date().toISOString())
             .order('posted_date', { ascending: false });
 
-        recJobsData = (allJobs || []).filter(j => jobMatchesProfile(j, userProfile, eduH));
+        recJobsData = filterPublishableJobs(allJobs).filter(j => jobMatchesProfile(j, userProfile, eduH));
         recJobsPage = 0;
 
         container.innerHTML = '';
@@ -275,6 +282,7 @@ function loadMoreRecommended() {
 
 // ── RENDER JOBS ────────────────────────────────────────────────────────────────
 function appendJobCards(jobs, containerId) {
+    jobs = filterPublishableJobs(jobs);
     const container = document.getElementById(containerId);
     if (!jobs || jobs.length === 0) {
         if (container.children.length === 0)
@@ -370,6 +378,33 @@ function normalizeText(text) {
         .replace(/[^a-z0-9\p{L}\p{M}\s-]/gu, ' ')
         .replace(/\s+/g, ' ')
         .trim();
+}
+function normalizeFilterText(value) {
+    return (value || '').toString()
+        .toLowerCase()
+        .replace(/&/g, ' and ')
+        .replace(/[^a-z0-9\s-]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+function isBlockedJob(job) {
+    if (!job) return true;
+    if (BLOCKED_JOB_IDS.has((job.id || '').toString())) return true;
+
+    const title = normalizeFilterText(job.title);
+    const organization = normalizeFilterText(job.organization);
+    const postName = normalizeFilterText(job.post_name);
+    const combined = `${title} ${organization} ${postName}`.replace(/\s+/g, ' ').trim();
+
+    if (title === 'scc test' && organization === 'scc test') return true;
+    if (title === 'it jobs' && organization === 'it jobs') return true;
+    if (combined.includes('dhruv rathi free ai masterclass')) return true;
+    if (combined.includes('dhruv rathee free ai masterclass')) return true;
+
+    return false;
+}
+function filterPublishableJobs(jobs) {
+    return (jobs || []).filter(job => !isBlockedJob(job));
 }
 function normalizeRecruitmentTitle(title) {
     return normalizeText(title)

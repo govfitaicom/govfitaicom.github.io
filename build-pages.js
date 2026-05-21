@@ -5,6 +5,13 @@ const path = require('path');
 const SITE_URL = 'https://govfitai.com';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InloZ3F0YmJ4c2JwdHNzeWJnYnJsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU1OTQ4NDYsImV4cCI6MjA4MTE3MDg0Nn0.cktVnZkay3MjYIG_v0WJSkotyq79Nnkr3JJn_munDi8';
 const SUPABASE_HOST = 'yhgqtbbxsbptssybgbrl.supabase.co';
+const BLOCKED_JOB_IDS = new Set([
+    '3528e1aa-e255-4d09-b388-4281e5ac9792',
+    'eeed74d0-2802-43d8-ae35-0d1375ee8417'
+]);
+const BLOCKED_ROOT_SITEMAP_PAGES = new Set([
+    'dhruv-rathee-free-ai-masterclass.html'
+]);
 
 function asText(value, fallback = '') {
     if (value === null || value === undefined) return fallback;
@@ -109,6 +116,23 @@ function normalizeText(text) {
         .replace(/[^a-z0-9\p{L}\p{M}\s-]/gu, ' ')
         .replace(/\s+/g, ' ')
         .trim();
+}
+
+function isBlockedJob(job) {
+    if (!job) return true;
+    if (BLOCKED_JOB_IDS.has(asText(job.id))) return true;
+
+    const title = normalizeText(job.title);
+    const organization = normalizeText(job.organization);
+    const postName = normalizeText(job.post_name);
+    const combined = normalizeText(`${title} ${organization} ${postName}`);
+
+    if (title === 'scc test' && organization === 'scc test') return true;
+    if (title === 'it jobs' && organization === 'it jobs') return true;
+    if (combined.includes('dhruv rathi free ai masterclass')) return true;
+    if (combined.includes('dhruv rathee free ai masterclass')) return true;
+
+    return false;
 }
 
 function normalizeRecruitmentTitle(title) {
@@ -311,7 +335,7 @@ function groupJobs(allJobs) {
     const groups = new Map();
 
     allJobs.forEach(job => {
-        if (!job || !job.id || !job.title) return;
+        if (!job || !job.id || !job.title || isBlockedJob(job)) return;
         if (seenIds.has(job.id)) return;
         seenIds.add(job.id);
 
@@ -708,7 +732,7 @@ function getRootPagesForSitemap(today) {
     const excluded = new Set(['404.html', 'admin.html', 'job-details.html', 'quiz-details.html']);
     return fs.readdirSync(__dirname)
         .filter(file => file.endsWith('.html'))
-        .filter(file => file !== 'index.html' && !excluded.has(file))
+        .filter(file => file !== 'index.html' && !excluded.has(file) && !BLOCKED_ROOT_SITEMAP_PAGES.has(file))
         .sort()
         .map(file => urlEntry(`${SITE_URL}/${file}`, today, 'weekly', '0.8'))
         .join('');
@@ -718,8 +742,9 @@ async function run() {
     console.log('Starting GovFitAI static publishing build...');
 
     console.log('Fetching jobs from Supabase...');
-    const allJobs = await fetchFromSupabase('jobs', 'posted_date');
-    console.log(`Fetched ${allJobs.length} job rows.`);
+    const fetchedJobs = await fetchFromSupabase('jobs', 'posted_date');
+    const allJobs = fetchedJobs.filter(job => !isBlockedJob(job));
+    console.log(`Fetched ${fetchedJobs.length} job rows, ${allJobs.length} publishable.`);
 
     console.log('Fetching MCQs from Supabase...');
     const allMcqs = await fetchFromSupabase('quiz_questions', 'posted_date');
