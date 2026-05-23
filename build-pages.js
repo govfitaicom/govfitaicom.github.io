@@ -10,7 +10,8 @@ const BLOCKED_JOB_IDS = new Set([
     'eeed74d0-2802-43d8-ae35-0d1375ee8417'
 ]);
 const BLOCKED_ROOT_SITEMAP_PAGES = new Set([
-    'dhruv-rathee-free-ai-masterclass.html'
+    'dhruv-rathee-free-ai-masterclass.html',
+    'panchayat-election-app-india.html'
 ]);
 
 function asText(value, fallback = '') {
@@ -875,6 +876,21 @@ function getRootPagesForSitemap(today) {
     return fs.readdirSync(__dirname)
         .filter(file => file.endsWith('.html'))
         .filter(file => file !== 'index.html' && !excluded.has(file) && !BLOCKED_ROOT_SITEMAP_PAGES.has(file))
+        .filter(file => {
+            const html = fs.readFileSync(path.join(__dirname, file), 'utf8');
+            if (/<meta[^>]+name=["']robots["'][^>]+content=["'][^"']*noindex/i.test(html)) return false;
+
+            const canonicalMatch = html.match(/<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i)
+                || html.match(/<link\s+href=["']([^"']+)["']\s+rel=["']canonical["']/i);
+            if (!canonicalMatch) return true;
+
+            try {
+                const canonical = new URL(canonicalMatch[1]);
+                return canonical.origin === SITE_URL && canonical.pathname === `/${file}`;
+            } catch {
+                return true;
+            }
+        })
         .sort()
         .map(file => urlEntry(`${SITE_URL}/${file}`, today, 'weekly', '0.8'))
         .join('');
