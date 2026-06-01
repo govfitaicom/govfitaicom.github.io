@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>लाडकी बहीण योजना - तक्रार नोंदणी पोर्टल</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --saffron: #FF6B00;
+    --saffron-light: #FFF3E8;
+    --saffron-dark: #CC5500;
+    --green: #138808;
+    --green-light: #E8F5E9;
+    --blue: #1565C0;
+    --blue-light: #E3F2FD;
+    --gold: #F59E0B;
+    --gold-light: #FFFBEB;
+    --white: #FFFFFF;
+    --bg: #FFF8F0;
+    --gray: #6B7280;
+    --gray-light: #F3F4F6;
+    --text: #1A1A2E;
+    --border: #E5E7EB;
+    --red: #DC2626;
+    --shadow: 0 4px 24px rgba(255,107,0,0.10);
+    --shadow-lg: 0 8px 40px rgba(255,107,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    background: linear-gradient(135deg, #FF6B00 0%, #FF8C00 40%, #138808 100%);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 10%;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 22px 36px 16px;
+    position: relative; z-index: 2;
+  }
+
+  .emblem {
+    width: 68px; height: 68px;
+    background: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    flex-shrink: 0;
+  }
+
+  .header-text h1 {
+    font-size: 26px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.3px;
+    line-height: 1.2;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+  }
+  .header-text p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+    margin-top: 3px;
+    font-weight: 400;
+  }
+
+  .tricolor-bar {
+    height: 6px;
+    background: linear-gradient(to right, #FF9933 33.33%, white 33.33%, white 66.66%, #138808 66.66%);
+  }
+
+  .header-tagline {
+    background: rgba(0,0,0,0.18);
+    text-align: center;
+    padding: 10px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.92);
+    letter-spacing: 0.5px;
+    position: relative; z-index: 2;
+  }
+
+  /* ===== NAV TABS ===== */
+  .nav-tabs {
+    background: white;
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--border);
+    overflow-x: auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .nav-tab {
+    padding: 14px 22px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+  }
+  .nav-tab:hover { color: var(--saffron); background: var(--saffron-light); }
+  .nav-tab.active { color: var(--saffron); border-bottom: 3px solid var(--saffron); background: var(--saffron-light); font-weight: 600; }
+
+  /* ===== MAIN CONTENT ===== */
+  main { max-width: 1100px; margin: 0 auto; padding: 32px 20px 60px; }
+
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ===== HERO BANNER ===== */
+  .hero-banner {
+    background: linear-gradient(120deg, var(--saffron-light) 0%, #FFF9F0 50%, var(--green-light) 100%);
+    border: 1.5px solid #FFD5A8;
+    border-radius: 18px;
+    padding: 32px 36px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-banner::after {
+    content: '🌸';
+    position: absolute;
+    right: 32px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 80px;
+    opacity: 0.15;
+  }
+  .hero-icon {
+    font-size: 56px;
+    flex-shrink: 0;
+  }
+  .hero-banner h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--saffron-dark);
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    margin-bottom: 6px;
+  }
+  .hero-banner p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.65;
+  }
+
+  /* ===== STATS ROW ===== */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .stat-card {
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+    border: 1.5px solid var(--border);
+    box-shadow: var(--shadow);
+    transition: transform 0.2s;
+  }
+  .stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+  .stat-card .stat-icon { font-size: 28px; margin-bottom: 8px; }
+  .stat-card .stat-value { font-size: 22px; font-weight: 700; color: var(--saffron); }
+  .stat-card .stat-label { font-size: 12px; color: var(--gray); margin-top: 4px; font-family: 'Noto Sans Devanagari', sans-serif; }
+
+  /* ===== INFO CARDS ===== */
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+  }
+  .section-title::before {
+    content: '';
+    width: 5px; height: 24px;
+    background: var(--saffron);
+    border-radius: 3px;
+    display: block;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+  .info-card {
+    background: white;
+    border-radius: 14px;
+    border: 1.5px solid var(--border);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s;
+  }
+  .info-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+  .info-card-header {
+    padding: 14px 20px;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+  }
+  .info-card-header.orange { background: var(--saffron-light); color: var(--saffron-dark); border-bottom: 1px solid #FFD5A8; }
+  .info-card-header.green { background: var(--green-light); color: var(--green); border-bottom: 1px solid #A5D6A7; }
+  .info-card-header.blue { background: var(--blue-light); color: var(--blue); border-bottom: 1px solid #90CAF9; }
+  .info-card-header.red { background: #FEF2F2; color: var(--red); border-bottom: 1px solid #FECACA; }
+  .info-card-header.gold { background: var(--gold-light); color: #92400E; border-bottom: 1px solid #FDE68A; }
+  .info-card-body { padding: 16px 20px; }
+  .info-list { list-style: none; }
+  .info-list li {
+    padding: 8px 0;
+    font-size: 13.5px;
+    border-bottom: 1px solid var(--gray-light);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    color: #333;
+  }
+  .info-list li:last-child { border-bottom: none; }
+  .info-list li .bullet { color: var(--saffron); font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  /* ===== ALERT BOX ===== */
+  .alert {
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 13.5px;
+    line-height: 1.6;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+  }
+  .alert-warning { background: #FFFBEB; border: 1.5px solid #FDE68A; color: #78350F; }
+  .alert-danger { background: #FEF2F2; border: 1.5px solid #FECACA; color: #7F1D1D; }
+  .alert-success { background: var(--green-light); border: 1.5px solid #A5D6A7; color: #14532D; }
+  .alert-info { background: var(--blue-light); border: 1.5px solid #90CAF9; color: #1E3A5F; }
+  .alert .alert-icon { font-size: 20px; flex-shrink: 0; }
+
+  /* ===== COMPLAINT FORM ===== */
+  .form-container {
+    background: white;
+    border-radius: 18px;
+    border: 1.5px solid var(--border);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+  .form-header {
+    background: linear-gradient(135deg, var(--saffron) 0%, var(--saffron-dark) 100%);
+    padding: 22px 28px;
+    color: white;
+  }
+  .form-header h2 { font-size: 20px; font-weight: 700; font-family: 'Noto Sans Devanagari', sans-serif; }
+  .form-header p { font-size: 13px; opacity: 0.88; margin-top: 4px; }
+
+  .form-steps {
+    display: flex;
+    padding: 20px 28px;
+    background: var(--saffron-light);
+    border-bottom: 1px solid #FFD5A8;
+    gap: 0;
+    overflow-x: auto;
+  }
+  .form-step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+  }
+  .form-step:not(:last-child)::after {
+    content: '→';
+    margin: 0 6px;
+    color: #CCC;
+    font-size: 16px;
+  }
+  .step-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid #DDD;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 600;
+    flex-shrink: 0;
+    color: var(--gray);
+  }
+  .step-num.active { background: var(--saffron); border-color: var(--saffron); color: white; }
+  .step-num.done { background: var(--green); border-color: var(--green); color: white; }
+  .step-label { font-size: 11.5px; color: var(--gray); white-space: nowrap; font-family: 'Noto Sans Devanagari', sans-serif; }
+  .step-label.active { color: var(--saffron-dark); font-weight: 600; }
+
+  .form-body { padding: 28px; }
+
+  .form-step-content { display: none; }
+  .form-step-content.active { display: block; }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 18px;
+  }
+  .form-row.single { grid-template-columns: 1fr; }
+  @media(max-width:600px) { .form-row { grid-template-columns: 1fr; } }
+
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #374151;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+  }
+  .form-group label .req { color: var(--red); }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: 'Noto Sans Devanagari', 'Poppins', sans-serif;
+    color: var(--text);
+    background: white;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--saffron);
+    box-shadow: 0 0 0 3px rgba(255,107,0,0.1);
+  }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+
+  .form-hint { font-size: 11.5px; color: var(--gray); font-family: 'Noto Sans Devanagari', sans-serif; }
+
+  .form-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .btn {
+    padding: 11px 26px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    font-family: 'Noto Sans Devanagari', 'Poppins', sans-serif;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-primary {
+    background: var(--saffron);
+    color: white;
+  }
+  .btn-primary:hover { background: var(--saffron-dark); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(255,107,0,0.3); }
+  .btn-secondary {
+    background: white;
+    color: var(--gray);
+    border: 1.5px solid var(--border);
+  }
+  .btn-secondary:hover { background: var(--gray-light); }
+  .btn-green {
+    background: var(--green);
+    color: white;
+  }
+  .btn-green:hover { background: #0f6a06; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(19,136,8,0.3); }
+
+  /* ===== PAYMENT SECTION ===== */
+  .payment-box {
+    background: linear-gradient(135deg, #FFF8F0 0%, #FFFBEB 100%);
+    border: 2px solid #FFD5A8;
+    border-radius: 16px;
+    padding: 28px;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .payment-amount {
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--saffron);
+    line-height: 1;
+    margin: 12px 0;
+  }
+  .payment-amount span { font-size: 24px; font-weight: 600; }
+  .payment-label {
+    font-size: 14px;
+    color: var(--gray);
+    font-family: 'Noto Sans Devanagari', sans-serif;
+  }
+  .payment-features {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 18px 0;
+    flex-wrap: wrap;
+  }
+  .payment-feature {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #444;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+  }
+  .payment-feature .check { color: var(--green); font-size: 16px; }
+
+  .razorpay-btn {
+    background: #072654;
+    color: white;
+    border: none;
+    padding: 14px 36px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    max-width: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 16px auto 0;
+    transition: all 0.2s;
+    font-family: 'Poppins', sans-serif;
+  }
+  .razorpay-btn:hover { background: #0A3580; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(7,38,84,0.3); }
+  .razorpay-logo { font-size: 13px; opacity: 0.7; }
+
+  /* ===== SUCCESS ===== */
+  .success-box {
+    text-align: center;
+    padding: 48px 28px;
+    display: none;
+  }
+  .success-icon { font-size: 72px; margin-bottom: 16px; }
+  .success-box h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--green);
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    margin-bottom: 10px;
+  }
+  .success-box p { font-size: 14px; color: var(--gray); font-family: 'Noto Sans Devanagari', sans-serif; }
+  .ticket-id {
+    background: var(--green-light);
+    border: 1.5px dashed var(--green);
+    border-radius: 12px;
+    padding: 16px 24px;
+    margin: 20px auto;
+    max-width: 320px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: 2px;
+  }
+
+  /* ===== FAQ ===== */
+  .faq-item {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .faq-item:hover { box-shadow: var(--shadow); }
+  .faq-question {
+    padding: 16px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    color: var(--text);
+  }
+  .faq-question:hover { background: var(--saffron-light); color: var(--saffron-dark); }
+  .faq-arrow { transition: transform 0.2s; font-size: 18px; }
+  .faq-answer {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s;
+    font-size: 13.5px;
+    color: #555;
+    line-height: 1.7;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+  }
+  .faq-item.open .faq-answer { max-height: 300px; padding: 12px 20px 16px; }
+  .faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+  /* ===== CONTACT ===== */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    margin-bottom: 28px;
+  }
+  .contact-card {
+    background: white;
+    border-radius: 14px;
+    border: 1.5px solid var(--border);
+    padding: 22px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s;
+  }
+  .contact-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+  .contact-icon { font-size: 36px; margin-bottom: 10px; }
+  .contact-title { font-size: 14px; font-weight: 600; color: var(--text); font-family: 'Noto Sans Devanagari', sans-serif; margin-bottom: 6px; }
+  .contact-info { font-size: 13px; color: var(--gray); font-family: 'Noto Sans Devanagari', sans-serif; }
+  .contact-info a { color: var(--saffron); text-decoration: none; font-weight: 500; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--text);
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    padding: 28px 20px;
+    font-size: 12.5px;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    line-height: 1.9;
+  }
+  footer strong { color: white; }
+
+  .required-note {
+    font-size: 12px;
+    color: var(--gray);
+    margin-bottom: 20px;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+  }
+
+  /* Checkbox */
+  .checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .checkbox-group input[type=checkbox] {
+    width: 18px; height: 18px;
+    margin-top: 2px;
+    accent-color: var(--saffron);
+    flex-shrink: 0;
+  }
+  .checkbox-group label {
+    font-size: 13px;
+    color: #444;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    line-height: 1.5;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .badge-orange { background: var(--saffron-light); color: var(--saffron-dark); }
+  .badge-green { background: var(--green-light); color: var(--green); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-top">
+    <div class="emblem">🏛️</div>
+    <div class="header-text">
+      <h1>मुख्यमंत्री लाडकी बहीण योजना</h1>
+      <p>महाराष्ट्र शासन — तक्रार व माहिती पोर्टल | Maharashtra Government Complaint Portal</p>
+    </div>
+  </div>
+  <div class="tricolor-bar"></div>
+  <div class="header-tagline">
+    🌸 महिला सक्षमीकरण • आर्थिक स्वातंत्र्य • सन्मानाचे जीवन 🌸
+  </div>
+</header>
+
+<!-- NAV TABS -->
+<nav class="nav-tabs">
+  <button class="nav-tab active" onclick="showSection('overview', this)">🏠 योजना माहिती</button>
+  <button class="nav-tab" onclick="showSection('issues', this)">⚠️ सामान्य समस्या</button>
+  <button class="nav-tab" onclick="showSection('complaint', this)">📝 तक्रार नोंदवा</button>
+  <button class="nav-tab" onclick="showSection('faq', this)">❓ प्रश्न-उत्तरे</button>
+  <button class="nav-tab" onclick="showSection('contact', this)">📞 संपर्क</button>
+</nav>
+
+<main>
+
+  <!-- ===== SECTION 1: OVERVIEW ===== -->
+  <section id="overview" class="section active">
+    <div class="hero-banner">
+      <div class="hero-icon">🌺</div>
+      <div>
+        <h2>लाडकी बहीण योजना म्हणजे काय?</h2>
+        <p>महाराष्ट्र शासनाने सुरू केलेली ही योजना राज्यातील <strong>21 ते 65 वर्षे</strong> वयोगटातील पात्र महिलांना दर महिन्याला <strong>₹1,500</strong> आर्थिक सहाय्य प्रदान करते. योजनेद्वारे महिलांचे जीवनमान उंचावणे व त्यांना आर्थिकदृष्ट्या सक्षम करणे हे मुख्य उद्दिष्ट आहे.</p>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-value">₹1,500</div><div class="stat-label">दरमहा लाभ</div></div>
+      <div class="stat-card"><div class="stat-icon">👩</div><div class="stat-value">21-65</div><div class="stat-label">वयोगट (वर्षे)</div></div>
+      <div class="stat-card"><div class="stat-icon">🏦</div><div class="stat-value">DBT</div><div class="stat-label">थेट बँक खात्यात</div></div>
+      <div class="stat-card"><div class="stat-icon">📋</div><div class="stat-value">2024</div><div class="stat-label">योजना सुरू झाली</div></div>
+    </div>
+
+    <div class="section-title">✅ पात्रता निकष</div>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-header green">✅ पात्रतेच्या अटी</div>
+        <div class="info-card-body">
+          <ul class="info-list">
+            <li><span class="bullet">✦</span>महाराष्ट्राची रहिवासी महिला असणे आवश्यक</li>
+            <li><span class="bullet">✦</span>वय 21 ते 65 वर्षांदरम्यान असावे</li>
+            <li><span class="bullet">✦</span>कुटुंबाचे वार्षिक उत्पन्न ₹2.5 लाखांपेक्षा कमी</li>
+            <li><span class="bullet">✦</span>आधार-लिंक्ड बँक खाते असणे आवश्यक</li>
+            <li><span class="bullet">✦</span>स्वतःच्या नावे किंवा जॉइंट खाते (आधार लिंक)</li>
+            <li><span class="bullet">✦</span>विवाहित, विधवा, घटस्फोटित, परित्यक्ता महिलाही पात्र</li>
+          </ul>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-header red">❌ अपात्रतेच्या अटी</div>
+        <div class="info-card-body">
+          <ul class="info-list">
+            <li><span class="bullet" style="color:var(--red)">✦</span>कोणत्याही सरकारी नोकरीत असल्यास</li>
+            <li><span class="bullet" style="color:var(--red)">✦</span>आयकर भरणाऱ्या कुटुंबातील महिला</li>
+            <li><span class="bullet" style="color:var(--red)">✦</span>इतर कोणत्या समान योजनेचा लाभ घेत असल्यास</li>
+            <li><span class="bullet" style="color:var(--red)">✦</span>4 चाकी वाहन (ट्रॅक्टर सोडून) धारक कुटुंब</li>
+            <li><span class="bullet" style="color:var(--red)">✦</span>निवडणूक लढवलेल्या माजी जनप्रतिनिधी</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title">📄 आवश्यक कागदपत्रे</div>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-header blue">📋 अर्जासाठी लागणारी कागदपत्रे</div>
+        <div class="info-card-body">
+          <ul class="info-list">
+            <li><span class="bullet">📌</span>आधार कार्ड (अनिवार्य)</li>
+            <li><span class="bullet">📌</span>रहिवास दाखला (अधिवास प्रमाणपत्र)</li>
+            <li><span class="bullet">📌</span>उत्पन्नाचा दाखला</li>
+            <li><span class="bullet">📌</span>बँक पासबुक / बँक खाते विवरण</li>
+            <li><span class="bullet">📌</span>पासपोर्ट फोटो (2)</li>
+            <li><span class="bullet">📌</span>मोबाइल नंबर (आधार लिंक्ड)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-header gold">⏱️ अर्ज प्रक्रिया</div>
+        <div class="info-card-body">
+          <ul class="info-list">
+            <li><span class="bullet">1️⃣</span>नजीकच्या आंगणवाडी / ग्राम पंचायतीत जा</li>
+            <li><span class="bullet">2️⃣</span>अर्ज भरा व कागदपत्रे जोडा</li>
+            <li><span class="bullet">3️⃣</span>eKYC आधार प्रमाणीकरण करा</li>
+            <li><span class="bullet">4️⃣</span>अर्ज क्रमांक नोंदवा</li>
+            <li><span class="bullet">5️⃣</span>मंजुरीनंतर DBT द्वारे पैसे मिळतात</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-info">
+      <span class="alert-icon">ℹ️</span>
+      <div><strong>महत्त्वाचे:</strong> योजनेचे लाभ थेट आधार-लिंक्ड बँक खात्यात जमा केले जातात. जर आधार बँकेशी लिंक नसेल तर लाभ मिळणार नाही. नजीकच्या बँकेत जाऊन आधार लिंकिंग करा.</div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 2: ISSUES ===== -->
+  <section id="issues" class="section">
+    <div class="alert alert-warning">
+      <span class="alert-icon">⚠️</span>
+      <div><strong>सूचना:</strong> खालील समस्यांपैकी कोणतीही समस्या असल्यास आपण खालील "तक्रार नोंदवा" विभागात तक्रार नोंदवू शकता. तक्रार नोंदणीसाठी <strong>₹65</strong> प्रक्रिया शुल्क आकारले जाते.</div>
+    </div>
+
+    <div class="section-title">⚠️ सामान्य समस्या व उपाय</div>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-header orange">💸 पैसे न मिळणे / रक्कम कमी</div>
+        <div class="info-card-body">
+          <ul class="info-list">
+            <li><span class="bullet">➤</span>बँक खाते आधारशी लिंक नसणे</li>
+            <li><span class="bullet">➤</span>DBT ब्लॉक असणे</li>
+            <li><span class="bullet">➤</span>तांत्रिक अडचणीमुळे पेमेंट फेल होणे</li>
+            <li><span class="bullet">➤</span>चुकीचा बँक खाते क्रमांक नोंदविला असणे</li>
+            <li><span class="bullet">➤</span>पेमेंट पेंडिंग असणे</li>
+          </ul>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-header red">📋 अर्ज नामंजूर / रद्द</div>
+        <div class="info-card-body">
+          <ul class="info-list">
+            <li><span class="bullet">➤</span>कागदपत्रे अपूर्ण असणे</li>
+            <li><span class="bullet">➤</span>आधार eKYC न झाल्याने नामंजूर</li>
+            <li><span class="bullet">➤</span>चुकीच्या माहितीमुळे रद्द</li>
+            <li><span class="bullet">➤</span>डुप्लिकेट अर्जामुळे रद्द</li>
+            <li><span class="bullet">➤</span>तक्रार करूनही सुनावणी न होणे</li>
+          </ul>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-header blue">🔄 तांत्रिक समस्या</div>
+        <div class="info-card-body">
+          <ul class="info-list">
+            <li><span class="bullet">➤</span>पोर्टलवर लॉगिन न होणे</li>
+            <li><span class="bullet">➤</span>eKYC अयशस्वी होणे</li>
+            <li><span class="bullet">➤</span>OTP न येणे / चुकीचा OTP</li>
+            <li><span class="bullet">➤</span>अर्ज स्थिती दिसत नसणे</li>
+            <li><span class="bullet">➤</span>आधार-बँक लिंकिंग अडचण</li>
+          </ul>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-header gold">🏛️ अधिकाऱ्यांची समस्या</div>
+        <div class="info-card-body">
+          <ul class="info-list">
+            <li><span class="bullet">➤</span>अर्ज घेण्यास नकार देणे</li>
+            <li><span class="bullet">➤</span>लाच मागणे किंवा भ्रष्टाचार</li>
+            <li><span class="bullet">➤</span>आंगणवाडी / तलाठी दुर्लक्ष</li>
+            <li><span class="bullet">➤</span>वेळेत माहिती न देणे</li>
+            <li><span class="bullet">➤</span>महिलांशी अयोग्य वर्तणूक</li>
+          </ul>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-header green">📊 नोंदणी समस्या</div>
+        <div class="info-card-body">
+          <ul class="info-list">
+            <li><span class="bullet">➤</span>पात्र असूनही नोंदणी न झाल्याची तक्रार</li>
+            <li><span class="bullet">➤</span>जुन्या अर्जाची स्थिती अस्पष्ट</li>
+            <li><span class="bullet">➤</span>नोंदणी अर्ज हरवणे</li>
+            <li><span class="bullet">➤</span>चुकीची माहिती नोंदविली असणे</li>
+            <li><span class="bullet">➤</span>अद्यतन (update) न झाल्याची समस्या</li>
+          </ul>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-header orange">🆕 इतर तक्रारी</div>
+        <div class="info-card-body">
+          <ul class="info-list">
+            <li><span class="bullet">➤</span>बँक खाते बंद / फ्रीज असणे</li>
+            <li><span class="bullet">➤</span>मृत व्यक्तीच्या नावे लाभ जाणे</li>
+            <li><span class="bullet">➤</span>दुसऱ्याच्या खात्यात पैसे जमा</li>
+            <li><span class="bullet">➤</span>फसवणूक / तोतयागिरीचा संशय</li>
+            <li><span class="bullet">➤</span>इतर कोणतीही तक्रार</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top: 12px;">
+      <button class="btn btn-primary" onclick="showSection('complaint', document.querySelectorAll('.nav-tab')[2])">
+        📝 तक्रार नोंदवा →
+      </button>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 3: COMPLAINT FORM ===== -->
+  <section id="complaint" class="section">
+    <div class="alert alert-warning" style="margin-bottom:20px;">
+      <span class="alert-icon">💡</span>
+      <div>तक्रार नोंदणीसाठी <strong>₹65 प्रक्रिया शुल्क</strong> ऑनलाइन भरणे आवश्यक आहे. हे शुल्क परतावा नाही. तक्रार दाखल केल्यावर तुम्हाला एक <strong>तक्रार क्रमांक</strong> दिला जाईल.</div>
+    </div>
+
+    <div class="form-container">
+      <div class="form-header">
+        <h2>📝 तक्रार / अर्ज नोंदणी फॉर्म</h2>
+        <p>Complaint / Application Registration Form — सर्व माहिती अचूक भरा</p>
+      </div>
+
+      <!-- STEPS -->
+      <div class="form-steps">
+        <div class="form-step">
+          <div class="step-num active" id="snum1">1</div>
+          <span class="step-label active" id="slabel1">वैयक्तिक माहिती</span>
+        </div>
+        <div class="form-step">
+          <div class="step-num" id="snum2">2</div>
+          <span class="step-label" id="slabel2">तक्रार तपशील</span>
+        </div>
+        <div class="form-step">
+          <div class="step-num" id="snum3">3</div>
+          <span class="step-label" id="slabel3">शुल्क भरणा</span>
+        </div>
+      </div>
+
+      <div class="form-body">
+        <p class="required-note"><span style="color:var(--red)">*</span> चिन्हांकित सर्व माहिती भरणे अनिवार्य आहे</p>
+
+        <!-- STEP 1 -->
+        <div class="form-step-content active" id="step1">
+          <div class="form-row">
+            <div class="form-group">
+              <label>पूर्ण नाव (Full Name) <span class="req">*</span></label>
+              <input type="text" id="fname" placeholder="उदा. सुनिता रामचंद्र पाटील">
+            </div>
+            <div class="form-group">
+              <label>मोबाइल नंबर <span class="req">*</span></label>
+              <input type="tel" id="mobile" placeholder="10 अंकी मोबाइल नंबर" maxlength="10">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>आधार क्रमांक <span class="req">*</span></label>
+              <input type="text" id="aadhar" placeholder="12 अंकी आधार क्रमांक" maxlength="12">
+              <span class="form-hint">फक्त शेवटचे 4 अंक दाखवले जातील</span>
+            </div>
+            <div class="form-group">
+              <label>जन्म तारीख <span class="req">*</span></label>
+              <input type="date" id="dob">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>ईमेल पत्ता</label>
+              <input type="email" id="email" placeholder="उदा. sunita@gmail.com (ऐच्छिक)">
+            </div>
+            <div class="form-group">
+              <label>जिल्हा <span class="req">*</span></label>
+              <select id="district">
+                <option value="">-- जिल्हा निवडा --</option>
+                <option>पुणे</option><option>मुंबई</option><option>नागपूर</option>
+                <option>नाशिक</option><option>औरंगाबाद</option><option>सोलापूर</option>
+                <option>कोल्हापूर</option><option>सांगली</option><option>सातारा</option>
+                <option>अहमदनगर</option><option>जळगाव</option><option>अमरावती</option>
+                <option>लातूर</option><option>उस्मानाबाद</option><option>नांदेड</option>
+                <option>बीड</option><option>धुळे</option><option>वर्धा</option>
+                <option>यवतमाळ</option><option>बुलढाणा</option><option>अकोला</option>
+                <option>वाशिम</option><option>हिंगोली</option><option>परभणी</option>
+                <option>जालना</option><option>रत्नागिरी</option><option>सिंधुदुर्ग</option>
+                <option>ठाणे</option><option>रायगड</option><option>पालघर</option>
+                <option>गोंदिया</option><option>भंडारा</option><option>चंद्रपूर</option>
+                <option>गडचिरोली</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>तालुका <span class="req">*</span></label>
+              <input type="text" id="taluka" placeholder="तालुक्याचे नाव">
+            </div>
+            <div class="form-group">
+              <label>गाव / शहर <span class="req">*</span></label>
+              <input type="text" id="village" placeholder="गाव / शहराचे नाव">
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="form-group">
+              <label>पूर्ण पत्ता <span class="req">*</span></label>
+              <textarea id="address" placeholder="घर क्रमांक, रस्ता, वस्ती, पिनकोड सहित संपूर्ण पत्ता लिहा"></textarea>
+            </div>
+          </div>
+          <div class="form-nav">
+            <span></span>
+            <button class="btn btn-primary" onclick="goToStep(2)">पुढे जा →</button>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="form-step-content" id="step2">
+          <div class="form-row">
+            <div class="form-group">
+              <label>तक्रारीचा प्रकार <span class="req">*</span></label>
+              <select id="complaint_type">
+                <option value="">-- तक्रारीचा प्रकार निवडा --</option>
+                <option>पैसे न मिळणे</option>
+                <option>रक्कम कमी मिळणे</option>
+                <option>अर्ज नामंजूर</option>
+                <option>eKYC समस्या</option>
+                <option>आधार-बँक लिंकिंग समस्या</option>
+                <option>अधिकाऱ्यांकडून दुर्लक्ष</option>
+                <option>भ्रष्टाचार / लाच मागणे</option>
+                <option>तांत्रिक समस्या</option>
+                <option>नोंदणी न झाल्याची तक्रार</option>
+                <option>इतर</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>अर्ज / लाभार्थी क्रमांक</label>
+              <input type="text" id="benef_id" placeholder="असल्यास लाभार्थी / अर्ज क्रमांक">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>बँकेचे नाव</label>
+              <input type="text" id="bank_name" placeholder="उदा. स्टेट बँक ऑफ इंडिया">
+            </div>
+            <div class="form-group">
+              <label>बँक खाते क्रमांक</label>
+              <input type="text" id="bank_acc" placeholder="बँक खाते क्रमांक">
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="form-group">
+              <label>तक्रारीचे संपूर्ण वर्णन <span class="req">*</span></label>
+              <textarea id="complaint_desc" style="min-height:130px;" placeholder="तुमची समस्या तपशीलवार लिहा. कधी, कुठे, काय झाले ते स्पष्ट सांगा. जेवढे अधिक तपशील तेवढे चांगले..."></textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>समस्या कधी सुरू झाली?</label>
+              <input type="date" id="issue_date">
+            </div>
+            <div class="form-group">
+              <label>यापूर्वी तक्रार केली होती का?</label>
+              <select id="prev_complaint">
+                <option value="">-- निवडा --</option>
+                <option>नाही, हे पहिल्यांदा</option>
+                <option>होय, पण उत्तर मिळाले नाही</option>
+                <option>होय, पण समाधान झाले नाही</option>
+              </select>
+            </div>
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="declaration">
+            <label for="declaration">मी घोषणा करतो/करते की वरील सर्व माहिती माझ्या माहितीनुसार सत्य व अचूक आहे. खोटी माहिती दिल्यास मी कायदेशीर जबाबदार असेन. <span class="req">*</span></label>
+          </div>
+          <div class="form-nav">
+            <button class="btn btn-secondary" onclick="goToStep(1)">← मागे</button>
+            <button class="btn btn-primary" onclick="goToStep(3)">पुढे जा →</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: PAYMENT -->
+        <div class="form-step-content" id="step3">
+          <div class="payment-box">
+            <div style="font-size:36px; margin-bottom:8px;">💳</div>
+            <div class="payment-label">तक्रार नोंदणी प्रक्रिया शुल्क</div>
+            <div class="payment-amount"><span>₹</span>65</div>
+            <div class="payment-label">एकवेळ (Non-Refundable) | Complaint Processing Fee</div>
+            <div class="payment-features">
+              <div class="payment-feature"><span class="check">✓</span> सुरक्षित पेमेंट</div>
+              <div class="payment-feature"><span class="check">✓</span> तात्काळ पावती</div>
+              <div class="payment-feature"><span class="check">✓</span> तक्रार क्रमांक मिळेल</div>
+              <div class="payment-feature"><span class="check">✓</span> 7 दिवसात उत्तर</div>
+            </div>
+
+            <div style="background:white; border:1px solid #E5E7EB; border-radius:10px; padding:14px 18px; max-width:380px; margin:0 auto 16px; text-align:left; font-size:13px; font-family:'Noto Sans Devanagari',sans-serif;">
+              <strong>तुमची माहिती:</strong><br>
+              <span style="color:var(--gray);">नाव:</span> <span id="summary-name" style="font-weight:500;">—</span><br>
+              <span style="color:var(--gray);">मोबाइल:</span> <span id="summary-mobile" style="font-weight:500;">—</span><br>
+              <span style="color:var(--gray);">तक्रार:</span> <span id="summary-type" style="font-weight:500;">—</span>
+            </div>
+
+            <!-- REPLACE THIS HREF WITH YOUR RAZORPAY LINK -->
+            <a href="YOUR_RAZORPAY_PAYMENT_LINK_HERE" target="_blank" id="pay-btn">
+              <button class="razorpay-btn" onclick="handlePayment()">
+                <span>🔒</span>
+                <span>₹65 Razorpay ने भरा</span>
+                <span class="razorpay-logo">| Powered by Razorpay</span>
+              </button>
+            </a>
+
+            <p style="font-size:12px; color:var(--gray); margin-top:12px; font-family:'Noto Sans Devanagari',sans-serif;">
+              🔒 100% सुरक्षित | UPI, Debit/Credit Card, Net Banking स्वीकारले जाते
+            </p>
+          </div>
+
+          <div class="alert alert-info">
+            <span class="alert-icon">📱</span>
+            <div>पेमेंट झाल्यावर <strong>"पेमेंट झाले - तक्रार नोंदवा"</strong> बटण दाबा. तुमच्या मोबाइलवर SMS द्वारे तक्रार क्रमांक पाठवला जाईल.</div>
+          </div>
+
+          <div class="form-nav">
+            <button class="btn btn-secondary" onclick="goToStep(2)">← मागे</button>
+            <button class="btn btn-green" onclick="submitComplaint()">✅ पेमेंट झाले - तक्रार नोंदवा</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="success-box" id="success-box">
+        <div class="success-icon">🎉</div>
+        <h3>तक्रार यशस्वीरित्या नोंदली!</h3>
+        <p>तुमची तक्रार प्राप्त झाली आहे. पुढील 7 कामकाजाच्या दिवसांत आपल्याशी संपर्क केला जाईल.</p>
+        <div class="ticket-id" id="ticket-display">TK-2024-XXXXXX</div>
+        <p style="margin-bottom:16px;">हा तक्रार क्रमांक जपून ठेवा. <br>तुमच्या मोबाइलवर SMS पाठवण्यात आला आहे.</p>
+        <button class="btn btn-primary" onclick="resetForm()">नवीन तक्रार नोंदवा</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 4: FAQ ===== -->
+  <section id="faq" class="section">
+    <div class="section-title">❓ वारंवार विचारले जाणारे प्रश्न</div>
+
+    <div id="faq-list"></div>
+  </section>
+
+  <!-- ===== SECTION 5: CONTACT ===== -->
+  <section id="contact" class="section">
+    <div class="section-title">📞 संपर्क माहिती</div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-icon">📞</div>
+        <div class="contact-title">हेल्पलाइन नंबर</div>
+        <div class="contact-info">
+          <a href="tel:181">181</a> (टोल-फ्री)<br>
+          सोमवार – शनिवार<br>9:00 AM – 6:00 PM
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">🌐</div>
+        <div class="contact-title">अधिकृत वेबसाइट</div>
+        <div class="contact-info">
+          <a href="https://ladakibahin.maharashtra.gov.in" target="_blank">ladakibahin.maharashtra.gov.in</a><br>
+          अर्जाची स्थिती पाहण्यासाठी भेट द्या
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">🏛️</div>
+        <div class="contact-title">जिल्हा कार्यालय</div>
+        <div class="contact-info">
+          महिला व बाल विकास विभाग<br>
+          आपल्या जिल्ह्याच्या<br>जिल्हाधिकारी कार्यालयात संपर्क करा
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">📧</div>
+        <div class="contact-title">ईमेल / ऑनलाइन</div>
+        <div class="contact-info">
+          <a href="mailto:wcd@maharashtra.gov.in">wcd@maharashtra.gov.in</a><br>
+          महाराष्ट्र शासन WCD विभाग
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">🏪</div>
+        <div class="contact-title">जवळचे CSC केंद्र</div>
+        <div class="contact-info">
+          आपल्या गावातील सेवा केंद्रावर जा.<br>
+          ऑनलाइन अर्ज व eKYC<br>मदत मिळेल.
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">🚨</div>
+        <div class="contact-title">महिला हेल्पलाइन</div>
+        <div class="contact-info">
+          <a href="tel:1091">1091</a> — महिला हेल्पलाइन<br>
+          <a href="tel:112">112</a> — आपत्कालीन<br>
+          24×7 उपलब्ध
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-success">
+      <span class="alert-icon">✅</span>
+      <div><strong>तक्रारीसाठी आधी प्रयत्न करा:</strong> तक्रार नोंदवण्यापूर्वी आंगणवाडी सेविका, ग्राम सेवक किंवा तलाठी यांच्याशी संपर्क करा. त्यांनी मदत न केल्यास या पोर्टलवर तक्रार नोंदवा.</div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <strong>मुख्यमंत्री लाडकी बहीण योजना — तक्रार पोर्टल</strong><br>
+  महाराष्ट्र शासन, महिला व बाल विकास विभाग<br>
+  हे पोर्टल केवळ माहिती व तक्रार नोंदणीसाठी आहे | सर्व हक्क राखीव © 2024<br>
+  <span style="font-size:11px; opacity:0.6;">तक्रार नोंदणी शुल्क: ₹65 | Razorpay द्वारे सुरक्षित पेमेंट</span>
+</footer>
+
+<script>
+function showSection(id, tab) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (tab) tab.classList.add('active');
+}
+
+function goToStep(n) {
+  const step1 = document.getElementById('step1');
+  const step2 = document.getElementById('step2');
+  const step3 = document.getElementById('step3');
+
+  if (n === 2) {
+    const fname = document.getElementById('fname').value.trim();
+    const mobile = document.getElementById('mobile').value.trim();
+    const aadhar = document.getElementById('aadhar').value.trim();
+    const dob = document.getElementById('dob').value;
+    const district = document.getElementById('district').value;
+    const address = document.getElementById('address').value.trim();
+    if (!fname || !mobile || !aadhar || !dob || !district || !address) {
+      alert('⚠️ कृपया सर्व अनिवार्य माहिती भरा (*चिन्हांकित)');
+      return;
+    }
+    if (mobile.length !== 10) { alert('⚠️ मोबाइल नंबर 10 अंकी असावा'); return; }
+    if (aadhar.length !== 12) { alert('⚠️ आधार क्रमांक 12 अंकी असावा'); return; }
+  }
+
+  if (n === 3) {
+    const type = document.getElementById('complaint_type').value;
+    const desc = document.getElementById('complaint_desc').value.trim();
+    const decl = document.getElementById('declaration').checked;
+    if (!type) { alert('⚠️ तक्रारीचा प्रकार निवडा'); return; }
+    if (!desc) { alert('⚠️ तक्रारीचे वर्णन लिहा'); return; }
+    if (!decl) { alert('⚠️ घोषणेचा चेकबॉक्स चेक करा'); return; }
+    // Update summary
+    document.getElementById('summary-name').textContent = document.getElementById('fname').value;
+    document.getElementById('summary-mobile').textContent = document.getElementById('mobile').value;
+    document.getElementById('summary-type').textContent = type;
+  }
+
+  [step1, step2, step3].forEach(s => s.classList.remove('active'));
+  document.getElementById('step' + n).classList.add('active');
+
+  // Update step indicators
+  for (let i = 1; i <= 3; i++) {
+    const num = document.getElementById('snum' + i);
+    const label = document.getElementById('slabel' + i);
+    num.classList.remove('active', 'done');
+    label.classList.remove('active');
+    if (i < n) { num.classList.add('done'); num.textContent = '✓'; }
+    else if (i === n) { num.classList.add('active'); num.textContent = i; label.classList.add('active'); }
+    else { num.textContent = i; }
+  }
+}
+
+function handlePayment() {
+  // Payment link is set on the anchor tag above
+}
+
+function submitComplaint() {
+  const ticketNum = 'TK-' + new Date().getFullYear() + '-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+  document.getElementById('ticket-display').textContent = ticketNum;
+
+  // Hide form, show success
+  document.querySelectorAll('.form-step-content').forEach(s => s.style.display = 'none');
+  document.querySelector('.form-steps').style.display = 'none';
+  document.querySelector('.form-body').style.display = 'none';
+  document.getElementById('success-box').style.display = 'block';
+}
+
+function resetForm() {
+  document.querySelectorAll('.form-step-content').forEach(s => { s.style.display = ''; s.classList.remove('active'); });
+  document.getElementById('step1').classList.add('active');
+  document.querySelector('.form-steps').style.display = '';
+  document.querySelector('.form-body').style.display = '';
+  document.getElementById('success-box').style.display = 'none';
+
+  // Reset step indicators
+  for (let i = 1; i <= 3; i++) {
+    const num = document.getElementById('snum' + i);
+    const label = document.getElementById('slabel' + i);
+    num.classList.remove('active', 'done');
+    label.classList.remove('active');
+    num.textContent = i;
+  }
+  document.getElementById('snum1').classList.add('active');
+  document.getElementById('slabel1').classList.add('active');
+
+  // Reset form fields
+  document.querySelectorAll('input, select, textarea').forEach(el => { if (el.type !== 'checkbox') el.value = ''; });
+  document.getElementById('declaration').checked = false;
+}
+
+// FAQ DATA
+const faqs = [
+  { q: "लाडकी बहीण योजनेत किती पैसे मिळतात?", a: "या योजनेत पात्र महिलांना दर महिन्याला ₹1,500 रुपये थेट बँक खात्यात (DBT) जमा केले जातात. वार्षिक ₹18,000 रुपये मिळतात." },
+  { q: "अर्ज केव्हा करावा? अंतिम तारीख आहे का?", a: "योजना सुरू असेपर्यंत कधीही अर्ज करता येतो. शासनाने विशिष्ट कालावधी जाहीर केला असल्यास त्याची माहिती अधिकृत वेबसाइटवर पहा." },
+  { q: "माझे पैसे बँकेत आले नाहीत, काय करावे?", a: "प्रथम आधार-बँक लिंकिंग तपासा. नंतर DBT स्टेटस लाडकी बहीण पोर्टलवर पहा. समस्या कायम राहिल्यास या पोर्टलवर तक्रार नोंदवा." },
+  { q: "eKYC म्हणजे काय आणि ते कसे करावे?", a: "eKYC म्हणजे आधार OTP किंवा बायोमेट्रिकद्वारे ओळख पडताळणी. जवळच्या CSC केंद्र, आंगणवाडी किंवा ग्रामपंचायतीत जाऊन बायोमेट्रिक eKYC करता येते." },
+  { q: "विधवा / घटस्फोटित महिला पात्र आहेत का?", a: "होय. विवाहित, विधवा, घटस्फोटित, परित्यक्ता — सर्व प्रकारच्या महिला पात्र आहेत, जोपर्यंत उत्पन्न मर्यादा व इतर अटी पूर्ण होतात." },
+  { q: "तक्रार नोंदणीसाठी किती शुल्क आहे?", a: "तक्रार नोंदणीसाठी ₹65 प्रक्रिया शुल्क आहे. हे शुल्क परत मिळत नाही. शुल्क भरल्यावर एक तक्रार क्रमांक दिला जातो." },
+  { q: "तक्रार किती दिवसांत निकाली निघते?", a: "सामान्यतः 7 ते 30 कामकाजाच्या दिवसांत तक्रारीवर कार्यवाही होते. तांत्रिक समस्या असल्यास 3-7 दिवसांत सुटते." },
+  { q: "एकाच कुटुंबातील दोन महिला अर्ज करू शकतात का?", a: "होय, एकाच कुटुंबातील (एकाच घरात राहणाऱ्या) दोन पात्र महिला या योजनेसाठी अर्ज करू शकतात, परंतु प्रत्येकीचे वेगळे बँक खाते असणे आवश्यक आहे." },
+];
+
+const faqList = document.getElementById('faq-list');
+faqs.forEach((f, i) => {
+  faqList.innerHTML += `
+    <div class="faq-item" id="faq${i}" onclick="toggleFaq(${i})">
+      <div class="faq-question">
+        <span>${f.q}</span>
+        <span class="faq-arrow">⌄</span>
+      </div>
+      <div class="faq-answer">${f.a}</div>
+    </div>`;
+});
+
+function toggleFaq(i) {
+  const item = document.getElementById('faq' + i);
+  item.classList.toggle('open');
+}
+</script>
+</body>
+</html>
