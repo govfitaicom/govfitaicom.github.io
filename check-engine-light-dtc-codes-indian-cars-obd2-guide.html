@@ -136,7 +136,7 @@
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
-    body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+    body { overflow-x: hidden;  font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
 
     /* ── SCROLLBAR ── */
     ::-webkit-scrollbar { width: 6px; }
@@ -324,7 +324,7 @@
       box-shadow: 0 0 0 4px var(--bg), 0 0 0 6px var(--amber);
       z-index: 1;
     }
-    .tl-body { padding-top: 8px; }
+    .tl-body { overflow-x: hidden;  padding-top: 8px; }
     .tl-body h4 { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
     .tl-body p { font-size: 14px; color: var(--muted); margin: 0; line-height: 1.65; }
     .tl-body .tl-tag { display: inline-block; background: var(--amber-lt); color: var(--amber-d); font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 4px; margin-top: 8px; }

@@ -29,7 +29,7 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  body {
+  body { overflow-x: hidden; 
     font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif;
     background: var(--bg);
     color: var(--text);
@@ -220,7 +220,7 @@
 
   .info-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
     margin-bottom: 32px;
   }
@@ -247,7 +247,7 @@
   .info-card-header.blue { background: var(--blue-light); color: var(--blue); border-bottom: 1px solid #90CAF9; }
   .info-card-header.red { background: #FEF2F2; color: var(--red); border-bottom: 1px solid #FECACA; }
   .info-card-header.gold { background: var(--gold-light); color: #92400E; border-bottom: 1px solid #FDE68A; }
-  .info-card-body { padding: 16px 20px; }
+  .info-card-body { overflow-x: hidden;  padding: 16px 20px; }
   .info-list { list-style: none; }
   .info-list li {
     padding: 8px 0;
@@ -333,7 +333,7 @@
   .step-label { font-size: 11.5px; color: var(--gray); white-space: nowrap; font-family: 'Noto Sans Devanagari', sans-serif; }
   .step-label.active { color: var(--saffron-dark); font-weight: 600; }
 
-  .form-body { padding: 28px; }
+  .form-body { overflow-x: hidden;  padding: 28px; }
 
   .form-step-content { display: none; }
   .form-step-content.active { display: block; }
@@ -613,6 +613,7 @@
   .badge-orange { background: var(--saffron-light); color: var(--saffron-dark); }
   .badge-green { background: var(--green-light); color: var(--green); }
 </style>
+<style>img { max-width: 100%; height: auto; }</style>
 </head>
 <body>
 

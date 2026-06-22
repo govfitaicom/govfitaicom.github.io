@@ -382,7 +382,8 @@ function pageShell({ title, description, canonicalUrl, content, jsonLd = null })
     ${jsonLd ? jsonLdScript(jsonLd) : ''}
     <style>
         * { box-sizing: border-box; }
-        body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, sans-serif; color: #202124; background: #f5f7fa; line-height: 1.65; }
+        body { overflow-x: hidden; margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, sans-serif; color: #202124; background: #f5f7fa; line-height: 1.65; }
+        img { max-width: 100%; height: auto; }
         a { color: #335dcc; text-decoration: none; }
         a:hover { text-decoration: underline; }
         .site-header { background: #fff; padding: 10px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #e0e0e0; }
