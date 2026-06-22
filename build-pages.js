@@ -345,8 +345,10 @@ function siteFooterHtml() {
                 <div class="footer-col">
                     <div class="footer-col-title">Company</div>
                     <a href="/about.html">About Us</a>
+                    <a href="/contact.html">Contact Us</a>
                     <a href="/privacy-policy.html">Privacy Policy</a>
                     <a href="/terms.html">Terms of Service</a>
+                    <a href="/disclaimer.html">Disclaimer</a>
                 </div>
             </div>
         </div>
@@ -355,8 +357,10 @@ function siteFooterHtml() {
             <span>&copy; 2026 GovFitAI - All rights reserved.</span>
             <span>
                 <a href="/about.html">About</a>
+                <a href="/contact.html">Contact</a>
                 <a href="/privacy-policy.html">Privacy</a>
                 <a href="/terms.html">Terms</a>
+                <a href="/disclaimer.html">Disclaimer</a>
             </span>
         </div>
     </footer>`;
@@ -948,9 +952,67 @@ async function run() {
     sitemap += '</urlset>\n';
     fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), sitemap, 'utf8');
 
+    // ── PRE-RENDER HOMEPAGE ────────────────────────────────────────────
+    preRenderHomepage(jobGroups);
+
     console.log(`Build complete: ${allJobs.length} job rows collapsed into ${jobGroups.length} recruitment pages.`);
     console.log(`Build complete: ${allMcqs.length} MCQ rows collapsed into ${quizGroups.length} topic pages.`);
     console.log('sitemap.xml updated with canonical public URLs only.');
+}
+
+/**
+ * Injects up to 20 latest job cards as static HTML into index.html's #allJobs container.
+ * This ensures Google/AdSense bots see real content without executing JavaScript.
+ * The client-side app.js will replace this content once it loads dynamically.
+ */
+function preRenderHomepage(jobGroups) {
+    const indexPath = path.join(__dirname, 'index.html');
+    if (!fs.existsSync(indexPath)) {
+        console.warn('index.html not found, skipping pre-render.');
+        return;
+    }
+
+    let html = fs.readFileSync(indexPath, 'utf8');
+
+    // Build static job cards for the top 20 groups
+    const top20 = jobGroups.slice(0, 20);
+    const staticCards = top20.map(group => {
+        const desc = jobDescription(group);
+        const shortDesc = desc.length > 120 ? desc.substring(0, 120) + '…' : desc;
+        const jobUrl = `jobs/${group.slug}`;
+        return `
+                <article class="job-card" itemscope itemtype="https://schema.org/JobPosting">
+                    <meta itemprop="datePosted" content="${escapeHtml(isoDate(group.latestPosted))}"/>
+                    <meta itemprop="validThrough" content="${escapeHtml(isoDate(group.latestDeadline))}"/>
+                    <div class="job-card-header">
+                        <div class="job-title" itemprop="title">
+                            <a href="${escapeHtml(jobUrl)}">${escapeHtml(group.title)}</a>
+                        </div>
+                    </div>
+                    <div class="job-org" itemprop="hiringOrganization" itemscope itemtype="https://schema.org/Organization">
+                        <span itemprop="name">${escapeHtml(group.organization)}</span> • ${escapeHtml(group.postCount)} post${group.postCount === 1 ? '' : 's'}
+                    </div>
+                    <div class="job-desc" itemprop="description">${escapeHtml(shortDesc)}</div>
+                    <div class="job-meta">
+                        <span class="job-meta-item">📅 ${escapeHtml(formatDate(group.earliestStart || group.latestPosted))}</span>
+                        <span class="job-meta-item">⏰ ${escapeHtml(formatDate(group.latestDeadline))}</span>
+                        <span class="job-meta-item" itemprop="educationRequirements">🎓 ${escapeHtml(group.education.join(', ') || 'See notification')}</span>
+                        <span class="job-meta-item" itemprop="jobLocation">📍 ${escapeHtml(group.states.join(', ') || 'India')}</span>
+                    </div>
+                    <div class="job-actions">
+                        <a href="${escapeHtml(jobUrl)}" class="btn-apply">View Details →</a>
+                    </div>
+                </article>`;
+    }).join('');
+
+    // Replace the empty #allJobs div with pre-rendered content
+    html = html.replace(
+        '<div id="allJobs" class="jobs-grid"></div>',
+        `<div id="allJobs" class="jobs-grid">${staticCards}\n                </div>`
+    );
+
+    fs.writeFileSync(indexPath, html, 'utf8');
+    console.log(`Pre-rendered ${top20.length} job cards into index.html for SEO.`);
 }
 
 run().catch(error => {
