@@ -174,7 +174,19 @@
     footer a { color: #93c5fd; text-decoration: none; margin: 0 8px; }
     @media (max-width: 600px) { .promo-card { flex-direction: column; text-align: center; align-items: center; } .promo-btns { justify-content: center; } .feature-grid { grid-template-columns: 1fr; } .who-grid { grid-template-columns: 1fr 1fr; } .prog-table { font-size: 12px; } .prog-table th, .prog-table td { padding: 9px 10px; } .fee-grid { grid-template-columns: 1fr 1fr; } .stats-grid { grid-template-columns: 1fr 1fr; } }
   </style>
-</head>
+
+    <style>
+        /* Mobile responsive tables */
+        @media (max-width: 860px) {
+            table { display: block; width: 100%; border: none !important; word-break: break-word; overflow-wrap: break-word; }
+            thead, tbody, th, td, tr { display: block; width: 100%; }
+            tr { margin-bottom: 16px; border: 1px solid #e6e8ef; border-radius: 8px; overflow: hidden; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+            th { padding: 12px; text-align: left; background: #f8fafc; border-bottom: 1px solid #edf0f5; font-size: 12px; text-transform: uppercase; color: #4b5563; }
+            td { padding: 12px; border: none; border-bottom: 1px dashed #edf0f5; }
+            td:last-child { border-bottom: none; }
+        }
+    </style>
+\n</head>
 <body>
 
 <a href="https://wa.me/919665258471?text=Hi%2C%20I%20am%20interested%20in%20the%20MARS%20Exploration%20Aerospace%20Internship%20Program.%20Please%20share%20details%20about%20the%20next%20available%20batch." class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">

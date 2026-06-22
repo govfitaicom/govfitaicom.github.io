@@ -13,7 +13,7 @@
     <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"JobPosting","title":"Bihar Board Class 10th","description":"Get ready to access your Bihar Board 10th Result 2026. The BSEB has officially announced the results on their website. Candidates who took the high school exam can now check and download their scores. Visit the official portals, results.biharboardonline.com or biharboardonline.com, to retrieve your result. The declaration date was March 29, 2026, at 1:15 PM. For more details and to access the result directly, visit Rojgar Result, where a convenient link is available for your convenience.","datePosted":"2026-04-04","employmentType":"FULL_TIME","hiringOrganization":{"@type":"Organization","name":"Bihar Board 10th Result 2026"},"jobLocation":{"@type":"Place","address":{"@type":"PostalAddress","addressRegion":"Bihar","addressCountry":"IN"}},"educationRequirements":"10th","qualifications":"As per official notification","url":"https://govfitai.com/jobs/bseb-bihar-board-high-school-2026-kpdk75.html"}]}</script>
     <style>
         * { box-sizing: border-box; }
-        body { overflow-x: hidden; margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, sans-serif; color: #202124; background: #f5f7fa; line-height: 1.65; }
+        body { overflow-x: hidden; overflow-wrap: break-word; word-wrap: break-word; margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, sans-serif; color: #202124; background: #f5f7fa; line-height: 1.65; }
         img { max-width: 100%; height: auto; }
         a { color: #335dcc; text-decoration: none; }
         a:hover { text-decoration: underline; }
@@ -44,10 +44,25 @@
         .table-scroll { width: 100%; overflow-x: auto; border: 1px solid #edf0f5; border-radius: 8px; }
         .compact-list { margin: 6px 0 0 18px; padding: 0; }
         .compact-list li { margin: 3px 0; }
-        table { width: 100%; border-collapse: collapse; }
+        table { width: 100%; border-collapse: collapse; word-break: break-word; }
         th, td { padding: 11px 10px; border-bottom: 1px solid #edf0f5; text-align: left; vertical-align: top; font-size: 14px; }
         th { background: #f8fafc; color: #4b5563; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
-        .posts-table { min-width: 1120px; table-layout: fixed; }
+        .posts-table { table-layout: fixed; width: 100%; }
+        @media (min-width: 861px) {
+            .posts-table { min-width: 1120px; }
+        }
+        @media (max-width: 860px) {
+            .table-scroll { border: none; overflow-x: visible; }
+            .posts-table, .posts-table thead, .posts-table tbody, .posts-table th, .posts-table td, .posts-table tr { display: block; }
+            .posts-table thead { display: none; }
+            .posts-table tr { margin-bottom: 16px; border: 1px solid #e6e8ef; border-radius: 8px; padding: 12px; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+            .posts-table td { padding: 8px 0; border: none; border-bottom: 1px dashed #edf0f5; position: relative; display: flex; flex-direction: column; }
+            .posts-table td:last-child { border-bottom: none; }
+            .posts-table td::before { content: attr(data-label); font-size: 11px; text-transform: uppercase; color: #687386; font-weight: 800; margin-bottom: 4px; }
+            table:not(.posts-table), table:not(.posts-table) tbody, table:not(.posts-table) tr, table:not(.posts-table) th, table:not(.posts-table) td { display: block; width: 100%; }
+            table:not(.posts-table) th { padding-bottom: 2px; border-bottom: none; }
+            table:not(.posts-table) td { padding-top: 0; padding-bottom: 12px; }
+        }
         .posts-table th { white-space: nowrap; }
         .posts-table td { overflow-wrap: normal; word-break: normal; }
         .posts-table .col-post { width: 210px; }
@@ -159,14 +174,14 @@
                             </thead>
                             <tbody>
         <tr>
-            <td><strong>Bihar Board Class 10th</strong></td>
-            <td>10th</td>
-            <td>Any relevant field</td>
-            <td>Bihar</td>
-            <td>NA - NA</td>
-            <td>35%</td>
-            <td>All</td>
-            <td class="requirements-cell">As per official notification</td>
+            <td data-label="Post"><strong>Bihar Board Class 10th</strong></td>
+            <td data-label="Education">10th</td>
+            <td data-label="Field">Any relevant field</td>
+            <td data-label="Location">Bihar</td>
+            <td data-label="Age">NA - NA</td>
+            <td data-label="Marks">35%</td>
+            <td data-label="Category">All</td>
+            <td data-label="Requirements" class="requirements-cell">As per official notification</td>
         </tr></tbody>
                         </table>
                     </div>

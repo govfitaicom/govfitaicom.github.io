@@ -382,7 +382,7 @@ function pageShell({ title, description, canonicalUrl, content, jsonLd = null })
     ${jsonLd ? jsonLdScript(jsonLd) : ''}
     <style>
         * { box-sizing: border-box; }
-        body { overflow-x: hidden; margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, sans-serif; color: #202124; background: #f5f7fa; line-height: 1.65; }
+        body { overflow-x: hidden; overflow-wrap: break-word; word-wrap: break-word; margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, sans-serif; color: #202124; background: #f5f7fa; line-height: 1.65; }
         img { max-width: 100%; height: auto; }
         a { color: #335dcc; text-decoration: none; }
         a:hover { text-decoration: underline; }
@@ -413,10 +413,25 @@ function pageShell({ title, description, canonicalUrl, content, jsonLd = null })
         .table-scroll { width: 100%; overflow-x: auto; border: 1px solid #edf0f5; border-radius: 8px; }
         .compact-list { margin: 6px 0 0 18px; padding: 0; }
         .compact-list li { margin: 3px 0; }
-        table { width: 100%; border-collapse: collapse; }
+        table { width: 100%; border-collapse: collapse; word-break: break-word; }
         th, td { padding: 11px 10px; border-bottom: 1px solid #edf0f5; text-align: left; vertical-align: top; font-size: 14px; }
         th { background: #f8fafc; color: #4b5563; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
-        .posts-table { min-width: 1120px; table-layout: fixed; }
+        .posts-table { table-layout: fixed; width: 100%; }
+        @media (min-width: 861px) {
+            .posts-table { min-width: 1120px; }
+        }
+        @media (max-width: 860px) {
+            .table-scroll { border: none; overflow-x: visible; }
+            .posts-table, .posts-table thead, .posts-table tbody, .posts-table th, .posts-table td, .posts-table tr { display: block; }
+            .posts-table thead { display: none; }
+            .posts-table tr { margin-bottom: 16px; border: 1px solid #e6e8ef; border-radius: 8px; padding: 12px; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+            .posts-table td { padding: 8px 0; border: none; border-bottom: 1px dashed #edf0f5; position: relative; display: flex; flex-direction: column; }
+            .posts-table td:last-child { border-bottom: none; }
+            .posts-table td::before { content: attr(data-label); font-size: 11px; text-transform: uppercase; color: #687386; font-weight: 800; margin-bottom: 4px; }
+            table:not(.posts-table), table:not(.posts-table) tbody, table:not(.posts-table) tr, table:not(.posts-table) th, table:not(.posts-table) td { display: block; width: 100%; }
+            table:not(.posts-table) th { padding-bottom: 2px; border-bottom: none; }
+            table:not(.posts-table) td { padding-top: 0; padding-bottom: 12px; }
+        }
         .posts-table th { white-space: nowrap; }
         .posts-table td { overflow-wrap: normal; word-break: normal; }
         .posts-table .col-post { width: 210px; }
@@ -622,14 +637,14 @@ function getJobHtml(group) {
 
     const postRows = group.posts.map(job => `
         <tr>
-            <td>${postNamesHtml(job, group.title)}</td>
-            <td>${escapeHtml(job.education_required || 'See notification')}</td>
-            <td>${escapeHtml(Array.isArray(job.education_fields) && job.education_fields.length ? job.education_fields.join(', ') : 'Any relevant field')}</td>
-            <td>${escapeHtml(job.state || 'India')}</td>
-            <td>${escapeHtml(job.min_age || 'NA')} - ${escapeHtml(job.max_age || 'NA')}</td>
-            <td>${escapeHtml(job.min_percentage ? `${job.min_percentage}%` : 'Not specified')}</td>
-            <td>${escapeHtml(uniqueValues(job.categories || []).join(', ') || 'As per rules')}</td>
-            <td class="requirements-cell">${escapeHtml(jobRequirementSummary(job))}</td>
+            <td data-label="Post">${postNamesHtml(job, group.title)}</td>
+            <td data-label="Education">${escapeHtml(job.education_required || 'See notification')}</td>
+            <td data-label="Field">${escapeHtml(Array.isArray(job.education_fields) && job.education_fields.length ? job.education_fields.join(', ') : 'Any relevant field')}</td>
+            <td data-label="Location">${escapeHtml(job.state || 'India')}</td>
+            <td data-label="Age">${escapeHtml(job.min_age || 'NA')} - ${escapeHtml(job.max_age || 'NA')}</td>
+            <td data-label="Marks">${escapeHtml(job.min_percentage ? `${job.min_percentage}%` : 'Not specified')}</td>
+            <td data-label="Category">${escapeHtml(uniqueValues(job.categories || []).join(', ') || 'As per rules')}</td>
+            <td data-label="Requirements" class="requirements-cell">${escapeHtml(jobRequirementSummary(job))}</td>
         </tr>`).join('');
 
     const dateRows = [
