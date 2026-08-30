@@ -159,23 +159,21 @@ const homepageJsonLd = {
         const desc = jobDescription(group);
         const shortDesc = desc.length > 120 ? desc.substring(0, 120) + '…' : desc;
         return (
-          <article class="job-card" itemscope itemtype="https://schema.org/JobPosting">
-            <meta itemprop="datePosted" content={isoDate(group.latestPosted)} />
-            <meta itemprop="validThrough" content={isoDate(group.latestDeadline)} />
+          <article class="job-card">
             <div class="job-card-header">
-              <div class="job-title" itemprop="title">
+              <div class="job-title">
                 <a href={`/jobs/${group.slug}/`}>{group.title}</a>
               </div>
             </div>
-            <div class="job-org" itemprop="hiringOrganization" itemscope itemtype="https://schema.org/Organization">
-              <span itemprop="name">{group.organization}</span> • {group.postCount} post{group.postCount === 1 ? '' : 's'}
+            <div class="job-org">
+              <span>{group.organization}</span> • {group.postCount} post{group.postCount === 1 ? '' : 's'}
             </div>
-            <div class="job-desc" itemprop="description">{shortDesc}</div>
+            <div class="job-desc">{shortDesc}</div>
             <div class="job-meta">
               <span class="job-meta-item">📅 {formatDate(group.earliestStart || group.latestPosted)}</span>
               <span class="job-meta-item">⏰ {formatDate(group.latestDeadline)}</span>
-              <span class="job-meta-item" itemprop="educationRequirements">🎓 {group.education.join(', ') || 'See notification'}</span>
-              <span class="job-meta-item" itemprop="jobLocation">📍 {group.states.join(', ') || 'India'}</span>
+              <span class="job-meta-item">🎓 {group.education.join(', ') || 'See notification'}</span>
+              <span class="job-meta-item">📍 {group.states.join(', ') || 'India'}</span>
             </div>
             <div class="job-actions">
               <a href={`/jobs/${group.slug}/`} class="btn-apply">View Details →</a>
