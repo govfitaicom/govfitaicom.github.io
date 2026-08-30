@@ -21,4 +21,4 @@ Allow: /
 Disallow: /admin.html
 Disallow: /admin
 
-Sitemap: https://govfitai.com/sitemap.xml
+Sitemap: https://govfitai.com/sitemap-index.xml
