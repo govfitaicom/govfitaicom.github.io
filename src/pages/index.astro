@@ -1,0 +1,218 @@
+---
+/**
+ * Homepage — /index.astro
+ * All job data is fetched at build time from Supabase and rendered as static HTML.
+ * No client-side JavaScript needed for content visibility.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { fetchJobs } from '../lib/supabase';
+import { groupJobs, jobDescription, formatDate, isoDate } from '../lib/utils';
+
+const allJobs = await fetchJobs();
+const groups = groupJobs(allJobs);
+const top20 = groups.slice(0, 20);
+const totalJobs = allJobs.length;
+
+const homepageJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://govfitai.com/#organization',
+      name: 'GovFitAI',
+      url: 'https://govfitai.com',
+      logo: { '@type': 'ImageObject', url: 'https://govfitai.com/logo.png' },
+      sameAs: ['https://play.google.com/store/apps/details?id=com.nextintinc.JobFitAI']
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://govfitai.com/#website',
+      url: 'https://govfitai.com',
+      name: 'GovFitAI',
+      description: 'AI-powered government job matching for SSC, Railway, UPSC and more',
+      publisher: { '@id': 'https://govfitai.com/#organization' },
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: 'https://govfitai.com/jobs/?q={search_term_string}',
+        'query-input': 'required name=search_term_string'
+      }
+    },
+    {
+      '@type': 'WebPage',
+      '@id': 'https://govfitai.com/#webpage',
+      url: 'https://govfitai.com',
+      name: 'GovFitAI – Smart Government Job Matching with AI',
+      description: 'Find government jobs that match your profile. AI-powered recommendations for SSC, Railway, UPSC and more.',
+      isPartOf: { '@id': 'https://govfitai.com/#website' },
+      publisher: { '@id': 'https://govfitai.com/#organization' },
+      datePublished: '2024-01-01',
+      dateModified: new Date().toISOString().split('T')[0],
+      inLanguage: 'en-IN'
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title="GovFitAI – Smart Government Job Matching with AI | Sarkari Naukri 2026"
+  description="Find government jobs that match your profile. AI-powered job recommendations for SSC, Railway, UPSC, State PSC and more. Free daily quiz, preparation guides, and instant alerts for Sarkari Naukri 2026."
+  canonicalUrl="https://govfitai.com/"
+  jsonLd={homepageJsonLd}
+>
+  <Fragment slot="head">
+    <meta name="keywords" content="government jobs, sarkari naukri, AI job matching, SSC CGL, railway jobs, UPSC, state government jobs, job recommendations, sarkari naukri 2026, government job alerts">
+  </Fragment>
+
+  <!-- HERO -->
+  <section class="hero-gradient">
+    <h1>Find Your Perfect Government Job</h1>
+    <p>AI-powered job matching based on your education, age, and qualifications</p>
+    <div class="cta-buttons">
+      <a href="/jobs/" class="btn btn-primary">Browse All Jobs</a>
+      <a href="https://play.google.com/store/apps/details?id=com.nextintinc.JobFitAI" target="_blank" rel="noopener" class="btn btn-download">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"></path></svg>
+        Download App
+      </a>
+    </div>
+
+    <div class="app-promo">
+      <h3>📱 Download for smarter personalized government job matching &amp; instant alerts</h3>
+      <p>Get AI-powered recommendations, daily quiz, and preparation guides on your phone</p>
+      <a href="https://play.google.com/store/apps/details?id=com.nextintinc.JobFitAI" target="_blank" rel="noopener" class="btn btn-download" style="width:100%;justify-content:center;">
+        Download on Play Store
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-number">{totalJobs}+</div>
+        <div class="stat-label">Active Jobs</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">{groups.length}+</div>
+        <div class="stat-label">Recruitments</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">Free</div>
+        <div class="stat-label">Always</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <div class="container">
+    <h2 class="section-title">Why GovFitAI?</h2>
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>Smart Matching</h3>
+        <p>AI shows only jobs you're eligible for based on your profile</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Real-time Updates</h3>
+        <p>Get latest government job notifications instantly</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📝</div>
+        <h3>Daily Quiz</h3>
+        <p>Practice GK, Current Affairs, SSC, UPSC and climb the leaderboard</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3>Access Anywhere</h3>
+        <p>Access jobs and quiz anywhere, anytime on any device</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PREP GUIDES -->
+  <div class="container">
+    <h2 class="section-title">Preparation Guides</h2>
+    <div class="features">
+      <div class="feature-card">
+        <h3>SSC CGL Preparation Strategy</h3>
+        <p>Complete 6-month study plan, best books, and subject-wise shortcuts for SSC CGL 2026.</p>
+        <a href="/SSC-CGL-Preparation.html" class="btn-apply" style="margin-top:12px;">Read Full Guide</a>
+      </div>
+      <div class="feature-card">
+        <h3>Govt Exam Eligibility Guide</h3>
+        <p>Detailed breakdown of age limits, attempts, and qualifications for UPSC, SSC, and Banking.</p>
+        <a href="/government-exam-eligibility-guide.html" class="btn-apply" style="margin-top:12px;">Check Eligibility</a>
+      </div>
+      <div class="feature-card">
+        <h3>Govt Job Salary Guide 2026</h3>
+        <p>Understand pay levels, allowances (DA, HRA), and gross salary for various central govt posts.</p>
+        <a href="/government-job-salary-guide.html" class="btn-apply" style="margin-top:12px;">View Salary Info</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- LATEST JOBS -->
+  <div class="container" id="jobsSection">
+    <h2 class="section-title">Latest Government Jobs</h2>
+    <p style="text-align:center;margin-bottom:24px;">
+      <a href="/jobs/" style="color:#667eea;font-weight:600;">View All {groups.length} Jobs →</a>
+    </p>
+    <div class="jobs-grid">
+      {top20.map((group) => {
+        const desc = jobDescription(group);
+        const shortDesc = desc.length > 120 ? desc.substring(0, 120) + '…' : desc;
+        return (
+          <article class="job-card" itemscope itemtype="https://schema.org/JobPosting">
+            <meta itemprop="datePosted" content={isoDate(group.latestPosted)} />
+            <meta itemprop="validThrough" content={isoDate(group.latestDeadline)} />
+            <div class="job-card-header">
+              <div class="job-title" itemprop="title">
+                <a href={`/jobs/${group.slug}/`}>{group.title}</a>
+              </div>
+            </div>
+            <div class="job-org" itemprop="hiringOrganization" itemscope itemtype="https://schema.org/Organization">
+              <span itemprop="name">{group.organization}</span> • {group.postCount} post{group.postCount === 1 ? '' : 's'}
+            </div>
+            <div class="job-desc" itemprop="description">{shortDesc}</div>
+            <div class="job-meta">
+              <span class="job-meta-item">📅 {formatDate(group.earliestStart || group.latestPosted)}</span>
+              <span class="job-meta-item">⏰ {formatDate(group.latestDeadline)}</span>
+              <span class="job-meta-item" itemprop="educationRequirements">🎓 {group.education.join(', ') || 'See notification'}</span>
+              <span class="job-meta-item" itemprop="jobLocation">📍 {group.states.join(', ') || 'India'}</span>
+            </div>
+            <div class="job-actions">
+              <a href={`/jobs/${group.slug}/`} class="btn-apply">View Details →</a>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+    <p style="text-align:center;margin-top:24px;">
+      <a href="/jobs/" class="btn-apply" style="padding:14px 40px;font-size:16px;">Browse All {groups.length} Jobs →</a>
+    </p>
+  </div>
+
+  <!-- OUR APPS -->
+  <div class="container">
+    <h2 class="section-title">📱 Our Other Apps — Check These Out!</h2>
+    <div class="features">
+      <a href="/ladki-bahin-yojana-ekyc-app.html" class="feature-card" style="text-decoration:none;color:inherit;">
+        <div class="feature-icon">👧</div>
+        <h3>Ladki Bahin Yojana eKYC</h3>
+        <p>₹1,500 monthly benefit guide, eligibility, documents. 17K+ downloads.</p>
+      </a>
+      <a href="/udhari-book-app.html" class="feature-card" style="text-decoration:none;color:inherit;">
+        <div class="feature-icon">💰</div>
+        <h3>Udhari Book</h3>
+        <p>Cash counter, daily register, customer credit ledger &amp; GST calculator for shopkeepers.</p>
+      </a>
+      <a href="/car-kundali-obd2-scanner-app.html" class="feature-card" style="text-decoration:none;color:inherit;">
+        <div class="feature-icon">🚗</div>
+        <h3>Car Kundali OBD2 Scanner</h3>
+        <p>Read real-time engine data, clear check engine codes, live sensor data.</p>
+      </a>
+      <a href="/evm-voting-machine-mock-poll.html" class="feature-card" style="text-decoration:none;color:inherit;">
+        <div class="feature-icon">🗳️</div>
+        <h3>EVM Mock Poll</h3>
+        <p>Simulate Indian EVM voting experience. Education-focused voting app.</p>
+      </a>
+    </div>
+  </div>
+</BaseLayout>

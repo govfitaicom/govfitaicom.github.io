@@ -1,0 +1,24 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /admin
+Disallow: /private/
+Disallow: /?*login*
+Disallow: /?*auth*
+
+User-agent: Mediapartners-Google
+Allow: /
+Disallow: /admin.html
+Disallow: /admin
+
+User-agent: Googlebot
+Allow: /
+Disallow: /admin.html
+Disallow: /admin
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin.html
+Disallow: /admin
+
+Sitemap: https://govfitai.com/sitemap.xml

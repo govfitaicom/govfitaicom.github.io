@@ -1,0 +1,34 @@
+---
+/**
+ * /quiz/index.astro — Quiz categories listing page
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { fetchQuizQuestions } from '../../lib/supabase';
+import { groupMcqs } from '../../lib/utils';
+
+const allMcqs = await fetchQuizQuestions();
+const groups = groupMcqs(allMcqs);
+---
+
+<BaseLayout
+  title="MCQ Practice for Government Exams - GovFitAI"
+  description="Practice GK, current affairs, SSC, UPSC and other government exam MCQs with answers and explanations."
+  canonicalUrl="https://govfitai.com/quiz/"
+>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Government Exam MCQ Practice</h1>
+      <p class="subtle">Choose a topic and practice MCQ sets with answers, explanations and exam-focused context.</p>
+    </section>
+    <section class="list">
+      {groups.map((group) => (
+        <article class="list-item">
+          <h2 style="margin-top:0;">
+            <a href={`/quiz/${group.slug}/`}>{group.category} MCQs</a>
+          </h2>
+          <p class="subtle">{group.questions.length} questions with answers and exam context.</p>
+        </article>
+      ))}
+    </section>
+  </main>
+</BaseLayout>

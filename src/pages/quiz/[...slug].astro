@@ -1,0 +1,82 @@
+---
+/**
+ * /quiz/[...slug].astro — Dynamic route for quiz category pages.
+ * Generates one page per quiz category with all MCQs pre-rendered.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { fetchQuizQuestions } from '../../lib/supabase';
+import {
+  groupMcqs, getQuestionText, getQuestionOptions, getCorrectIndex,
+  questionAnchor, quizJsonLd, asText, escapeHtml,
+} from '../../lib/utils';
+import type { QuizGroup } from '../../lib/utils';
+
+export async function getStaticPaths() {
+  const allMcqs = await fetchQuizQuestions();
+  const groups = groupMcqs(allMcqs);
+  return groups.map((group) => ({
+    params: { slug: group.slug },
+    props: { group },
+  }));
+}
+
+interface Props {
+  group: QuizGroup;
+}
+
+const { group } = Astro.props;
+const { category, questions } = group;
+const canonicalUrl = `https://govfitai.com/quiz/${group.slug}/`;
+const title = `${category} MCQ Practice Questions With Answers | GovFitAI`;
+const description = `Practice ${questions.length} ${category} MCQs with options, correct answers and exam-focused context for government job preparation.`;
+const jsonLd = quizJsonLd(category, questions);
+const labels = ['A', 'B', 'C', 'D', 'E'];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl={canonicalUrl}
+  jsonLd={jsonLd}
+>
+  <main class="wrap">
+    <div class="breadcrumb">
+      <a href="/">Home</a> / <a href="/quiz/">MCQ Practice</a> / {category}
+    </div>
+
+    <section class="hero">
+      <h1>{category} MCQ Practice Questions</h1>
+      <p class="subtle">{description}</p>
+      <div class="badge-row">
+        <span class="badge">{questions.length} questions</span>
+        <span class="badge">Answers included</span>
+        <span class="badge">Government exam practice</span>
+      </div>
+    </section>
+
+    {questions.map((question, index) => {
+      const qText = getQuestionText(question);
+      const options = getQuestionOptions(question);
+      const correctIndex = getCorrectIndex(question);
+      const correctAnswer = options[correctIndex] || 'See answer';
+      const explanation = asText(question.explanation, `${category} questions are useful for government exams because they test accuracy, recall and concept clarity. Review the correct option, then practice similar questions to improve speed.`);
+
+      return (
+        <article class="card question" id={questionAnchor(question)}>
+          <div class="badge">{category}</div>
+          <h2>{index + 1}. {qText}</h2>
+          <ol type="A">
+            {options.map((option, optionIndex) => (
+              <li><strong>{labels[optionIndex] || String(optionIndex + 1)}.</strong> {option}</li>
+            ))}
+          </ol>
+          <details>
+            <summary>Show answer and explanation</summary>
+            <p><strong>Correct answer:</strong> {correctAnswer}</p>
+            <p>{explanation}</p>
+          </details>
+        </article>
+      );
+    })}
+  </main>
+</BaseLayout>

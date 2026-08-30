@@ -1,0 +1,51 @@
+---
+/**
+ * /contact/index.astro — Contact Us page
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contact Us - GovFitAI"
+  description="Get in touch with the GovFitAI team. Reach out for support, feedback, partnership inquiries or content corrections."
+  canonicalUrl="https://govfitai.com/contact/"
+>
+  <div class="container">
+    <h1 style="color:#667eea;">Contact Us</h1>
+    <p>We're here to help! Reach out for support, feedback, partnership inquiries, or content corrections.</p>
+
+    <div class="card" style="margin-top:24px;">
+      <div style="display:flex;align-items:flex-start;gap:16px;padding:16px 0;border-bottom:1px solid #f0f0f0;">
+        <span style="font-size:28px;flex-shrink:0;">📧</span>
+        <div>
+          <div style="font-size:12px;color:#999;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Email</div>
+          <div style="font-weight:600;"><a href="mailto:govfitai.com@gmail.com" style="color:#667eea;">govfitai.com@gmail.com</a></div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:16px;padding:16px 0;border-bottom:1px solid #f0f0f0;">
+        <span style="font-size:28px;flex-shrink:0;">🌐</span>
+        <div>
+          <div style="font-size:12px;color:#999;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Website</div>
+          <div style="font-weight:600;"><a href="https://govfitai.com" style="color:#667eea;">govfitai.com</a></div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:16px;padding:16px 0;">
+        <span style="font-size:28px;flex-shrink:0;">📱</span>
+        <div>
+          <div style="font-size:12px;color:#999;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Android App</div>
+          <div style="font-weight:600;"><a href="https://play.google.com/store/apps/details?id=com.nextintinc.JobFitAI" target="_blank" rel="noopener" style="color:#667eea;">Download on Google Play</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#e8f0ff;border-radius:8px;padding:16px 20px;color:#335dcc;font-size:14px;font-weight:500;margin-top:20px;">
+      We typically respond within 24-48 hours. For urgent issues, mention "URGENT" in your email subject.
+    </div>
+
+    <h2>Feedback &amp; Suggestions</h2>
+    <p>Your feedback helps us improve! Whether it's a feature request, bug report, or content correction, we value every message.</p>
+
+    <h2>Partnership &amp; Business Inquiries</h2>
+    <p>Interested in partnering with us? Send your proposal to our email and we'll get back to you.</p>
+  </div>
+</BaseLayout>

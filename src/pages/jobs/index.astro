@@ -1,0 +1,42 @@
+---
+/**
+ * /jobs/index.astro — Jobs listing page
+ * Fetches all job groups at build time and renders a static listing.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { fetchJobs } from '../../lib/supabase';
+import { groupJobs, jobDescription, formatDate, escapeHtml } from '../../lib/utils';
+
+const allJobs = await fetchJobs();
+const groups = groupJobs(allJobs);
+---
+
+<BaseLayout
+  title="Latest Government Jobs 2026 - GovFitAI"
+  description="Browse consolidated government job notifications with post-wise eligibility, dates, official links and preparation resources."
+  canonicalUrl="https://govfitai.com/jobs/"
+>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Latest Government Jobs</h1>
+      <p class="subtle">Browse {groups.length} consolidated recruitment pages with post-wise eligibility, dates and official application links.</p>
+    </section>
+    <section class="list">
+      {groups.map((group) => {
+        const desc = jobDescription(group);
+        const shortDesc = desc.length > 220 ? desc.slice(0, 220) + '...' : desc;
+        return (
+          <article class="list-item">
+            <h2 style="margin-top:0;">
+              <a href={`/jobs/${group.slug}/`}>{group.title}</a>
+            </h2>
+            <p class="subtle">
+              {group.organization} | {group.postCount} post{group.postCount === 1 ? '' : 's'} | Last date: {formatDate(group.latestDeadline)}
+            </p>
+            <p>{shortDesc}</p>
+          </article>
+        );
+      })}
+    </section>
+  </main>
+</BaseLayout>

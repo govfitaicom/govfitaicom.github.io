@@ -1,0 +1,155 @@
+---
+/**
+ * /jobs/[...slug].astro — Dynamic route for individual job detail pages.
+ * Uses getStaticPaths() to generate one HTML page per job group from Supabase data.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { fetchJobs } from '../../lib/supabase';
+import {
+  groupJobs, jobDescription, jobJsonLd, jobEducationSummary, jobRequirementSummary,
+  postNames, postNamesText, postNamesHtml, formatDate, isoDate, firstValidDate,
+  escapeHtml, uniqueValues, asText,
+} from '../../lib/utils';
+import type { JobGroup } from '../../lib/utils';
+import type { Job } from '../../lib/supabase';
+
+export async function getStaticPaths() {
+  const allJobs = await fetchJobs();
+  const groups = groupJobs(allJobs);
+  return groups.map((group) => ({
+    params: { slug: group.slug },
+    props: { group },
+  }));
+}
+
+const { group } = Astro.props as { group: JobGroup };
+const description = jobDescription(group);
+const canonicalUrl = `https://govfitai.com/jobs/${group.slug}/`;
+const title = `${group.title} - Posts, Eligibility, Dates | GovFitAI`;
+const meta = `${group.organization} ${group.title}: see ${group.postCount} post option${group.postCount === 1 ? '' : 's'}, eligibility, age limit, education, dates, official links and preparation resources.`;
+const jsonLd = jobJsonLd(group);
+
+
+---
+
+<BaseLayout
+  title={title}
+  description={meta}
+  canonicalUrl={canonicalUrl}
+  jsonLd={jsonLd}
+>
+  <main class="wrap">
+    <div class="breadcrumb">
+      <a href="/">Home</a> / <a href="/jobs/">Jobs</a> / {group.title}
+    </div>
+
+    <section class="hero">
+      <h1>{group.title}</h1>
+      <p class="subtle">{group.organization} recruitment page with all available posts grouped in one place.</p>
+      <div class="badge-row">
+        <span class="badge">{group.postCount} post{group.postCount === 1 ? '' : 's'} covered</span>
+        <span class="badge">{group.states.join(', ') || 'India'}</span>
+        <span class="badge">Last date: {formatDate(group.latestDeadline)}</span>
+      </div>
+      <div class="stat-grid">
+        <div class="stat"><div class="stat-label">Organization</div><div class="stat-value">{group.organization}</div></div>
+        <div class="stat"><div class="stat-label">Education</div><div class="stat-value">{group.education.join(', ') || 'See notification'}</div></div>
+        <div class="stat"><div class="stat-label">Fields</div><div class="stat-value">{group.educationFields.join(', ') || 'Any relevant field'}</div></div>
+        <div class="stat"><div class="stat-label">Categories</div><div class="stat-value">{group.categories.join(', ') || 'As per rules'}</div></div>
+      </div>
+    </section>
+
+    <div class="layout">
+      <div>
+        <section class="card">
+          <h2>Recruitment Overview</h2>
+          <p>{description}</p>
+          {group.descriptions.slice(1, 3).map((text) => <p>{text}</p>)}
+        </section>
+
+        <section class="card">
+          <h2>Posts Included In This Notification</h2>
+          <p class="subtle">All available posts for this recruitment are grouped here so candidates can compare eligibility, dates and official links in one place.</p>
+          <div class="table-scroll">
+            <table class="posts-table">
+              <colgroup>
+                <col class="col-post" />
+                <col class="col-education" />
+                <col class="col-field" />
+                <col class="col-location" />
+                <col class="col-age" />
+                <col class="col-marks" />
+                <col class="col-category" />
+                <col class="col-extra" />
+              </colgroup>
+              <thead>
+                <tr><th>Post</th><th>Education</th><th>Field</th><th>Location</th><th>Age</th><th>Marks</th><th>Category</th><th>Extra Requirements</th></tr>
+              </thead>
+              <tbody>
+                {group.posts.map((job) => (
+                  <tr>
+                    <td data-label="Post"><Fragment set:html={postNamesHtml(job, group.title)} /></td>
+                    <td data-label="Education">{job.education_required || 'See notification'}</td>
+                    <td data-label="Field">{Array.isArray(job.education_fields) && job.education_fields.length ? job.education_fields.join(', ') : 'Any relevant field'}</td>
+                    <td data-label="Location">{job.state || 'India'}</td>
+                    <td data-label="Age">{job.min_age || 'NA'} - {job.max_age || 'NA'}</td>
+                    <td data-label="Marks">{job.min_percentage ? `${job.min_percentage}%` : 'Not specified'}</td>
+                    <td data-label="Category">{uniqueValues(job.categories || []).join(', ') || 'As per rules'}</td>
+                    <td data-label="Requirements" class="requirements-cell">{jobRequirementSummary(job)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Eligibility Notes</h2>
+          <p>Check the post-wise education, age limit and category rules above, then confirm the final conditions in the official notification. Age relaxation, fee exemption and reservation benefits normally depend on the recruiting body's rules and candidate category.</p>
+          <p>Use GovFitAI's profile matching on the homepage to compare your age, education, state and category against available government jobs.</p>
+        </section>
+
+        <section class="card">
+          <h2>Frequently Asked Questions</h2>
+          <h3>How many posts are covered on this page?</h3>
+          <p>This page currently groups {group.postCount} post option{group.postCount === 1 ? '' : 's'} for {group.organization} under one canonical recruitment page.</p>
+          <h3>What is the last date to apply?</h3>
+          <p>The latest available deadline in GovFitAI data is {formatDate(group.latestDeadline)}. If the official notification has been updated, follow the official website date.</p>
+          <h3>Where should I apply?</h3>
+          <p>Use only the official recruiting body website or official application link. GovFitAI is an eligibility and discovery tool, not the recruiting authority.</p>
+        </section>
+      </div>
+
+      <aside class="side">
+        <section class="card">
+          <h2>Important Dates</h2>
+          <table>
+              <tbody>
+                <tr><th>Posted / Updated</th><td>{formatDate(group.latestPosted)}</td></tr>
+                <tr><th>Application Start</th><td>{formatDate(group.earliestStart)}</td></tr>
+                <tr><th>Last Date</th><td>{formatDate(group.latestDeadline)}</td></tr>
+                <tr><th>Admit Card</th><td>{formatDate(firstValidDate(group.jobs.map((j) => j.admit_card_date), 'latest'))}</td></tr>
+                <tr><th>Result</th><td>{formatDate(firstValidDate(group.jobs.map((j) => j.result_date), 'latest'))}</td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="card">
+          <h2>Official Links</h2>
+          {group.applyLinks.length > 0 ? (
+            group.applyLinks.map((link, index) => (
+              <a class="button" href={link} target="_blank" rel="nofollow noopener">Official link {index + 1}</a>
+            ))
+          ) : (
+            <div class="subtle">Official apply link will be updated when available. Always verify details on the recruiting organization website.</div>
+          )}
+        </section>
+        <section class="card">
+          <h2>Preparation Resources</h2>
+          <p><a href="/government-exam-eligibility-guide.html">Government exam eligibility guide</a></p>
+          <p><a href="/government-job-salary-guide.html">Government job salary guide</a></p>
+          <p><a href="/SSC-CGL-Preparation.html">SSC CGL preparation plan</a></p>
+        </section>
+      </aside>
+    </div>
+  </main>
+</BaseLayout>

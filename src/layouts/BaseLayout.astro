@@ -1,0 +1,64 @@
+---
+/**
+ * BaseLayout.astro — Shared HTML shell for all pages.
+ * Provides consistent <head>, header, footer, and SEO meta tags.
+ */
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalUrl?: string;
+  jsonLd?: object | null;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description,
+  canonicalUrl = Astro.url.href,
+  jsonLd = null,
+  ogImage = 'https://govfitai.com/logo.png',
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <meta name="google-adsense-account" content="ca-pub-2221858776975716">
+  <meta name="google-site-verification" content="cr8C7-CLwnAc8voDW4sNR9uqb-TbmQ6gRH8VeTURwSU">
+  <meta name="msvalidate.01" content="EFDB7199AD21E7ACF183659D64DFC66B">
+  <link rel="canonical" href={canonicalUrl}>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:url" content={canonicalUrl}>
+  <meta property="og:image" content={ogImage}>
+  <meta property="og:site_name" content="GovFitAI">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content={ogImage}>
+
+  {jsonLd && (
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')} />
+  )}
+
+  <slot name="head" />
+</head>
+<body>
+  <Header />
+  <slot />
+  <Footer />
+</body>
+</html>
